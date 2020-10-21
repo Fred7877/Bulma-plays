@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use MarcReichel\IGDBLaravel\Models\Genre;
 use MarcReichel\IGDBLaravel\Models\Platform;
 
 class FilterGames extends Component
@@ -24,6 +25,10 @@ class FilterGames extends Component
     public $sort;
     public $platformName = '';
     public $sortName = '';
+    public $search = '';
+    public $genres = '';
+    public $genre;
+    public $genreName = '';
 
     public function mount()
     {
@@ -31,12 +36,16 @@ class FilterGames extends Component
             return Platform::all()->sortBy('name')->toArray();
         });
 
+        $this->genres = Cache::remember('genres', $this->ttl, function () {
+            return Genre::all()->sortBy('name')->toArray();
+        });
+
         $this->platformNintendo = collect($this->platforms)->filter(function ($item) {
 
             if (isset($item['platform_family'])) {
                 return ($item['platform_family'] === self:: PLATFORM_FAMILLY_NINTENDO);
             }
-            if (strpos($item['name'], 'Nintendo') !== false) {
+            if (stripos($item['name'], 'Nintendo') !== false) {
                 return true;
             }
 
@@ -45,7 +54,7 @@ class FilterGames extends Component
 
         $this->platformOculus = collect($this->platforms)->filter(function ($item) {
 
-            return false !== strpos($item['name'], 'VR');
+            return false !== stripos($item['name'], 'VR');
         })->toArray();
 
         $this->platformPlaystation = collect($this->platforms)->filter(function ($item) {
@@ -64,7 +73,7 @@ class FilterGames extends Component
                 );
             }
 
-            if (strpos($item['name'], 'VR') !== false || strpos($item['name'], 'Nintendo') !== false) {
+            if (stripos($item['name'], 'VR') !== false || stripos($item['name'], 'Nintendo') !== false) {
                 return false;
             }
 
@@ -72,10 +81,35 @@ class FilterGames extends Component
         })->sortBy('name')->toArray();
     }
 
+    public function updatedGenre($value)
+    {
+        if ($value !== '') {
+            $this->genreName = collect($this->genres)->where('slug', $value)->first()['name'];
+
+        } else {
+            $this->genreName = '';
+        }
+        $this->emitUp('genre', $value);
+    }
+
+    public function updatedSearch($value)
+    {
+        $this->sortName = 'Descendant';
+        $this->platformName = '';
+        $this->platform = null;
+        $this->genreName = '';
+        $this->emitUp('search', $value);
+    }
+
     public function updatedPlatform($value)
     {
+        if ($value !== '') {
+            $this->search = '';
+            $this->platformName = collect($this->platforms)->where('slug', $value)->first()['name'];
+        } else {
+            $this->platformName = '';
+        }
 
-        $this->platformName = collect($this->platforms)->where('slug', $value)->first()['name'];
         $this->emitUp('platformChange', $value);
     }
 

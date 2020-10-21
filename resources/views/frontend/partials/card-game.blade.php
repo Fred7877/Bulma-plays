@@ -4,7 +4,7 @@
     </div>
     <div
         class="w-full bg-white rounded-r-lg p-4 flex flex-col justify-between leading-normal">
-        <div class="mb-8">
+        <div class="mb-2">
             <div class="text-gray-900 font-bold text-xl mb-2">
                 <a href="{{ route('games.show', ['id' => $game['id']]) }}"> {{ $game['name'] }} </a>
             </div>
@@ -13,15 +13,30 @@
         <div class="flex items-center">
             <div class="text-sm">
                 <p>
+                    <b>Genres :</b>
+                    @if (isset($game['genres']))
+                        <span class="text-gray-900 leading-none">
+                            {{ collect($game['genres'])->implode('name', ', ') }}
+                        </span>
+                    @else
+                        <span class="text-gray-900 leading-none">
+                            N.A
+                        </span>
+                    @endif
+                </p>
+                <p>
                     <b>Platforms :</b>
                     @if (isset($game['platforms']))
-                        <span
-                            class="text-gray-900 leading-none">{{ collect($game['platforms'])->implode('name', ', ') }}</span>
+                        <span class="text-gray-900 leading-none">
+                            {{ collect($game['platforms'])->implode('name', ', ') }}
+                        </span>
                     @endif
                 </p>
                 <p>
                     <b>Première date :</b>
-                    <span class="text-gray-600">{{ optional($game['first_release_date'])->toDateString() }}</span>
+                    <span class="text-gray-600">
+                        {{ isset($game['first_release_date']) ? $game['first_release_date']->toDateString() : '-' }}
+                    </span>
                 </p>
             </div>
         </div>

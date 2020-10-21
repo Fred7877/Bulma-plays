@@ -1,5 +1,5 @@
 <div>
-    <livewire:filter-games />
+    <livewire:filter-games/>
 
     <div wire:loading>
         Processing search...
@@ -7,9 +7,11 @@
 
     <div class="block mt-5">
         <div wire:loading.remove>
-            @foreach ($games as $game)
+            @forelse ($games as $game)
                 @include('frontend.partials.card-game', ['game' => $game])
-            @endforeach
+            @empty
+                <p>No Games</p>
+            @endforelse
         </div>
     </div>
 </div>
