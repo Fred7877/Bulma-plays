@@ -17,12 +17,22 @@ class ViewGames extends Component
     private $with = ['release_dates', 'platforms', 'cover', 'genres'];
     public $genre = '';
 
-    private $ttl = 7200;
+    public $offset = 0;
+    public $limit = 10;
+    public $totalItem;
+    public $infiniteScroll = [];
 
-    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre'];
+    private $ttl = 7200;
+    private $loadMore = false;
+
+    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'loadMore'];
 
     public function mount()
     {
+        $this->totalItem = Cache::remember('total-item', $this->ttl, function () {
+            return Game::count();
+        });
+
         $this->games = Cache::remember('games', $this->ttl, function () {
             return Game::with($this->with)
                 ->where('first_release_date', '<', Carbon::now())
@@ -71,7 +81,6 @@ class ViewGames extends Component
 
     private function getGames()
     {
-
         // On trie sur le search ou non
         if ($this->searchWord !== null) {
             $gamesCache = collect(Cache::get('games-search-' . $this->searchWord));
@@ -83,9 +92,9 @@ class ViewGames extends Component
             }
 
         } else {
-            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort.'_'.$this->genre);
+            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre.'_'.$this->offset);
 
-            $this->games = Cache::remember($keyCache, $this->ttl, function () {
+            $games = Cache::remember($keyCache, $this->ttl, function () {
                 $games = Game::with($this->with);
                 if ($this->platform !== null) {
                     $games->where('platforms.slug', $this->platform);
@@ -103,9 +112,25 @@ class ViewGames extends Component
                     $games->where('genres.slug', $this->genre);
                 }
 
+                $games->offset($this->offset)->limit($this->limit)->get();
+
                 return $games->get()->toArray();
             });
+
+            if ($this->loadMore) {
+                $this->infiniteScroll = array_merge($this->infiniteScroll, $games);
+            } else {
+                $this->games = $games;
+            }
         }
+    }
+
+
+    public function loadMore()
+    {
+        $this->loadMore = true;
+        $this->offset += 11;
+        $this->getGames();
     }
 
     public function render()

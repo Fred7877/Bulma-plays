@@ -1,4 +1,4 @@
-<div class="max-w-sm w-full lg:max-w-full lg:flex mb-4">
+<div class="max-w-sm w-full lg:max-w-full lg:flex mb-4 card-game">
     <div class="flex-none img-content rounded-l-lg">
         <img src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')  }}"/>
     </div>
@@ -35,7 +35,13 @@
                 <p>
                     <b>Première date :</b>
                     <span class="text-gray-600">
-                        {{ isset($game['first_release_date']) ? $game['first_release_date']->toDateString() : '-' }}
+                        @if (isset($game['first_release_date']) && is_string($game['first_release_date']))
+                            {{ Carbon\Carbon::parse($game['first_release_date'])->toDateString() }}
+                        @elseif (isset($game['first_release_date']) && $game['first_release_date'] instanceof Carbon\Carbon)
+                            {{ $game['first_release_date']->toDateString() }}
+                        @else
+                            N.A
+                        @endif
                     </span>
                 </p>
             </div>

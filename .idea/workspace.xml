@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/FilterGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/FilterGames.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" afterDir="false" />
@@ -162,15 +161,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/frontend/game" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/css" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/partials" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/frontend" />
       <recent name="$PROJECT_DIR$/resources/views/backend" />
       <recent name="$PROJECT_DIR$/resources/views/frontend" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/frontend/game" />
     </key>
   </component>
   <component name="RunManager">
@@ -193,7 +192,7 @@
       <workItem from="1603088056719" duration="37102000" />
       <workItem from="1603172653919" duration="18326000" />
       <workItem from="1603255865814" duration="15085000" />
-      <workItem from="1603281617241" duration="2252000" />
+      <workItem from="1603281617241" duration="17716000" />
     </task>
     <servers />
   </component>
