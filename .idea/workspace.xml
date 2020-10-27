@@ -3,10 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/view-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/view-games.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +160,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/frontend/game" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -158,6 +168,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -193,6 +204,14 @@
       <workItem from="1603172653919" duration="18326000" />
       <workItem from="1603255865814" duration="15085000" />
       <workItem from="1603281617241" duration="17716000" />
+      <workItem from="1603344224471" duration="1106000" />
+      <workItem from="1603346509178" duration="1141000" />
+      <workItem from="1603347978124" duration="4233000" />
+      <workItem from="1603354740267" duration="1600000" />
+      <workItem from="1603367448042" duration="1417000" />
+      <workItem from="1603722594943" duration="40000" />
+      <workItem from="1603722643123" duration="1200000" />
+      <workItem from="1603779182124" duration="5425000" />
     </task>
     <servers />
   </component>
@@ -208,9 +227,10 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="703" y="1374" width="494" height="475" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603101422986" />
-    <state x="693" y="1363" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603206692656">
-      <screen x="0" y="1080" width="1920" height="1080" />
+    <state x="1386" y="273" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603780664910">
+      <screen x="0" y="0" width="3840" height="1040" />
     </state>
+    <state x="1386" y="273" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1603780664910" />
     <state x="693" y="283" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.1080.1920.1080/0.0.1920.1080@0.0.1920.1080" timestamp="1603176129885" />
     <state x="693" y="1363" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603206692656" />
     <state x="743" y="1363" width="424" height="491" key="FileChooserDialogImpl" timestamp="1603119623869">
@@ -225,6 +245,14 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="626" y="1324" width="657" height="568" key="NewPhpClassDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603266350790" />
+    <state x="1016" y="166" key="SettingsEditor" timestamp="1603722634297">
+      <screen x="0" y="0" width="3840" height="1040" />
+    </state>
+    <state x="1016" y="166" key="SettingsEditor/3840.132.1920.1040/0.0.3840.1040@0.0.3840.1040" timestamp="1603722634297" />
+    <state width="620" height="446" key="SwitcherDM" timestamp="1603348502640">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state width="620" height="446" key="SwitcherDM/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603348502640" />
     <state x="100" y="1180" width="1720" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1603109449864">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
@@ -233,9 +261,10 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="100" y="1180" width="1720" height="850" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603196573704" />
-    <state x="624" y="778" key="run.anything.popup" timestamp="1603260246048">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="1248" y="749" key="run.anything.popup" timestamp="1603782684182">
+      <screen x="0" y="0" width="3840" height="1040" />
     </state>
+    <state x="1248" y="749" key="run.anything.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603782684182" />
     <state x="624" y="778" key="run.anything.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603260246048" />
   </component>
 </project>

@@ -44,6 +44,7 @@ class ViewGames extends Component
 
     public function platformChange($value)
     {
+        $this->reset('games');
         if ($value === '') {
             $this->platform = null;
         } else {
@@ -92,7 +93,7 @@ class ViewGames extends Component
             }
 
         } else {
-            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre.'_'.$this->offset);
+            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre . '_' . $this->offset);
 
             $games = Cache::remember($keyCache, $this->ttl, function () {
                 $games = Game::with($this->with);
@@ -124,7 +125,6 @@ class ViewGames extends Component
             }
         }
     }
-
 
     public function loadMore()
     {

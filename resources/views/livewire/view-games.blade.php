@@ -22,6 +22,7 @@
 
 @push('js')
     <script>
+        // Infinite scroll
         document.addEventListener("DOMContentLoaded", () => {
             var heightTotal = document.querySelectorAll('.card-game')[0].offsetHeight * document.querySelectorAll('.card-game').length;
             var height = document.querySelectorAll('.card-game')[0].offsetHeight * 4;
