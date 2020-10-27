@@ -6,7 +6,7 @@
     </div>
 
     <div class="block mt-5" id="infinite-list">
-        <div wire:loading.remove>
+        <div wire:loading.remove >
             @forelse ($games as $game)
                 @include('frontend.partials.card-game', ['game' => $game])
             @empty

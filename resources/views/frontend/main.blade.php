@@ -25,6 +25,9 @@
             cursor: pointer;
         }
     </style>
+
+    @stack('css')
+
     @livewireStyles
 </head>
 <body>

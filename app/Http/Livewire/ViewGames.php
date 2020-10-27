@@ -6,6 +6,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithPagination;
 use MarcReichel\IGDBLaravel\Models\Game;
 
 class ViewGames extends Component
@@ -32,14 +33,17 @@ class ViewGames extends Component
         $this->totalItem = Cache::remember('total-item', $this->ttl, function () {
             return Game::count();
         });
+        $this->getGames();
 
-        $this->games = Cache::remember('games', $this->ttl, function () {
-            return Game::with($this->with)
-                ->where('first_release_date', '<', Carbon::now())
-                ->whereNotNull('first_release_date')
-                ->orderByDesc('first_release_date')
-                ->get()->toArray();
-        });
+        /*
+         *
+        $this->>games = Game::with($this->with)
+            ->where('first_release_date', '<', Carbon::now())
+            ->whereNotNull('first_release_date')
+            ->orderByDesc('first_release_date')
+            ->get()->toArray();
+
+         */
     }
 
     public function platformChange($value)
@@ -82,6 +86,12 @@ class ViewGames extends Component
 
     private function getGames()
     {
+
+        if (empty($this->games)) {
+            $this->games = [];
+            $this->infiniteScroll = [];
+        }
+
         // On trie sur le search ou non
         if ($this->searchWord !== null) {
             $gamesCache = collect(Cache::get('games-search-' . $this->searchWord));
@@ -118,6 +128,10 @@ class ViewGames extends Component
                 return $games->get()->toArray();
             });
 
+            foreach($games as $k => $game){
+                $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary');
+            }
+
             if ($this->loadMore) {
                 $this->infiniteScroll = array_merge($this->infiniteScroll, $games);
             } else {
@@ -130,6 +144,7 @@ class ViewGames extends Component
     {
         $this->loadMore = true;
         $this->offset += 11;
+
         $this->getGames();
     }
 
