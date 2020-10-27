@@ -8,7 +8,13 @@
             <div class="text-gray-900 font-bold text-xl mb-2">
                 <a href="{{ route('games.show', ['id' => $game['id']]) }}"> {{ $game['name'] }} </a>
             </div>
-            <p class="text-gray-700 text-base">{{ Str::of(isset($game['summary']) ? $game['summary'] : '')->limit(150)  ?? '' }}</p>
+            <p class="text-gray-700 text-base">
+                @if(isset($game['translate']['summary']) && $game['translate']['summary'] !== '')
+                    {{ Str::of($game['translate']['summary'])->limit(150) }}
+                @else
+                    {{ Str::of(isset($game['summary']) ? $game['summary'] : '')->limit(150)  ?? '' }}
+                @endif
+            </p>
         </div>
         <div class="flex items-center">
             <div class="text-sm">
