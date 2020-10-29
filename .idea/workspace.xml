@@ -20,32 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/pagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mygamessite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mygamessite.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/ViewGames.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/AutoTranslation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/AutoTranslation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Game.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/view-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/view-games.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/0a/de/0ade7da825262a04d377bdd7e9be110f236e63aa" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/0a/de/0ade7da825262a04d377bdd7e9be110f236e63aa" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/2f/fc/2ffcb1e87234eed5492bd3549a3a53197f74b140" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/2f/fc/2ffcb1e87234eed5492bd3549a3a53197f74b140" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/79/65/79657bc81ce560f38b425a15e21a7a7a53db6cf6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/79/65/79657bc81ce560f38b425a15e21a7a7a53db6cf6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/96/6d/966d51832db4c19bcf3d4a79f94ebe5e4be212a6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/96/6d/966d51832db4c19bcf3d4a79f94ebe5e4be212a6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/b5/11/b5115c2f15beced03866be18d49436ce0bdc6c47" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/b5/11/b5115c2f15beced03866be18d49436ce0bdc6c47" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/c4/ec/c4ec6c86cbf629b26607481706ff780024d96874" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/c4/ec/c4ec6c86cbf629b26607481706ff780024d96874" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/c5/59/c5595f9a82b47f9158e2a5062650794354c04c14" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/c5/59/c5595f9a82b47f9158e2a5062650794354c04c14" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/ce/e3/cee386b04503398bc6cadb817aeb05c96c420db6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/ce/e3/cee386b04503398bc6cadb817aeb05c96c420db6" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +263,7 @@
       <workItem from="1603882897197" duration="1680000" />
       <workItem from="1603896312744" duration="6063000" />
       <workItem from="1603903024594" duration="3488000" />
-      <workItem from="1603951090517" duration="18320000" />
+      <workItem from="1603951090517" duration="19062000" />
     </task>
     <servers />
   </component>
@@ -363,9 +347,10 @@
     </state>
     <state x="1248" y="749" key="run.anything.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603782684182" />
     <state x="624" y="778" key="run.anything.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603260246048" />
-    <state x="662" y="236" width="672" height="678" key="search.everywhere.popup" timestamp="1603957082436">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="739" y="245" width="672" height="705" key="search.everywhere.popup" timestamp="1603975789477">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="662" y="236" width="672" height="678" key="search.everywhere.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603957082436" />
+    <state x="739" y="245" width="672" height="705" key="search.everywhere.popup/93.0.3747.1080@93.0.3747.1080" timestamp="1603975789477" />
   </component>
 </project>
