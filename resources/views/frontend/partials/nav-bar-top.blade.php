@@ -4,17 +4,17 @@
             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
         </a>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
         </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div id="navbarBasic" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" href="{{ route('games.index') }}">
-                Home
+            <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
+                <i class="fas fa-home"></i>
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
@@ -42,15 +42,39 @@
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
-                    </a>
+                <div class="dropdown dropdown-languages" >
+                    <div class="dropdown-trigger">
+                        <button id="languages" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <span>Languages</span>
+                            <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <a href="{{ LaravelLocalization::getLocalizedURL('fr') }}" class="dropdown-item">
+                                Français
+                            </a>
+                            <a href="{{ LaravelLocalization::getLocalizedURL('en') }}" class="dropdown-item">
+                                English
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </nav>
+
+@push('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            document.getElementById("languages").addEventListener("click", function (e) {
+                var element = document.querySelector(".dropdown-languages");
+                element.classList.toggle("is-active");
+            });
+
+        });
+    </script>
+@endpush

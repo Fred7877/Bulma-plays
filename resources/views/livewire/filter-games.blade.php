@@ -1,7 +1,7 @@
 <div>
     <div class="block block-filters pl-5 pt-5 rounded-b-lg pb-3" id="block-filters">
-        <div class="columns is-gapless">
-            <div class="column ">
+        <div class="columns is-multiline is-mobile">
+            <div class="column is-narrow">
                 <div class="dropdown dropdown-filter">
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3"
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="column">
+            <div class="column is-narrow">
                 <div class="dropdown dropdown-genre">
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3"
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <div class="column">
+            <div class="column is-narrow">
                 <div class="dropdown dropdown-sort">
                     <div class="dropdown-trigger">
                         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3" id="filter-sort">

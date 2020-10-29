@@ -6,15 +6,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>My Games Sites</title>
 
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+
     <style>
         body {
             background: #222939;
+            font-family: Roboto, serif;
         }
-
         .img-content {
             background: white;
         }
-
         label {
             color: #3273dc;
         }
@@ -25,6 +26,7 @@
             cursor: pointer;
         }
     </style>
+
 
     @stack('css')
 

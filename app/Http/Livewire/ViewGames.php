@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -86,7 +87,6 @@ class ViewGames extends Component
 
     private function getGames()
     {
-
         if (empty($this->games)) {
             $this->games = [];
             $this->infiniteScroll = [];
@@ -103,7 +103,7 @@ class ViewGames extends Component
             }
 
         } else {
-            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre . '_' . $this->offset);
+            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre . '_' . $this->offset.'_'.App::getLocale());
 
             $games = Cache::remember($keyCache, $this->ttl, function () {
                 $games = Game::with($this->with);
@@ -113,6 +113,7 @@ class ViewGames extends Component
 
                 $games->where('first_release_date', '<', Carbon::now())
                     ->whereNotNull('first_release_date');
+
                 if ($this->sort === 'asc') {
                     $games->orderBy('first_release_date');
                 } else {
@@ -129,7 +130,7 @@ class ViewGames extends Component
             });
 
             foreach($games as $k => $game){
-                $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary');
+                $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
             }
 
             if ($this->loadMore) {

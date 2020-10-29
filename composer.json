@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "ext-json": "*",
         "chriskonnertz/deeply": "^1.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -19,8 +20,8 @@
         "laravel/ui": "^3.0",
         "livewire/livewire": "^2.3",
         "marcreichel/igdb-laravel": "^2.0",
-        "predis/predis": "^1.1",
-        "ext-json": "*"
+        "mcamara/laravel-localization": "^1.6",
+        "predis/predis": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

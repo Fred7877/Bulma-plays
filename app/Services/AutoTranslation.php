@@ -46,7 +46,10 @@ class AutoTranslation
                         [
                             'game_id' => $gameId,
                             'field' => $field,
-                            'translations' => [$targetLang => $translation['translations'][0]['text']],
+                            'translations' => [
+                                $sourceLang => $text,
+                                $targetLang => $translation['translations'][0]['text'],
+                            ],
                         ]
                     );
                 }
