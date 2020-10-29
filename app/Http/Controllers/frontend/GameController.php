@@ -13,9 +13,9 @@ class GameController extends Controller
         return view('frontend.game.index');
     }
 
-    public function show($id)
+    public function show($slug)
     {
 
-        return view('frontend.game.show', ['game' => (new Game)->get($id)]);
+        return view('frontend.game.show', ['game' => (new Game)->get($slug)]);
     }
 }

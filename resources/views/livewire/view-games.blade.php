@@ -6,7 +6,7 @@
     </div>
 
     <div class="block mt-5" id="infinite-list">
-        <div wire:loading.remove >
+        <div wire:loading.remove>
             @forelse ($games as $game)
                 @include('frontend.partials.card-game', ['game' => $game])
             @empty
@@ -17,6 +17,24 @@
         @foreach($infiniteScroll as $game)
             @include('frontend.partials.card-game', ['game' => $game])
         @endforeach
+
+        <div wire:loading.remove wire:target="loadMore">
+            <div class="level-item has-text-centered pb-6">
+                <div class="buttons">
+                    <buton wire:click="loadMore" class="button is-primary is-rounded is-small">
+                        <i class="fas fa-arrow-circle-down"></i>
+                        <span class="mr-2 ml-2">More</span>
+                         <i class="fas fa-arrow-circle-down"></i>
+                    </buton>
+                </div>
+            </div>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div wire:loading wire:target="loadMore">
+                Processing search...
+            </div>
+        </div>
     </div>
 </div>
 
@@ -36,7 +54,7 @@
                     }
                     isAnimating = true;
 
-                    Livewire.emit('loadMore');
+                    //Livewire.emit('loadMore');
                     heightTotal = document.querySelectorAll('.card-game')[0].offsetHeight * document.querySelectorAll('.card-game').length;
 
                     setTimeout(() => {

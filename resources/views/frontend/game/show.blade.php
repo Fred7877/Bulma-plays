@@ -1,7 +1,13 @@
 @extends('frontend.main')
 
+@push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css"
+          integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA=="
+          crossorigin="anonymous"/>
+@endpush
+
 @section('content')
-    <div class="box">
+    <div class="box mt-3">
         <div class="rows">
             <div class="columns">
                 <div class="column">
@@ -74,7 +80,7 @@
                                 </li>
                                 <li>
                                     <span
-                                        class="underline">Max coop online :</span> {{ $multiplayerMode['onlinecoopmax'] ? 'Oui' : 'Non' }}
+                                        class="underline">Max coop online :</span> {{ isset($multiplayerMode['onlinecoopmax']) ? 'Oui' : 'Non' }}
                                 </li>
                             @endforeach
                         </ul>
@@ -121,6 +127,7 @@
                     </p>
                 </div>
             </div>
+            @if (isset($game['screenshots']))
             <div class="block has-background-dark p-4 rounded">
                 <div class="columns">
                     @foreach($game['screenshots'] as $screenshot)
@@ -134,7 +141,7 @@
                     @endforeach
                 </div>
             </div>
-
+            @endif
             @if (isset($game['videos']))
                 <div class="block has-background-dark p-4 rounded">
 

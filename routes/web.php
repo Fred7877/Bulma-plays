@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\frontend\GameController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group([
+    'namespace' => 'frontend',
+    'prefix' => LaravelLocalization::setLocale()
+], function () {
+    Route::get('/', function () {
+        return redirect(route('games.index'));
+    });
 
-Route::namespace('frontend')->group(function () {
-    Route::get('/games', [GameController::class, 'index'])->name('games.index');
-    Route::get('/games/{id}', [GameController::class, 'show'])->name('games.show');
+    Route::get('games', [GameController::class, 'index'])->name('games.index');
+    Route::get('games/{slug}', [GameController::class, 'show'])->name('games.show');
 });
