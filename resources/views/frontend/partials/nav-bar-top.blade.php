@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
+            <img src="{{ asset('storage/assets/images/logo_1.png') }}">
         </a>
 
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
@@ -16,36 +16,14 @@
             <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
                 <i class="fas fa-home"></i>
             </a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    More
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a class="navbar-item">
-                        About
-                    </a>
-                    <a class="navbar-item">
-                        Jobs
-                    </a>
-                    <a class="navbar-item">
-                        Contact
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item">
-                        Report an issue
-                    </a>
-                </div>
-            </div>
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
-                <div class="dropdown dropdown-languages" >
+                <div class="dropdown dropdown-languages">
                     <div class="dropdown-trigger">
                         <button id="languages" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                            <span>Languages</span>
+                            <span>Languages <b>({{Str::upper(App::getLocale()) }})</b> </span>
                             <span class="icon is-small">
         <i class="fas fa-angle-down" aria-hidden="true"></i>
       </span>
