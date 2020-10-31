@@ -20,16 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/en/frontend.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/lang/fr/frontend.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/logo_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/0a/de/0ade7da825262a04d377bdd7e9be110f236e63aa" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/0a/de/0ade7da825262a04d377bdd7e9be110f236e63aa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/2f/fc/2ffcb1e87234eed5492bd3549a3a53197f74b140" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/2f/fc/2ffcb1e87234eed5492bd3549a3a53197f74b140" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/79/65/79657bc81ce560f38b425a15e21a7a7a53db6cf6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/79/65/79657bc81ce560f38b425a15e21a7a7a53db6cf6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/96/6d/966d51832db4c19bcf3d4a79f94ebe5e4be212a6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/96/6d/966d51832db4c19bcf3d4a79f94ebe5e4be212a6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/b5/11/b5115c2f15beced03866be18d49436ce0bdc6c47" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/b5/11/b5115c2f15beced03866be18d49436ce0bdc6c47" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/c4/ec/c4ec6c86cbf629b26607481706ff780024d96874" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/c4/ec/c4ec6c86cbf629b26607481706ff780024d96874" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/c5/59/c5595f9a82b47f9158e2a5062650794354c04c14" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/c5/59/c5595f9a82b47f9158e2a5062650794354c04c14" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/ce/e3/cee386b04503398bc6cadb817aeb05c96c420db6" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/ce/e3/cee386b04503398bc6cadb817aeb05c96c420db6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +53,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/translate" />
+                    <option name="lastUsedInstant" value="1604068219" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="feature/pagination" />
                     <option name="lastUsedInstant" value="1603896262" />
@@ -207,7 +207,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Ocus/mcp-v2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/lang/en" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -220,13 +220,16 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/css" />
-      <recent name="$PROJECT_DIR$/resources/views/frontend/partials" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/frontend" />
-      <recent name="$PROJECT_DIR$/resources/views/backend" />
-      <recent name="$PROJECT_DIR$/resources/views/frontend" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\app\public\assets" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\app\public\images" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\app\public" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\resources\lang\en" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage" />
+      <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\public\assets\images" />
       <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays" />
       <recent name="$PROJECT_DIR$/resources/views/frontend/game" />
     </key>
@@ -263,7 +266,11 @@
       <workItem from="1603882897197" duration="1680000" />
       <workItem from="1603896312744" duration="6063000" />
       <workItem from="1603903024594" duration="3488000" />
-      <workItem from="1603951090517" duration="19062000" />
+      <workItem from="1603951090517" duration="19662000" />
+      <workItem from="1603986281279" duration="557000" />
+      <workItem from="1604045818490" duration="4401000" />
+      <workItem from="1604065753723" duration="10049000" />
+      <workItem from="1604130376036" duration="679000" />
     </task>
     <servers />
   </component>
@@ -283,11 +290,12 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1284" y="315" width="648" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603905519139">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="1346" y="327" width="648" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604053013670">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="1284" y="315" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3840.1040@0.0.3840.1040" timestamp="1603905519139" />
     <state x="642" y="1407" width="648" height="403" key="#com.intellij.fileTypes.FileTypeChooser/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603127242060" />
+    <state x="1346" y="327" key="#com.intellij.fileTypes.FileTypeChooser/93.0.3747.1080@93.0.3747.1080" timestamp="1604053013669" />
     <state x="703" y="1374" width="494" height="475" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603101422986">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
@@ -302,11 +310,12 @@
       <screen x="0" y="0" width="3840" height="1040" />
     </state>
     <state x="100" y="107" width="1734" height="840" key="DiffContextDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1603906469196" />
-    <state x="1486" y="273" width="642" height="611" key="FileChooserDialogImpl" timestamp="1603961549550">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="1543" y="284" width="642" height="611" key="FileChooserDialogImpl" timestamp="1603986354243">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="1486" y="273" width="642" height="611" key="FileChooserDialogImpl/0.0.3840.1040@0.0.3840.1040" timestamp="1603961549550" />
     <state x="743" y="1363" width="424" height="491" key="FileChooserDialogImpl/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603119623869" />
+    <state x="1543" y="284" key="FileChooserDialogImpl/93.0.3747.1080@93.0.3747.1080" timestamp="1603986354243" />
     <state x="543" y="1351" width="824" height="515" key="IDE.errors.dialog" timestamp="1603199347597">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
@@ -316,15 +325,17 @@
     </state>
     <state x="1252" y="235" key="NewPhpClassDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1603810526394" />
     <state x="626" y="1324" width="657" height="568" key="NewPhpClassDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603266350790" />
-    <state x="1147" y="442" key="NewPhpFileDialog" timestamp="1603809841454">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="1212" y="459" key="NewPhpFileDialog" timestamp="1604068280466">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="1147" y="442" key="NewPhpFileDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1603809841454" />
-    <state x="1016" y="166" key="SettingsEditor" timestamp="1603964106522">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="1212" y="459" key="NewPhpFileDialog/93.0.3747.1080@93.0.3747.1080" timestamp="1604068280466" />
+    <state x="1084" y="172" key="SettingsEditor" timestamp="1604053348279">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="1016" y="166" key="SettingsEditor/0.0.3840.1040@0.0.3840.1040" timestamp="1603964106522" />
     <state x="1016" y="166" key="SettingsEditor/3840.132.1920.1040/0.0.3840.1040@0.0.3840.1040" timestamp="1603722634297" />
+    <state x="1084" y="172" key="SettingsEditor/93.0.3747.1080@93.0.3747.1080" timestamp="1604053348279" />
     <state width="620" height="446" key="SwitcherDM" timestamp="1603348502640">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
@@ -342,11 +353,12 @@
       <screen x="0" y="0" width="3840" height="1040" />
     </state>
     <state x="1627" y="118" width="585" height="801" key="find.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603799985552" />
-    <state x="1248" y="749" key="run.anything.popup" timestamp="1603782684182">
-      <screen x="0" y="0" width="3840" height="1040" />
+    <state x="1311" y="778" key="run.anything.popup" timestamp="1604130698786">
+      <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="1248" y="749" key="run.anything.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603782684182" />
     <state x="624" y="778" key="run.anything.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603260246048" />
+    <state x="1311" y="778" key="run.anything.popup/93.0.3747.1080@93.0.3747.1080" timestamp="1604130698786" />
     <state x="739" y="245" width="672" height="705" key="search.everywhere.popup" timestamp="1603975789477">
       <screen x="93" y="0" width="3747" height="1080" />
     </state>
