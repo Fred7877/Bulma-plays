@@ -20,12 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/lang/en/frontend.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/lang/fr/frontend.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/logo_1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/filter-games.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,16 +49,16 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1604131268" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="feature/translate" />
                     <option name="lastUsedInstant" value="1604068219" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="feature/pagination" />
                     <option name="lastUsedInstant" value="1603896262" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1603882926" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
@@ -270,7 +265,7 @@
       <workItem from="1603986281279" duration="557000" />
       <workItem from="1604045818490" duration="4401000" />
       <workItem from="1604065753723" duration="10049000" />
-      <workItem from="1604130376036" duration="679000" />
+      <workItem from="1604130376036" duration="902000" />
     </task>
     <servers />
   </component>
