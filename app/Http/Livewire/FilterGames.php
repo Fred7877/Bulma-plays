@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use MarcReichel\IGDBLaravel\Models\Genre;
 use MarcReichel\IGDBLaravel\Models\Platform;
@@ -79,25 +80,40 @@ class FilterGames extends Component
 
             return true;
         })->sortBy('name')->toArray();
+
+        $this->sortName = __('frontend.descending');
+
+        if (session()->has('filter')) {
+            $this->genreName = session('filter')['genreName'] ?? '';
+            $this->sortName = session('filter')['sortName'] ?? '';
+            $this->platformName = session('filter')['platformName'] ?? '';
+        }
     }
 
     public function updatedGenre($value)
     {
         if ($value !== '') {
             $this->genreName = collect($this->genres)->where('slug', $value)->first()['name'];
-
         } else {
             $this->genreName = '';
         }
+
+        session([
+            'filter' => [
+                'genreName' => $this->genreName,
+            ]
+        ]);
+
         $this->emitUp('genre', $value);
     }
 
     public function updatedSearch($value)
     {
-        $this->sortName = 'Descendant';
+        $this->sortName = Str::ucFirst(__('frontend.descending'));
         $this->platformName = '';
         $this->platform = null;
         $this->genreName = '';
+
         $this->emitUp('search', $value);
     }
 
@@ -110,12 +126,18 @@ class FilterGames extends Component
             $this->platformName = '';
         }
 
+        session([
+            'filter' => [
+                'platformName' => $this->platformName,
+            ]
+        ]);
+
         $this->emitUp('platformChange', $value);
     }
 
     public function updatedSort($value)
     {
-        $this->sortName = $value === 'asc' ? 'Ascendant' : 'Descendant';
+        $this->sortName = $value === 'asc' ? Str::ucFirst(__('frontend.ascending')) : Str::ucFirst(__('frontend.descending'));
         $this->emitUp('sortChange', $value);
     }
 

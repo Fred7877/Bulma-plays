@@ -7,4 +7,6 @@ mix.js('resources/js/app.js', 'public/js')
     .options({
         processCssUrls: false,
         postCss: [tailwindcss('./tailwind.config.js')],
-    });
+    }).autoload({
+    jquery: ['$', 'window.jQuery', 'jQuery'],
+});

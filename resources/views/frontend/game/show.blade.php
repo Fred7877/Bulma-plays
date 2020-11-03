@@ -121,8 +121,10 @@
             <div class="block">
                 <div class="content">
                     <p>
-                        @if(isset($game['translate']['summary']))
+                        @if(isset($game['translate']['summary']) && !empty($game['translate']['summary']))
                             {{ $game['translate']['summary']}}
+                            @else
+                           {{ $game['summary'] }}
                         @endif
                     </p>
                 </div>

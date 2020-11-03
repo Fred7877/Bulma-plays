@@ -6,26 +6,53 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>My Games Sites</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+    <link
+        href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
+        rel='stylesheet' type='text/css'>
 
     <style>
         body {
             background: #222939;
             font-family: Roboto, serif;
         }
+
         .img-content {
             background: white;
         }
+
         label {
             color: #3273dc;
         }
+
         .block-filters {
             background: #323a45;
         }
+
         .pointer {
             cursor: pointer;
         }
+
+
+        .loader-wrapper {
+            transition: opacity .3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 6px;
+        }
+
+        .loader {
+            height: 80px;
+            width: 80px;
+        }
+
+        .is-active {
+            opacity: 1;
+            z-index: 1;
+        }
+
     </style>
+
 
 
     @stack('css')
@@ -40,7 +67,9 @@
 </div>
 
 @livewireScripts
+
 <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+
 </body>
 </html>
 

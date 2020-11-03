@@ -22,7 +22,12 @@
                     <b>Genres :</b>
                     @if (isset($game['genres']))
                         <span class="text-gray-900 leading-none">
-                            {{ collect($game['genres'])->implode('name', ', ') }}
+                            {!! collect($game['genres'])->map(function($value) use($genre){
+                                    if ( Str::ucFirst($genre) === $value['name']){
+                                        return ['name' => '<b>'.$value['name'].'</b>'];
+                                    }
+                                    return ['name' => $value['name']];
+                                })->implode('name', ', ') !!}
                         </span>
                     @else
                         <span class="text-gray-900 leading-none">
@@ -34,7 +39,13 @@
                     <b>Platforms :</b>
                     @if (isset($game['platforms']))
                         <span class="text-gray-900 leading-none">
-                            {{ collect($game['platforms'])->implode('name', ', ') }}
+                            {!! collect($game['platforms'])->map(function($value) use($platform){
+                                    if ( $platform === $value['slug']){
+                                        return ['platforms' => '<b>'.$value['name'].'</b>'];
+                                    }
+
+                                    return ['platforms' => $value['name']];
+                                })->implode('platforms', ', ') !!}
                         </span>
                     @endif
                 </p>

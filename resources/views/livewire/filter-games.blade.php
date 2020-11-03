@@ -106,6 +106,7 @@
                     {{ Str::ucFirst($sortName) }}
                 </div>
             </div>
+            <div class="is-divider-vertical" data-content="OR"></div>
             <div class="column is-2 mr-5">
                 <input class="input" type="text" id="searching" placeholder="{{ Str::Ucfirst(__('frontend.research')) }}" name="searching"
                        wire:model.debounce.500ms="search">
@@ -119,7 +120,7 @@
         document.addEventListener("DOMContentLoaded", (event) => {
 
             document.body.addEventListener("mouseup", function (e) {
-                if (document.body.contains(document.querySelector(".is-active"))) {
+                if (document.body.contains(document.querySelector(".is-active")) && e.target.tagName !== 'SELECT') {
                     document.querySelector(".is-active").classList.remove('is-active');
                 }
             });
