@@ -20,7 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +272,7 @@
       <workItem from="1604303113408" duration="34744000" />
       <workItem from="1604386758762" duration="13492000" />
       <workItem from="1604436426146" duration="6962000" />
-      <workItem from="1604473122269" duration="8916000" />
+      <workItem from="1604473122269" duration="10267000" />
     </task>
     <servers />
   </component>
@@ -341,11 +342,11 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state width="620" height="446" key="SwitcherDM/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603348502640" />
-    <state x="288" y="100" width="3357" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604482181593">
+    <state x="288" y="100" width="3357" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604483322775">
       <screen x="93" y="0" width="3747" height="1080" />
     </state>
     <state x="100" y="1180" width="1720" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603109449864" />
-    <state x="288" y="100" width="3357" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/93.0.3747.1080@93.0.3747.1080" timestamp="1604482181593" />
+    <state x="288" y="100" width="3357" height="850" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/93.0.3747.1080@93.0.3747.1080" timestamp="1604483322775" />
     <state x="288" y="100" width="3357" height="851" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604341868181">
       <screen x="93" y="0" width="3747" height="1080" />
     </state>

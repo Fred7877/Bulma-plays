@@ -165,7 +165,6 @@
 
             var owlScreenshot = $('#carousel-screenshot');
             owlScreenshot.owlCarousel({
-                loop: true,
                 margin: 10,
                 responsive: {
                     0: {
@@ -175,10 +174,10 @@
                         items: 3
                     },
                     960: {
-                        items: 5
+                        items: 3
                     },
                     1200: {
-                        items: 6
+                        items: 3
                     }
                 }
             });
@@ -193,7 +192,6 @@
 
             var owlVideo = $('#carousel-video');
             owlVideo.owlCarousel({
-                loop: true,
                 margin: 10,
             });
 
