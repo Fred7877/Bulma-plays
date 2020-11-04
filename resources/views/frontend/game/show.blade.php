@@ -100,14 +100,14 @@
                         <b>Links :</b>
 
                         @if (isset($game['websites']))
-                                <ul>
-                                    @foreach($game['websites'] as $siteweb)
-                                        <li class="text-gray-900 leading-none">
-                                            <a href="{{ $siteweb['url'] }}" class="word-break"
-                                               target="_blank"> - {{ $siteweb['url'] }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                            <ul>
+                                @foreach($game['websites'] as $siteweb)
+                                    <li class="text-gray-900 leading-none">
+                                        <a href="{{ $siteweb['url'] }}" class="word-break"
+                                           target="_blank"> - {{ $siteweb['url'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         @endif
                 </div>
                 <!-- FICHE -->
@@ -141,15 +141,13 @@
                 <div class="block has-background-dark p-4 rounded">
                     <div class="owl-carousel owl-theme" id="carousel-video">
                         @foreach($game['videos'] as $video)
-                            <div class="item-video">
-                                <iframe src="https://www.youtube.com/embed/{{ $video['video_id'] }}"></iframe>
-                            </div>
+                            <iframe class="item-video" data-merge="1"
+                                    src="https://www.youtube.com/embed/{{ $video['video_id'] }}"></iframe>
                         @endforeach
                     </div>
                 </div>
             @endif
         </div>
-
     </div>
 
 @endsection
@@ -183,22 +181,30 @@
 
             var owlVideo = $('#carousel-video');
             owlVideo.owlCarousel({
-                items: 1,
-                margin: 10,
-                video: true,
-                responsive: {
+                items:1,
+                merge:true,
+                margin:10,
+                video:true,
+                lazyLoad:true,
+                responsive:{
                     0: {
                         items: 1
                     },
+                    480:{
+                        items:1
+                    },
+                    500: {
+                        items: 1
+                    },
                     600: {
-                        items: 3
+                        items: 1
                     },
-                    960: {
-                        items: 3
+                    700: {
+                        items: 1
                     },
-                    1200: {
-                        items: 3
-                    }
+                    800: {
+                        items: 2
+                    },
                 }
             });
         });
