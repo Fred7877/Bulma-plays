@@ -166,13 +166,8 @@ class ViewGames extends Component
         }
 
         $query->where('first_release_date', '<', Carbon::now())
-            ->whereNotNull('first_release_date');
-
-        if ($this->sort === 'asc') {
-            $query->orderBy('first_release_date');
-        } else {
-            $query->orderByDesc('first_release_date');
-        }
+            ->whereNotNull('first_release_date')
+            ->orderBy('first_release_date', $this->sort ?? 'desc');
 
         if ($this->genre !== '') {
             $query->where('genres.slug', $this->genre);

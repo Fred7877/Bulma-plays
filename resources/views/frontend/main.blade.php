@@ -11,6 +11,9 @@
         rel='stylesheet' type='text/css'>
 
     <style>
+        p, span {
+            font-size: 14px;
+        }
         body {
             background: #222939;
             font-family: Roboto, serif;
@@ -51,9 +54,14 @@
             z-index: 1;
         }
 
+        .image-carousel {
+
+        }
     </style>
 
-
+    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('storage/assets/css/fancyBox-3.5.7.min.css') }}">
 
     @stack('css')
 

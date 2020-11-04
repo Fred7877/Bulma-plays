@@ -1,11 +1,5 @@
 @extends('frontend.main')
 
-@push('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css"
-          integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA=="
-          crossorigin="anonymous"/>
-@endpush
-
 @section('content')
     <div class="box mt-3">
         <div class="rows">
@@ -123,35 +117,32 @@
                     <p>
                         @if(isset($game['translate']['summary']) && !empty($game['translate']['summary']))
                             {{ $game['translate']['summary']}}
-                            @else
-                           {{ $game['summary'] }}
+                        @else
+                            {{ $game['summary'] }}
                         @endif
                     </p>
                 </div>
             </div>
             @if (isset($game['screenshots']))
-            <div class="block has-background-dark p-4 rounded">
-                <div class="columns">
-                    @foreach($game['screenshots'] as $screenshot)
-                        @if (isset($screenshot['url']))
-                            <div class="column">
-                                <img class="image is-128x128"
-                                     src="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_med')  }}"
-                                >
-                            </div>
-                        @endif
-                    @endforeach
+                <div class="block has-background-dark p-4 rounded">
+                    <div class="owl-carousel" id="carousel-screenshot">
+                        @foreach($game['screenshots'] as $screenshot)
+                            @if (isset($screenshot['url']))
+                                <a id="single_image-{{ $loop->index }}" href="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_huge')  }}">
+                                    <img src="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_med')  }}">
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
-            </div>
             @endif
             @if (isset($game['videos']))
                 <div class="block has-background-dark p-4 rounded">
-
-                    <div class="columns">
+                    <div class="owl-carousel" id="carousel-video">
                         @foreach($game['videos'] as $video)
-                            <div class="column is-variable is-1-mobile is-0-tablet is-3-desktop is-4-widescreen">
+                            <div>
                                 <iframe
-                                    src="https://www.youtube.com/embed/{{ $video['video_id'] }}">
+                                    src="https://www.youtube.com/embed/{{ $video['video_id'] }}" allowfullscreen>
                                 </iframe>
                             </div>
                         @endforeach
@@ -159,5 +150,61 @@
                 </div>
             @endif
         </div>
+
     </div>
+
 @endsection
+@push('js')
+    <script src="{{ asset('storage/assets/js/Jquery-3.5.1.min.js') }}"> </script>
+    <script src="{{ asset('storage/assets/OwlCarousel/dist/owl.carousel.min.js') }}"> </script>
+    <script src="{{ asset('storage/assets/js/fancyBox-3.5.7.min.js') }}"> </script>
+
+    <script>
+        $(document).ready(function () {
+            $("a[id^=single_image]").fancybox();
+
+            var owlScreenshot = $('#carousel-screenshot');
+            owlScreenshot.owlCarousel({
+                loop: true,
+                margin: 10,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    960: {
+                        items: 5
+                    },
+                    1200: {
+                        items: 6
+                    }
+                }
+            });
+            owlScreenshot.on('mousewheel', '.owl-stage', function (e) {
+                if (e.originalEvent.wheelDelta > 0) {
+                    owlScreenshot.trigger('next.owl');
+                } else {
+                    owlScreenshot.trigger('prev.owl');
+                }
+                e.preventDefault();
+            });
+
+            var owlVideo = $('#carousel-video');
+            owlVideo.owlCarousel({
+                loop: true,
+                margin: 10,
+            });
+
+            owlVideo.on('mousewheel', '.owl-stage', function (e) {
+                if (e.originalEvent.wheelDelta > 0) {
+                    owlVideo.trigger('next.owl');
+                } else {
+                    owlVideo.trigger('prev.owl');
+                }
+                e.preventDefault();
+            });
+        });
+    </script>
+@endpush

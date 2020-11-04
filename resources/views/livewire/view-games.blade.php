@@ -17,10 +17,11 @@
                 <p>No Games</p>
             @endforelse
 
-
-            <div class="mt-5 pb-5">
-                @include('frontend.partials.pagination', ['totalQueryGame' => $totalQueryGame])
-            </div>
+            @if ($totalQueryGame > 10)
+                <div class="mt-5 pb-5">
+                    @include('frontend.partials.pagination', ['totalQueryGame' => $totalQueryGame])
+                </div>
+            @endif
         </div>
     </div>
 </div>

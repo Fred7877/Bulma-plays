@@ -19,4 +19,11 @@ class GameController extends Controller
 
         return view('frontend.game.show', ['game' => (new Game)->get($slug)]);
     }
+
+    public function resetFilter()
+    {
+        session()->flush();
+
+        return redirect(route('games.index'));
+    }
 }

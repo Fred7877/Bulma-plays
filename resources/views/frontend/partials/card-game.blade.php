@@ -8,7 +8,7 @@
             <div class="text-gray-900 font-bold text-xl mb-2">
                 <a href="{{ LaravelLocalization::localizeUrl(route('games.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
             </div>
-            <p class="text-gray-700 text-base">
+            <p class="text-gray-700">
                 @if(isset($game['translate']['summary']) && $game['translate']['summary'] !== '')
                     {{ Str::of($game['translate']['summary'])->limit(150) }}
                 @else

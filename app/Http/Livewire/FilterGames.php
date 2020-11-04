@@ -15,7 +15,11 @@ class FilterGames extends Component
     const PLATFORM_FAMILLY_SEGA = 3;
     const PLATFORM_FAMILLY_LINUX = 4;
     const PLATFORM_FAMILLY_NINTENDO = 5;
+    const PLATFORM_SLUG_WINDOWS = 'win';
+    const PLATFORM_SLUG_LINUX = 'linux';
+    const PLATFORM_SLUG_MAC = 'mac';
 
+    public $platformPC;
     public $platformNintendo;
     public $platformOculus;
     public $platformPlaystation;
@@ -40,6 +44,15 @@ class FilterGames extends Component
         $this->genres = Cache::remember('genres', $this->ttl, function () {
             return Genre::all()->sortBy('name')->toArray();
         });
+
+        $this->platformPC = collect($this->platforms)->filter(function ($item) {
+
+            if (isset($item['slug'])) {
+                return ($item['slug'] === self:: PLATFORM_SLUG_WINDOWS || $item['slug'] === self:: PLATFORM_SLUG_LINUX || $item['slug'] === self:: PLATFORM_SLUG_MAC);
+            }
+
+            return false;
+        })->toArray();
 
         $this->platformNintendo = collect($this->platforms)->filter(function ($item) {
 
@@ -70,11 +83,15 @@ class FilterGames extends Component
             if (isset($item['platform_family'])) {
                 return (
                 !($item['platform_family'] === self:: PLATFORM_FAMILLY_NINTENDO ||
-                    $item['platform_family'] === self:: PLATFORM_FAMILLY_PLAYSTATION)
+                    $item['platform_family'] === self:: PLATFORM_FAMILLY_PLAYSTATION ||
+                    $item['platform_family'] === self:: PLATFORM_FAMILLY_LINUX)
                 );
             }
 
-            if (stripos($item['name'], 'VR') !== false || stripos($item['name'], 'Nintendo') !== false) {
+            if (stripos($item['name'], 'VR') !== false ||
+                stripos($item['name'], 'Nintendo') !== false ||
+                stripos($item['name'], 'Mac') !== false ||
+                stripos($item['name'], 'PC (Microsoft Windows)') !== false) {
                 return false;
             }
 
@@ -87,6 +104,10 @@ class FilterGames extends Component
             $this->genreName = session('filter')['genreName'] ?? '';
             $this->sortName = session('filter')['sortName'] ?? '';
             $this->platformName = session('filter')['platformName'] ?? '';
+            $this->genre = session('filter')['genreSlug'] ?? '';
+            $this->platform = session('filter')['platformSlug'] ?? '';
+            $this->sortName = session('filter')['sortName'] ?? __('frontend.descending');
+            $this->search = session('filter')['search'] ?? '';
         }
     }
 
@@ -101,6 +122,7 @@ class FilterGames extends Component
         session([
             'filter' => [
                 'genreName' => $this->genreName,
+                'genreSlug' => $value,
             ]
         ]);
 
@@ -113,6 +135,12 @@ class FilterGames extends Component
         $this->platformName = '';
         $this->platform = null;
         $this->genreName = '';
+
+        session([
+            'filter' => [
+                'search' => $value,
+            ]
+        ]);
 
         $this->emitUp('search', $value);
     }
@@ -129,6 +157,7 @@ class FilterGames extends Component
         session([
             'filter' => [
                 'platformName' => $this->platformName,
+                'platformSlug' => $value,
             ]
         ]);
 
@@ -138,6 +167,12 @@ class FilterGames extends Component
     public function updatedSort($value)
     {
         $this->sortName = $value === 'asc' ? Str::ucFirst(__('frontend.ascending')) : Str::ucFirst(__('frontend.descending'));
+        session([
+            'filter' => [
+                'sortName' => $value,
+            ]
+        ]);
+
         $this->emitUp('sortChange', $value);
     }
 

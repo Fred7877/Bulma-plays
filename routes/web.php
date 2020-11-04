@@ -24,5 +24,6 @@ Route::group([
     });
 
     Route::get('games', [GameController::class, 'index'])->name('games.index');
+    Route::get('reset-filter', [GameController::class, 'resetFilter'])->name('reset.filter');
     Route::get('games/{slug}', [GameController::class, 'show'])->name('games.show');
 });

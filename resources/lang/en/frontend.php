@@ -8,4 +8,5 @@ return [
     'ascending' => 'ascending',
     'research' => 'research',
     'sort' => 'sort',
+    'reset_filter' => 'reset filters',
 ];
