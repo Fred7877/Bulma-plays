@@ -97,18 +97,18 @@
                         </span>
                             @endif
                         </p>
-                        <p>
-                            <b>Links :</b>
+                        <b>Links :</b>
+
                         @if (isset($game['websites']))
-                            <ul>
-                                @foreach($game['websites'] as $siteweb)
-                                    <li class="text-gray-900 leading-none">
-                                        <a href="{{ $siteweb['url'] }}" target="_blank">{{ $siteweb['url'] }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            @endif
-                            </p>
+                                <ul>
+                                    @foreach($game['websites'] as $siteweb)
+                                        <li class="text-gray-900 leading-none">
+                                            <a href="{{ $siteweb['url'] }}" class="word-break"
+                                               target="_blank"> - {{ $siteweb['url'] }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                        @endif
                 </div>
                 <!-- FICHE -->
             </div>
@@ -125,10 +125,11 @@
             </div>
             @if (isset($game['screenshots']))
                 <div class="block has-background-dark p-4 rounded">
-                    <div class="owl-carousel" id="carousel-screenshot">
+                    <div class="owl-carousel owl-theme" id="carousel-screenshot">
                         @foreach($game['screenshots'] as $screenshot)
                             @if (isset($screenshot['url']))
-                                <a id="single_image-{{ $loop->index }}" href="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_huge')  }}">
+                                <a id="single_image-{{ $loop->index }}"
+                                   href="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_huge')  }}">
                                     <img src="{{ Str::of($screenshot['url'])->replace('thumb', 'screenshot_med')  }}">
                                 </a>
                             @endif
@@ -138,12 +139,10 @@
             @endif
             @if (isset($game['videos']))
                 <div class="block has-background-dark p-4 rounded">
-                    <div class="owl-carousel" id="carousel-video">
+                    <div class="owl-carousel owl-theme" id="carousel-video">
                         @foreach($game['videos'] as $video)
-                            <div>
-                                <iframe
-                                    src="https://www.youtube.com/embed/{{ $video['video_id'] }}" allowfullscreen>
-                                </iframe>
+                            <div class="item-video">
+                                <iframe src="https://www.youtube.com/embed/{{ $video['video_id'] }}"></iframe>
                             </div>
                         @endforeach
                     </div>
@@ -155,9 +154,9 @@
 
 @endsection
 @push('js')
-    <script src="{{ asset('storage/assets/js/Jquery-3.5.1.min.js') }}"> </script>
-    <script src="{{ asset('storage/assets/OwlCarousel/dist/owl.carousel.min.js') }}"> </script>
-    <script src="{{ asset('storage/assets/js/fancyBox-3.5.7.min.js') }}"> </script>
+    <script src="{{ asset('storage/assets/js/Jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('storage/assets/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('storage/assets/js/fancyBox-3.5.7.min.js') }}"></script>
 
     <script>
         $(document).ready(function () {
@@ -181,27 +180,26 @@
                     }
                 }
             });
-            owlScreenshot.on('mousewheel', '.owl-stage', function (e) {
-                if (e.originalEvent.wheelDelta > 0) {
-                    owlScreenshot.trigger('next.owl');
-                } else {
-                    owlScreenshot.trigger('prev.owl');
-                }
-                e.preventDefault();
-            });
 
             var owlVideo = $('#carousel-video');
             owlVideo.owlCarousel({
+                items: 1,
                 margin: 10,
-            });
-
-            owlVideo.on('mousewheel', '.owl-stage', function (e) {
-                if (e.originalEvent.wheelDelta > 0) {
-                    owlVideo.trigger('next.owl');
-                } else {
-                    owlVideo.trigger('prev.owl');
+                video: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    960: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 3
+                    }
                 }
-                e.preventDefault();
             });
         });
     </script>

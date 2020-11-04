@@ -54,8 +54,8 @@
             z-index: 1;
         }
 
-        .image-carousel {
-
+        .word-break {
+            word-break: break-all;
         }
     </style>
 
