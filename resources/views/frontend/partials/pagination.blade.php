@@ -1,13 +1,13 @@
 <nav class="pagination is-centered" role="navigation" aria-label="pagination">
 
-    <button class="button is-primary pagination-previous"
+    <button class="button is-primary is-small pagination-previous"
             @if($currentPage == 1)
             disabled
             @else
             wire:click="paginate('-')"
         @endif
     >
-        Previous
+        {{ Str::ucFirst(__('frontend.previous')) }}
     </button>
 
     <ul class="pagination-list">
@@ -84,13 +84,13 @@
         @endforeach
     </ul>
 
-    <button class="button is-primary pagination-next"
+    <button class="button is-primary pagination-next is-small"
             @if($currentPage == $pageCount)
             disabled
             @else
             wire:click="paginate('+')"
         @endif
     >
-        Previous
+        {{ Str::ucFirst(__('frontend.next')) }}
     </button>
 </nav>

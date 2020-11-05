@@ -100,7 +100,7 @@ class ViewGames extends Component
 
     private function getGames()
     {
-        $keyCache = 'games_' . Str::studly($this->searchWord . '_' . $this->platform . '_' . $this->sort . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
+        $keyCache = 'games_' . Str::studly($this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
 
         $this->totalQueryGame = $this->queryGames()->count();
         $this->pageCount = (int)ceil($this->totalQueryGame / $this->limit);
@@ -165,9 +165,9 @@ class ViewGames extends Component
             $query->search($this->searchWord);
         }
 
-        $query->where('first_release_date', '<', Carbon::now())
-            ->whereNotNull('first_release_date')
-            ->orderBy('first_release_date', $this->sort ?? 'desc');
+        $query->whereNotNull('first_release_date')
+            ->orderBy('first_release_date', $this->sort ?? 'desc')
+            ->where('first_release_date', '<', Carbon::now());
 
         if ($this->genre !== '') {
             $query->where('genres.slug', $this->genre);

@@ -9,4 +9,6 @@ return [
     'research' => 'research',
     'sort' => 'sort',
     'reset_filter' => 'reset filters',
+    'next' => 'next',
+    'previous' => 'previous',
 ];

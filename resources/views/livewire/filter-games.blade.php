@@ -136,7 +136,7 @@
                        wire:model.debounce.500ms="search">
                 <div class=" mt-1 is-flex-direction-row-reverse">
                     <a class="text-sm has-text-link-dark "
-                       href="{{ route('reset.filter') }}">{{ __('frontend.reset_filter') }}</a>
+                       href="{{ route('reset.filter') }}">{{ Str::ucFirst(__('frontend.reset_filter')) }}</a>
                 </div>
             </div>
         </div>

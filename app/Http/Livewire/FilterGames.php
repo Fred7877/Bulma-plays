@@ -102,7 +102,6 @@ class FilterGames extends Component
 
         if (session()->has('filter')) {
             $this->genreName = session('filter')['genreName'] ?? '';
-            $this->sortName = session('filter')['sortName'] ?? '';
             $this->platformName = session('filter')['platformName'] ?? '';
             $this->genre = session('filter')['genreSlug'] ?? '';
             $this->platform = session('filter')['platformSlug'] ?? '';
@@ -135,6 +134,7 @@ class FilterGames extends Component
         $this->platformName = '';
         $this->platform = null;
         $this->genreName = '';
+        $this->search = $value;
 
         session([
             'filter' => [
@@ -169,7 +169,7 @@ class FilterGames extends Component
         $this->sortName = $value === 'asc' ? Str::ucFirst(__('frontend.ascending')) : Str::ucFirst(__('frontend.descending'));
         session([
             'filter' => [
-                'sortName' => $value,
+                'sortName' => $this->sortName,
             ]
         ]);
 
