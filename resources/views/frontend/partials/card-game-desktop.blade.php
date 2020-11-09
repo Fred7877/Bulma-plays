@@ -23,7 +23,7 @@
                     @if (isset($game['genres']))
                         <span class="text-gray-900 leading-none">
                             {!! collect($game['genres'])->map(function($value) use($genre){
-                                    if ( Str::ucFirst($genre) === $value['name']){
+                                    if ( Str::ucFirst($genre) === $value['slug']){
                                         return ['name' => '<b>'.$value['name'].'</b>'];
                                     }
                                     return ['name' => $value['name']];

@@ -101,9 +101,9 @@ class FilterGames extends Component
         $this->sortName = __('frontend.descending');
 
         if (session()->has('filter')) {
-            $this->genreName = session('filter')['genreName'] ?? '';
+            $this->genreName = session('filter')['genreName'][0] ?? '';
             $this->platformName = session('filter')['platformName'] ?? '';
-            $this->genre = session('filter')['genreSlug'] ?? '';
+            $this->genre = session('filter')['genreSlug'][0] ?? '';
             $this->platform = session('filter')['platformSlug'] ?? '';
             $this->sortName = session('filter')['sortName'] ?? __('frontend.descending');
             $this->search = session('filter')['search'] ?? '';
@@ -112,18 +112,10 @@ class FilterGames extends Component
 
     public function updatedGenre($value)
     {
-        if ($value !== '') {
-            $this->genreName = collect($this->genres)->where('slug', $value)->first()['name'];
-        } else {
-            $this->genreName = '';
-        }
+        $this->genreName = collect($this->genres)->where('slug', $value)->first()['name'];
 
-        session([
-            'filter' => [
-                'genreName' => $this->genreName,
-                'genreSlug' => $value,
-            ]
-        ]);
+        session()->push('filter.genreName', $this->genreName);
+        session()->push('filter.genreSlug', $value);
 
         $this->emitUp('genre', $value);
     }
@@ -131,16 +123,9 @@ class FilterGames extends Component
     public function updatedSearch($value)
     {
         $this->sortName = Str::ucFirst(__('frontend.descending'));
-        $this->platformName = '';
-        $this->platform = null;
-        $this->genreName = '';
         $this->search = $value;
 
-        session([
-            'filter' => [
-                'search' => $value,
-            ]
-        ]);
+        session()->put('filter.search', $value);
 
         $this->emitUp('search', $value);
     }
@@ -148,18 +133,13 @@ class FilterGames extends Component
     public function updatedPlatform($value)
     {
         if ($value !== '') {
-            $this->search = '';
             $this->platformName = collect($this->platforms)->where('slug', $value)->first()['name'];
         } else {
             $this->platformName = '';
         }
 
-        session([
-            'filter' => [
-                'platformName' => $this->platformName,
-                'platformSlug' => $value,
-            ]
-        ]);
+        session()->put('filter.platformName', $this->platformName);
+        session()->put('filter.platformSlug', $value);
 
         $this->emitUp('platformChange', $value);
     }
@@ -167,11 +147,8 @@ class FilterGames extends Component
     public function updatedSort($value)
     {
         $this->sortName = $value === 'asc' ? Str::ucFirst(__('frontend.ascending')) : Str::ucFirst(__('frontend.descending'));
-        session([
-            'filter' => [
-                'sortName' => $this->sortName,
-            ]
-        ]);
+
+        session()->put('filter.sortName', $this->sortName);
 
         $this->emitUp('sortChange', $value);
     }

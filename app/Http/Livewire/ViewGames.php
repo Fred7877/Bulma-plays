@@ -68,15 +68,23 @@ class ViewGames extends Component
             $this->platform = null;
         } else {
             $this->platform = $value;
-            $this->searchWord = null;
         }
+        $this->offset = 0;
+        $this->currentPage = 1;
 
         $this->getGames();
     }
 
     public function genre($value)
     {
-        $this->genre = $value;
+        if ($value !== '') {
+            $this->genre = $value;
+        } else {
+            $this->genre = null;
+        }
+        $this->offset = 0;
+        $this->currentPage = 1;
+
         $this->getGames();
     }
 
@@ -94,8 +102,10 @@ class ViewGames extends Component
             $this->searchWord = null;
         }
 
-        $this->getGames();
+        $this->offset = 0;
+        $this->currentPage = 1;
 
+        $this->getGames();
     }
 
     private function getGames()
@@ -108,7 +118,7 @@ class ViewGames extends Component
         $games = Cache::remember($keyCache, $this->ttl, function () {
             $query = $this->queryGames();
 
-            $query->offset($this->offset)->limit($this->limit)->get();
+            $query->offset($this->offset)->limit($this->limit);
 
             return $query->get()->toArray();
         });
@@ -117,7 +127,7 @@ class ViewGames extends Component
             $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
         }
 
-        session([
+        session()->put([
             'paginate' => [
                 'offset' => $this->offset,
                 'currentPage' => $this->currentPage,
@@ -161,19 +171,17 @@ class ViewGames extends Component
     {
         $query = Game::with($this->with);
 
-        if ($this->searchWord !== null) {
+        $query->where('first_release_date', '<', Carbon::now());
+
+        if ($this->searchWord != '') {
             $query->search($this->searchWord);
         }
 
-        $query->whereNotNull('first_release_date')
-            ->orderBy('first_release_date', $this->sort ?? 'desc')
-            ->where('first_release_date', '<', Carbon::now());
-
-        if ($this->genre !== '') {
+        if ($this->genre) {
             $query->where('genres.slug', $this->genre);
         }
 
-        if ($this->platform !== null) {
+        if ($this->platform != '') {
             $query->where('platforms.slug', $this->platform);
         }
 

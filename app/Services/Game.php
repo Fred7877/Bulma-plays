@@ -29,6 +29,7 @@ class Game
                 'platforms',
                 'screenshots',
                 'websites',
+                'age_ratings',
             ])->where('slug', $slug)->first()->toArray();
 
             (new AutoTranslation)->translate($game['summary'], 'summary', $game['id']);
