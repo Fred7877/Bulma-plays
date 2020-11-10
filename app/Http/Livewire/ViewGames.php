@@ -28,7 +28,7 @@ class ViewGames extends Component
 
     private $ttl = 7200;
 
-    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'loadMore'];
+    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh'];
 
     public function mount()
     {
