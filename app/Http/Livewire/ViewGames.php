@@ -13,7 +13,7 @@ class ViewGames extends Component
 {
     public $games;
     public $platform = null;
-    public $sort;
+    public $sort = 'desc';
     public $searchWord;
     private $with = ['release_dates', 'platforms', 'cover', 'genres'];
     public $genre = '';
@@ -184,6 +184,8 @@ class ViewGames extends Component
         if ($this->platform != '') {
             $query->where('platforms.slug', $this->platform);
         }
+
+        $query->orderBy('first_release_date', $this->sort);
 
         return $query;
     }

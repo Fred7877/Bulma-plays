@@ -10,18 +10,29 @@
             </a>
         </div>
         <div class="columns">
-            <div class="column">
-                <figure class="image is-1by1">
-                    <img
-                        src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'cover_big')  }}">
-                </figure>
+            <div class="column ">
+                @if(isset($game['cover']))
+                    <figure class="image is-1by1 static">
+                        <img
+                            src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'screenshot_big')  }}">
+                        @if(isset($game['aggregated_rating']))
+                            <div class="absolute bottom-0 right-0" style="right:-40px; bottom:-40px">
+                                <div
+                                    class="shadow-2xl  rounded-full h-24 w-24 flex items-center justify-center text-white font-black text-4xl bg-gray-800">
+                                    {{  $game['aggregated_rating'] }}%
+                                </div>
+                            </div>
+                        @endif
+                    </figure>
+                @endif
             </div>
+
             <!-- FICHE -->
-            <div class="column">
+            <div class="column is-relative">
                 <p>
-                    <b>Name :</b>
-                    {{ $game['name'] }}
+                    <span class="title is-3">{{ $game['name'] }}</span>
                 </p>
+                <hr class="dropdown-divider">
                 <p>
                     <b>Date première version :</b>
                     @if (isset($game['first_release_date']) && is_string($game['first_release_date']))
@@ -120,6 +131,7 @@
         </div>
         <div class="block">
             <div class="content">
+                <b>Synopsis :</b>
                 <p>
                     @if(isset($game['translate']['summary']) && !empty($game['translate']['summary']))
                         {{ $game['translate']['summary']}}

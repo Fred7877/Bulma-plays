@@ -32,8 +32,7 @@
                                     wire:model="platform">
                                 <option value="">{{ Str::Ucfirst(__('frontend.choose')) }}</option>
                                 @foreach(collect($platformNintendo)->sortBy('name')->toArray() as $platform1)
-                                    <option value="{{ $platform1['slug'] }}"
-                                            @if($platform1['slug'] == $platform) selected @endif>{{ $platform1['name'] }}</option>
+                                    <option value="{{ $platform1['slug'] }}" >{{ $platform1['name'] }}</option>
                                 @endforeach
                             </select>
                             <hr class="dropdown-divider">
