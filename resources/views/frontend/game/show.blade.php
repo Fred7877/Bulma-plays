@@ -27,7 +27,7 @@
                 <div class="columns mb-0">
                     <div class="column @if(isset($game['age_ratings'])) is-half @endif">
                         <p>
-                            <b>Date première version :</b>
+                            <b>{{ Str::ucFirst(__('frontend.first_release_date'))  }} :</b>
                             @if (isset($game['first_release_date']) && is_string($game['first_release_date']))
                                 {{ Carbon\Carbon::parse($game['first_release_date'])->toDateString() }}
                             @elseif (isset($game['first_release_date']) && $game['first_release_date'] instanceof Carbon\Carbon)
@@ -37,8 +37,8 @@
                             @endif
                         </p>
                         <p>
-                            <b>Genres :</b>
                             @if (isset($game['genres']))
+                                <b>{{ Str::ucFirst( Str::plural(__('genre'), count($game['genres'])) ) }} :</b>
                                 <span class="text-gray-900 leading-none">
                             {{ collect($game['genres'])->implode('name', ', ') }}
                         </span>
@@ -49,7 +49,7 @@
                             @endif
                         </p>
                         <p>
-                            <b>Platforms :</b>
+                            <b>{{ Str::ucFirst(Str::plural(__('frontend.platform'), count($game['platforms']))) }} :</b>
                             @if (isset($game['platforms']))
                                 <span class="text-gray-900 leading-none">
                                     {{ collect($game['platforms'])->implode('name', ', ') }}
@@ -92,8 +92,9 @@
                             </p>
                             </p>
                             <p>
-                                <b>Thèmes :</b>
                                 @if (isset($game['themes']))
+                                    <b>{{ Str::ucFirst(Str::plural(__('frontend.theme'), count($game['themes']))) }}
+                                        :</b>
                                     <span class="text-gray-900 leading-none">
                                         {{ collect($game['themes'])->implode('name', ', ') }}
                                     </span>
@@ -101,7 +102,7 @@
                             </p>
                             @if (isset($game['player_perspectives']))
                                 <p>
-                                    <b>Perspective :</b>
+                                    <b>{{ Str::ucFirst(Str::plural('Perspective', count($game['player_perspectives']))) }} :</b>
                                     <span class="text-gray-900 leading-none">
                                         {{ collect($game['player_perspectives'])->implode('name', ', ') }}
                                     </span>
@@ -121,8 +122,8 @@
                             </div>
                         </div>
                     @endif
-
                 </div>
+
                 <div class="columns">
                     <div class="column">
                         @if (isset($game['websites']))
@@ -145,7 +146,7 @@
                             <div class="column">
                                 @if(isset($game['compagnies']))
                                     <div class="mt-2">
-                                        <b>Produit par :</b>
+                                        <b>{{ Str::ucFirst(__('frontend.produced_by')) }} :</b>
                                         <ul>
                                             @foreach($game['compagnies'] as $compagny)
                                                 <li class="text-gray-900 leading-none">
@@ -169,7 +170,7 @@
                                             <div class="column is-full text-xs text-center">
                                                 <span class="text-xl"> {{ $game['aggregated_rating'] }}% </span>
                                                 <hr class="dropdown-divider m-0">
-                                                {{ $game['aggregated_rating_count'] }} voteurs
+                                                {{ $game['aggregated_rating_count'] }} {{ Str::plural(__('frontend.voter'), $game['aggregated_rating_count']) }}
                                             </div>
                                         </div>
                                     </div>
@@ -181,6 +182,8 @@
             </div>
             <!-- FICHE -->
         </div>
+        <hr class="dropdown-divider">
+
         <div class="block">
             <div class="content">
                 @if(isset($game['summary']))

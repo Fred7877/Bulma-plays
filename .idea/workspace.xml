@@ -21,6 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/frontend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fr/frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fr/frontend.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +53,11 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1605256272" />
+                    <option name="lastUsedInstant" value="1605440624" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/footer" />
+                    <option name="lastUsedInstant" value="1605440611" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="feature/translate" />
@@ -281,7 +287,7 @@
       <workItem from="1604997137325" duration="19095000" />
       <workItem from="1605169479440" duration="3834000" />
       <workItem from="1605275717434" duration="10624000" />
-      <workItem from="1605434195665" duration="5414000" />
+      <workItem from="1605434195665" duration="7171000" />
     </task>
     <servers />
   </component>

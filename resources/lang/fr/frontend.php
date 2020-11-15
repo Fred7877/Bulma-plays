@@ -11,4 +11,9 @@ return [
     'reset_filter' => 'reset filtres',
     'next' => 'suivant',
     'previous' => 'précédent',
+    'voter' => 'voteur',
+    'first_release_date' => 'Date première version',
+    'genre' => 'genre',
+    'theme' => 'thème',
+    'produced_by' => 'produit par',
 ];
