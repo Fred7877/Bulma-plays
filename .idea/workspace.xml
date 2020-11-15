@@ -20,23 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_AO.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_E.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_E10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_EC.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_Eighteen.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_M.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_RP.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_Seven.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_Sixteen.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_T.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_Three.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/esrb_Twelve.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Game.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/card-game.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +281,7 @@
       <workItem from="1604997137325" duration="19095000" />
       <workItem from="1605169479440" duration="3834000" />
       <workItem from="1605275717434" duration="10624000" />
-      <workItem from="1605434195665" duration="4320000" />
+      <workItem from="1605434195665" duration="5414000" />
     </task>
     <servers />
   </component>

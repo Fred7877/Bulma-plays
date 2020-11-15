@@ -141,8 +141,9 @@
                             </ul>
                         @endif
 
-                        <div class="columns">
-                            <div class="column"> @if(isset($game['compagnies']))
+                        <div class="columns is-mobile">
+                            <div class="column">
+                                @if(isset($game['compagnies']))
                                     <div class="mt-2">
                                         <b>Produit par :</b>
                                         <ul>
@@ -163,7 +164,7 @@
                             @if (isset($game['aggregated_rating']))
                                 <div class="column">
                                     <div
-                                        class="is-pulled-right rounded-full h-20 w-20 flex items-center justify-center bg-teal-500 text-xs text-white font-medium shadow-lg transform rotate-12">
+                                        class="mt-3 is-pulled-right rounded-full h-20 w-20 flex items-center justify-center bg-teal-500 text-xs text-white font-medium shadow-lg transform rotate-12">
                                         <div class="columns">
                                             <div class="column is-full text-xs text-center">
                                                 <span class="text-xl"> {{ $game['aggregated_rating'] }}% </span>
