@@ -20,10 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/frontend.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/fr/frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fr/frontend.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/storage" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,6 +289,7 @@
       <workItem from="1605169479440" duration="3834000" />
       <workItem from="1605275717434" duration="10624000" />
       <workItem from="1605434195665" duration="7171000" />
+      <workItem from="1606134375480" duration="40000" />
     </task>
     <servers />
   </component>
@@ -347,10 +349,11 @@
     </state>
     <state x="1147" y="442" key="NewPhpFileDialog/0.0.3840.1040@0.0.3840.1040" timestamp="1603809841454" />
     <state x="1212" y="459" key="NewPhpFileDialog/93.0.3747.1080@93.0.3747.1080" timestamp="1604068280466" />
-    <state x="1084" y="172" key="SettingsEditor" timestamp="1604053348279">
-      <screen x="93" y="0" width="3747" height="1080" />
+    <state x="1037" y="172" key="SettingsEditor" timestamp="1606134414525">
+      <screen x="29" y="0" width="3811" height="1080" />
     </state>
     <state x="1016" y="166" key="SettingsEditor/0.0.3840.1040@0.0.3840.1040" timestamp="1603964106522" />
+    <state x="1037" y="172" key="SettingsEditor/29.0.3811.1080@29.0.3811.1080" timestamp="1606134414525" />
     <state x="1016" y="166" key="SettingsEditor/3840.132.1920.1040/0.0.3840.1040@0.0.3840.1040" timestamp="1603722634297" />
     <state x="1084" y="172" key="SettingsEditor/93.0.3747.1080@93.0.3747.1080" timestamp="1604053348279" />
     <state width="620" height="446" key="SwitcherDM" timestamp="1603348502640">
