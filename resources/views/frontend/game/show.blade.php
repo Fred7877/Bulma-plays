@@ -88,26 +88,25 @@
                                     </li>
                                 @endforeach
                             </ul>
-                            @endif
-                            </p>
-                            </p>
-                            <p>
-                                @if (isset($game['themes']))
-                                    <b>{{ Str::ucFirst(Str::plural(__('frontend.theme'), count($game['themes']))) }}
-                                        :</b>
-                                    <span class="text-gray-900 leading-none">
+                        @endif
+                        <p>
+                            @if (isset($game['themes']))
+                                <b>{{ Str::ucFirst(Str::plural(__('frontend.theme'), count($game['themes']))) }}
+                                    :</b>
+                                <span class="text-gray-900 leading-none">
                                         {{ collect($game['themes'])->implode('name', ', ') }}
                                     </span>
-                                @endif
-                            </p>
-                            @if (isset($game['player_perspectives']))
-                                <p>
-                                    <b>{{ Str::ucFirst(Str::plural('Perspective', count($game['player_perspectives']))) }} :</b>
-                                    <span class="text-gray-900 leading-none">
+                            @endif
+                        </p>
+                        @if (isset($game['player_perspectives']))
+                            <p>
+                                <b>{{ Str::ucFirst(Str::plural('Perspective', count($game['player_perspectives']))) }}
+                                    :</b>
+                                <span class="text-gray-900 leading-none">
                                         {{ collect($game['player_perspectives'])->implode('name', ', ') }}
                                     </span>
-                                </p>
-                            @endif
+                            </p>
+                        @endif
                     </div>
                     @if(isset($game['age_ratings']))
                         <div class="column is-half">
@@ -224,72 +223,44 @@
         @endif
     </div>
 
+    <div class="block has-background-dark p-4 rounded">
+        <div class="container js-tabs-container">
+            <div class="tabs is-toggle is-fullwidth">
+                <ul>
+                    <li class="is-active" data-tab="tab-comments">
+                        <a class="has-text-white">
+                            <span class="icon is-small"><i class="fas fa-lg fa-comments" aria-hidden="true"></i></span>
+                            <span>Commentaires et Avis</span>
+                        </a>
+                    </li>
+                    <li data-tab="tab-tips">
+                        <a class="has-text-white">
+                            <span class="icon is-small"><i class="fas fa-lg fa-comment-medical" aria-hidden="true"></i></span>
+                            <span>Trucs & Asctuces</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="js-tab-content" id="tab-comments">
+                <article class="message is-dark">
+                    <div class="message-body">
+                        <livewire:comment :game="$game" :type="\App\Enums\CommentType::Comments"/>
+                    </div>
+                </article>
+            </div>
+            <div class="has-display-none js-tab-content" id="tab-tips">
+                <div class="js-tab-content" id="tab-tips">
+                    <article class="message is-dark">
+                        <div class="message-body">
+                            <livewire:comment :game="$game" :type="\App\Enums\CommentType::Tips"/>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 @push('js')
-    <script src="{{ asset('storage/assets/js/Jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('storage/assets/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('storage/assets/js/fancyBox-3.5.7.min.js') }}"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("a[id^=single_image]").fancybox();
-
-            var owlScreenshot = $('#carousel-screenshot');
-            owlScreenshot.owlCarousel({
-                margin: 10,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    960: {
-                        items: 3
-                    },
-                    1200: {
-                        items: 3
-                    }
-                }
-            });
-
-            var owlVideo = $('#carousel-video');
-            owlVideo.owlCarousel({
-                items: 1,
-                merge: true,
-                margin: 10,
-                video: true,
-                lazyLoad: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    480: {
-                        items: 1
-                    },
-                    500: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    700: {
-                        items: 1
-                    },
-                    800: {
-                        items: 2
-                    },
-                }
-            });
-
-
-            var input = $('#myInput');
-            input.on('keydown', function () {
-                var key = event.keyCode || event.charCode;
-
-                if (key == 8 || key == 46)
-                    return false;
-            });
-        });
-    </script>
+    <script src="/js/show-game.js"></script>
 @endpush

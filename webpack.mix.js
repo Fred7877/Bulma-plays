@@ -1,12 +1,19 @@
 const mix = require('laravel-mix');
 
-const tailwindcss = require('tailwindcss');
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            'fancybox': '@fancyapps/fancybox',
+            'owl.carousel': 'owl.carousel',
+            'sweetalert2': 'sweetalert2',
+        }
+    }
+});
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/show-game.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .options({
-        processCssUrls: false,
-        postCss: [tailwindcss('./tailwind.config.js')],
-    }).autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery'],
-});
+    .autoload({
+        jquery: ['$', 'jQuery', 'window.jQuery']
+    })
+    .sourceMaps();

@@ -57,6 +57,11 @@
         .word-break {
             word-break: break-all;
         }
+
+        .has-display-none {
+            display: none;
+            visibility: hidden;
+        }
     </style>
 
     <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
@@ -77,8 +82,7 @@
 @livewireScripts
 
 <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+@stack('js')
 
 </body>
 </html>
-
-@stack('js')
