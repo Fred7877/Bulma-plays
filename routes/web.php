@@ -4,6 +4,9 @@ use App\Http\Controllers\backend\CommentController;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\GameController;
+use App\Http\Controllers\frontend\LoginController;
+use App\Http\Controllers\frontend\LogoutController;
+use App\Http\Controllers\frontend\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -42,5 +45,9 @@ Route::group([
     Route::resource('comments', CommentController::class);
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
 });
+
+Route::post('gamers-register', [RegisterController::class, 'create'])->name('gamers.register');
+Route::get('gamers-login', [LoginController::class, 'authenticate'])->name('gamers.login');
+Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.logout');
 
 Auth::routes();

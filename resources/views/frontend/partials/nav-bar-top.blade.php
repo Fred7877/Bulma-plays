@@ -55,39 +55,24 @@
                     </div>
                 </div>
             </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" id="btn-signup">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" id="btn-login">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <meta name="_token" content="{{ csrf_token() }}">
 </nav>
 
 @push('js')
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            document.getElementById("languages").addEventListener("click", function (e) {
-                var element = document.querySelector(".dropdown-languages");
-                element.classList.toggle("is-active");
-            });
-
-// Get all "navbar-burger" elements
-            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-// Check if there are any navbar burgers
-            if ($navbarBurgers.length > 0) {
-
-// Add a click event on each of them
-                $navbarBurgers.forEach(el => {
-                    el.addEventListener('click', () => {
-
-// Get the target from the "data-target" attribute
-                        const target = el.dataset.target;
-                        const $target = document.getElementById(target);
-
-// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                        el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
-                });
-            }
-
-        });
-    </script>
+    <script src="/js/nav-bar.js"> </script>
 @endpush

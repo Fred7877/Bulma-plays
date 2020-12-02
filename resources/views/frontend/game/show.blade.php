@@ -223,42 +223,46 @@
         @endif
     </div>
 
-    <div class="block has-background-dark p-4 rounded">
-        <div class="container js-tabs-container">
-            <div class="tabs is-toggle is-fullwidth">
-                <ul>
-                    <li class="is-active" data-tab="tab-comments">
-                        <a class="has-text-white">
-                            <span class="icon is-small"><i class="fas fa-lg fa-comments" aria-hidden="true"></i></span>
-                            <span>Commentaires et Avis</span>
-                        </a>
-                    </li>
-                    <li data-tab="tab-tips">
-                        <a class="has-text-white">
-                            <span class="icon is-small"><i class="fas fa-lg fa-comment-medical" aria-hidden="true"></i></span>
-                            <span>Trucs & Asctuces</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="js-tab-content" id="tab-comments">
-                <article class="message is-dark">
-                    <div class="message-body">
-                        <livewire:comment :game="$game" :type="\App\Enums\CommentType::Comments"/>
-                    </div>
-                </article>
-            </div>
-            <div class="has-display-none js-tab-content" id="tab-tips">
-                <div class="js-tab-content" id="tab-tips">
+    @if(Auth::check())
+        <div class="block has-background-dark p-4 rounded">
+            <div class="container js-tabs-container">
+                <div class="tabs is-toggle is-fullwidth">
+                    <ul>
+                        <li class="is-active" data-tab="tab-comments">
+                            <a class="has-text-white">
+                                <span class="icon is-small"><i class="fas fa-lg fa-comments"
+                                                               aria-hidden="true"></i></span>
+                                <span>Commentaires et Avis</span>
+                            </a>
+                        </li>
+                        <li data-tab="tab-tips">
+                            <a class="has-text-white">
+                                <span class="icon is-small"><i class="fas fa-lg fa-comment-medical"
+                                                               aria-hidden="true"></i></span>
+                                <span>Trucs & Asctuces</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="js-tab-content" id="tab-comments">
                     <article class="message is-dark">
                         <div class="message-body">
-                            <livewire:comment :game="$game" :type="\App\Enums\CommentType::Tips"/>
+                            <livewire:comment :game="$game" :type="\App\Enums\CommentType::Comments"/>
                         </div>
                     </article>
                 </div>
+                <div class="has-display-none js-tab-content" id="tab-tips">
+                    <div class="js-tab-content" id="tab-tips">
+                        <article class="message is-dark">
+                            <div class="message-body">
+                                <livewire:comment :game="$game" :type="\App\Enums\CommentType::Tips"/>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection
 
 @push('js')
