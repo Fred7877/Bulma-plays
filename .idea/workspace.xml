@@ -20,27 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/LoginController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/LogoutController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/RegisterController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/GamerLoginRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/nav-bar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/mygamessite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mygamessite.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/app/public/assets/images/tenor.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/show-game.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/show-game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/nav-bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/nav-bar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/nav-bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/nav-bar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/nav-bar-top.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +244,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/app/public/assets/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -271,19 +256,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/frontend" />
-      <recent name="$PROJECT_DIR$/app/Http/Requests" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/comment" />
-      <recent name="$PROJECT_DIR$/resources/views/backend/moderation" />
-      <recent name="$PROJECT_DIR$/resources/js" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/backend/moderation" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/backend" />
       <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\app\public\assets" />
       <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\app\public" />
       <recent name="C:\Users\darkf\Documents\Workspace\Projects\Bulma-plays\storage\assets\images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public/assets/images" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/frontend" />
+      <recent name="$PROJECT_DIR$/app/Http/Requests" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/comment" />
+      <recent name="$PROJECT_DIR$/resources/views/backend/moderation" />
     </key>
   </component>
   <component name="RunManager">
@@ -351,6 +336,7 @@
       <workItem from="1606810570236" duration="47000" />
       <workItem from="1606830745103" duration="14026000" />
       <workItem from="1606896322513" duration="28432000" />
+      <workItem from="1606982491695" duration="1123000" />
     </task>
     <servers />
   </component>
@@ -451,11 +437,11 @@
     <state x="624" y="778" key="run.anything.popup/0.1080.1920.1080/0.0.1920.1080@0.1080.1920.1080" timestamp="1603260246048" />
     <state x="1268" y="778" key="run.anything.popup/29.0.3811.1080@29.0.3811.1080" timestamp="1606757024237" />
     <state x="1311" y="778" key="run.anything.popup/93.0.3747.1080@93.0.3747.1080" timestamp="1604343187989" />
-    <state x="686" y="245" width="684" height="705" key="search.everywhere.popup" timestamp="1606932344675">
+    <state x="686" y="245" width="684" height="705" key="search.everywhere.popup" timestamp="1606982806540">
       <screen x="29" y="0" width="3811" height="1080" />
     </state>
     <state x="662" y="236" width="672" height="678" key="search.everywhere.popup/0.0.3840.1040@0.0.3840.1040" timestamp="1603957082436" />
-    <state x="686" y="245" width="684" height="705" key="search.everywhere.popup/29.0.3811.1080@29.0.3811.1080" timestamp="1606932344675" />
+    <state x="686" y="245" width="684" height="705" key="search.everywhere.popup/29.0.3811.1080@29.0.3811.1080" timestamp="1606982806540" />
     <state x="739" y="245" width="672" height="705" key="search.everywhere.popup/93.0.3747.1080@93.0.3747.1080" timestamp="1605256550903" />
   </component>
 </project>

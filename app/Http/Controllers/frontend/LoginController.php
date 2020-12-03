@@ -20,7 +20,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
 
-            return response()->json(['error' => ''], 200);
+            return response()->json(['name' => Auth::user()->name], 200);
         }
 
         return response()->json(['error' => 'Unkown user'], 404);

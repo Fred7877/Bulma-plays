@@ -59,12 +59,19 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-primary" id="btn-signup">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light" id="btn-login">
-                            Log in
-                        </a>
+                        @if(!Auth::check())
+                            <a class="button is-primary" id="btn-signup">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light" id="btn-login">
+                                Log in
+                            </a>
+                        @endif
+                        @if(Auth::check())
+                            <a class="button is-dark" id="btn-logout" href="{{ route('gamers.logout') }}">
+                                Log out
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -74,5 +81,5 @@
 </nav>
 
 @push('js')
-    <script src="/js/nav-bar.js"> </script>
+    <script src="/js/nav-bar.js"></script>
 @endpush

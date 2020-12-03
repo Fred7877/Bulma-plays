@@ -151,8 +151,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         }
                     }).done(function (response) {
                         Swal.fire({
-                            title: 'Bienvenue '+ response.name +' ! Identification réussit',
-                        })
+                            title: 'Bienvenue '+ response.name +' !',
+                            timer: 5000,
+                            showConfirmButton: false,
+                            background: '#fff url(/images/trees.png)',
+                            backdrop: `
+                            rgba(0,0,123,0.4)
+                            url("/storage/assets/images/tenor.gif")
+                            left top
+                            no-repeat
+                          `
+                        }).then(document.location.reload())
                     }).fail(function (error) {
                         Swal.showValidationMessage(error.responseJSON.error)
                     })
