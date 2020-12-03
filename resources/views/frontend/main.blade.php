@@ -14,6 +14,7 @@
         p, span {
             font-size: 14px;
         }
+
         body {
             background: #222939;
             font-family: Roboto, serif;
@@ -57,6 +58,20 @@
         .word-break {
             word-break: break-all;
         }
+
+        .has-display-none {
+            display: none;
+            visibility: hidden;
+        }
+        .cookie-consent{
+            position: fixed;
+            bottom: 0;
+            z-index: 999;
+           color:white;
+            background-color: #0c525d;
+            padding: 5px;
+            font-weight: bold;
+        }
     </style>
 
     <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
@@ -74,11 +89,12 @@
     @yield('content')
 </div>
 
+@include('cookieConsent::index')
+
 @livewireScripts
 
 <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+@stack('js')
 
 </body>
 </html>
-
-@stack('js')

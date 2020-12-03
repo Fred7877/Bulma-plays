@@ -1,3 +1,3 @@
 require('./bootstrap');
-import "jquery";
-import "paginationjs";
+window.route = route;
+window.Ziggy = Ziggy;

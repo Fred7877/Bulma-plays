@@ -3,6 +3,8 @@
 
 namespace App\Services;
 
+use App\Enums\CommentType;
+use App\Models\Comment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use MarcReichel\IGDBLaravel\Models\Company;
@@ -30,7 +32,33 @@ class Game
         12 => 'AO',
     ];
 
-    public function get($slug)
+    public function find(int $id)
+    {
+        return Cache::remember('game-' . $id . '-' . App::getLocale(), $this->ttl, function () use ($id) {
+
+            $game = IGDBGame::with([
+                'cover',
+                'videos',
+                'game_engines',
+                'game_modes',
+                'multiplayer_modes',
+                'player_perspectives',
+                'release_dates',
+                'themes',
+                'genres',
+                'keywords',
+                'platforms',
+                'screenshots',
+                'websites',
+                'age_ratings',
+                'involved_companies',
+            ])->where('id', $id)->first()->toArray();
+
+            return $game;
+        });
+    }
+
+    public function get(string $slug)
     {
         return Cache::remember('game-' . $slug . '-' . App::getLocale(), $this->ttl, function () use ($slug) {
 
@@ -82,6 +110,9 @@ class Game
                 (new AutoTranslation)->translate($game['summary'], 'summary', $game['id']);
                 $game['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
             }
+
+            $game['comments'] = Comment::where('game_id', $game['id'])->where('type', CommentType::Comments)->get();
+            $game['tips'] = Comment::where('game_id', $game['id'])->where('type', CommentType::Tips)->get();
 
             return $game;
         });
