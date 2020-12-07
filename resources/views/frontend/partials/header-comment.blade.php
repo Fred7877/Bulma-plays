@@ -1,6 +1,6 @@
 <div class="level m-0 {{ $backgroundColor }} has-text-white p-1">
     <div class="level-left">
-        <div class="is-size-7">
+        <div class="is-size-7 author">
             Author : {{ $comment->user->name }}
         </div>
     </div>

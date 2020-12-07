@@ -4,55 +4,39 @@
             @include('frontend.partials.header-comment', ['comment' => $comment, 'backgroundColor' => 'has-background-dark'])
             <div class="mt-2 pl-1 pr-1">
                 {!! nl2br(e($comment->comment)) !!}
-                <form wire:submit.prevent="sendAnswer">
-                    <div id="{{$typeDesciption}}_area_answer-{{$comment->id}}" style="display: none" wire:ignore
-                         class="mt-5">
-                        <div class="box">
-                            <div class="is-size-7"> Répondre au commentaire de {{ $comment->user->name }} </div>
-                            <div class="field">
-                                <div class="control" wire:loading.class="is-loading">
-                                <textarea wire:loading.attr="disabled" wire:model.defer="answer"
-                                          class="textarea is-small"
-                                          name="answer" cols="30" rows="10"></textarea>
-                                </div>
-                            </div>
-                            <input type="hidden" wire:model="type">
-                            <div class="column is-full mb-3">
-                                <button type="submit" class="button is-small is-info is-rounded is-pulled-right"
-                                        wire:click="sendAnswer('{{$comment->id}}')">
-                                    Envoyer
-                                </button>
-                            </div>
-                        </div>
+                <div class="columns">
+                    <div class="column is-full">
+                        <button type="button"
+                                class="button mr-5 mt-5 is-small is-info is-rounded is-pulled-right answers-answers"
+                                data-id-comment="{{$comment->id}}"
+                                data-type="{{$type}}"
+                                data-type-txt="{{ \App\Enums\CommentType::fromValue($type)->description }}"
+                                data-reply-id="{{$comment->id}}"
+                                data-author-name="{{ $comment->user->name }}"
+                                data-reply="{{ $comment->comment }}"
+                                data-game-id="{{ $game['id'] }}"
+                        >
+                            répondre
+                        </button>
                     </div>
-                    @error('comment') <span class="error">{{ $message }}</span> @enderror
-                </form>
+                </div>
             </div>
 
             {{-- ANSWERS --}}
             <div class="border p-3">
                 @foreach($answers as $replies)
-                    @include('frontend.partials.answers', ['replies' => $replies, 'comment' => $comment])
+                    @include('frontend.partials.answers', ['replies' => $replies, 'comment' => $comment, 'gameId' => $game['id']])
                 @endforeach
             </div>
         </div>
     @endforeach
 
-    <form wire:submit.prevent="sendComment">
-        <div id="{{$typeDesciption}}_area" style="display: none" wire:ignore>
-            <div class="field">
-                <div class="control" wire:loading.class="is-loading">
-                    <textarea wire:loading.attr="disabled" wire:model.defer="comment" class="textarea is-small"
-                              name="comment" id="" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-            <input type="hidden" wire:model="type">
-            <button type="submit" class="button is-small is-info is-rounded is-pulled-right">Envoyer</button>
-        </div>
-        @error('comment') <span class="error">{{ $message }}</span> @enderror
-    </form>
-
-    <button class="button is-primary is-small mt-2" id="add-{{$typeDesciption}}">
+    <button class="button is-primary is-small mt-2 leave-comment" id="add-{{$typeDesciption}}"
+            data-id-comment="{{$comment->id}}"
+            data-type="{{$type}}"
+            data-type-txt="{{ \App\Enums\CommentType::fromValue($type)->description }}"
+            data-game-id="{{ $game['id'] }}"
+    >
         Laisser un {{$typeDesciption}}
     </button>
 </div>

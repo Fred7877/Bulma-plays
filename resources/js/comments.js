@@ -10,35 +10,137 @@ $(document).ready(() => {
     });
 
     $('.answer-comments').on('click', function (elem) {
-        $('#comments_area_answer-'+elem.target.dataset.idComment).toggle();
+        $('#comments_area_answer-' + elem.target.dataset.idComment).toggle();
 
-        if ( $(elem.target).css('visibility') === 'hidden' )
-            $(elem.target).css('visibility','visible');
+        if ($(elem.target).css('visibility') === 'hidden')
+            $(elem.target).css('visibility', 'visible');
         else
-            $(elem.target).css('visibility','hidden');
+            $(elem.target).css('visibility', 'hidden');
+
     });
 
     $('.answers-answers').on('click', function (elem) {
-        console.log(elem.target.dataset.idComment);
-        $('#comments_area_answers-answers-'+elem.target.dataset.idComment).toggle();
 
-        if ( $(elem.target).css('visibility') === 'hidden' )
-            $(elem.target).css('visibility','visible');
-        else
-            $(elem.target).css('visibility','hidden');
+        let reply = elem.target.dataset.reply;
+        let authorName = elem.target.dataset.authorName;
+        let replyId = elem.target.dataset.replyId;
+        let typeComment = elem.target.dataset.type;
+        let typeTxt = elem.target.dataset.typeTxt;
+        let gameId = elem.target.dataset.gameId;
+
+        let htmlModal = `<div class="columns">
+    <div class="column">
+        <div class="row">
+            <div class="has-text-left">
+                <h5>Répondre à :</h5>
+                 <div class="level m-0 has-background-grey has-text-white p-1">
+                    <div class="is-size-7">`
+            + authorName +
+            `</div>
+                 </div>
+                 <div class="mt-2 mb-2">
+                   ` + reply + `
+                </div>
+                <textarea class="textarea" name="reply"></textarea>
+            </div>
+        </div>
+    </div>`;
+        Swal.fire({
+            showCloseButton: true,
+            allowEnterKey: true,
+            html: htmlModal,
+            confirmButtonText: 'Envoyer',
+            focusConfirm: false,
+            preConfirm: () => {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: route('comments.create'),
+                    method: 'post',
+                    data: {
+                        comment: $('textarea[name=reply]').val(),
+                        type: typeComment,
+                        parentCommentId: replyId,
+                        gameId: gameId,
+                    }
+                }).done(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: typeTxt.toUpperCase() + ' Added !',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        text: "Ton message sera soumis à une modération.",
+                    })
+                }).fail(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                });
+            }
+        })
     });
 
-    window.addEventListener('commentAdded', event => {
+
+    $('.leave-comment').on('click', function (elem) {
+
+        let typeComment = elem.target.dataset.type;
+        let typeTxt = elem.target.dataset.typeTxt;
+        let gameId = elem.target.dataset.gameId;
+
+        let htmlModal = `<div class="columns">
+    <div class="column">
+        <div class="row">
+            <div class="has-text-left">
+                <h5>Laisser un commentaire :</h5>
+                <textarea class="textarea" name="reply"></textarea>
+            </div>
+        </div>
+    </div>`;
         Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: event.detail.type.toUpperCase() + ' Added !',
-            showConfirmButton: false,
-            timer: 2000,
-            text: "Ton message sera soumis à une modération.",
+            showCloseButton: true,
+            allowEnterKey: true,
+            html: htmlModal,
+            confirmButtonText: 'Envoyer',
+            focusConfirm: false,
+            preConfirm: () => {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: route('comments.create'),
+                    method: 'post',
+                    data: {
+                        comment: $('textarea[name=reply]').val(),
+                        type: typeComment,
+                        parentCommentId: null,
+                        gameId: gameId,
+                    }
+                }).done(() => {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: typeTxt.toUpperCase() + ' Added !',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        text: "Ton message sera soumis à une modération.",
+                    })
+                }).fail(() => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                });
+            }
         })
-        $('#comments_area').hide();
-        $('#tips_area').hide();
     });
 
     // ### TABS comments and tips ###

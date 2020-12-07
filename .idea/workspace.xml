@@ -20,40 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/comments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/comment/language-comments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/comment/nb-answers.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/comment/partials/btn-moderation.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/comment/partials/status-moderation.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/partials/answers.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/partials/header-comment.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/livewire/__comment.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/livewire/backend/table-answsers.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/CommentController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CommentRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/UpdateDb.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/UpdateDb.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/CommentsDataTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/CommentsDataTable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/CommentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/ModerationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/ModerationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/RelationShips/CommentRelationShips.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/RelationShips/CommentRelationShips.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/AutoTranslation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/AutoTranslation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/Game.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_19_095356_create_games_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_19_095356_create_games_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_25_203653_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_25_203653_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/comments.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/nav-bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/nav-bar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/show-game.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/show-game.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/ziggy.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/ziggy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/nav-bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/nav-bar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/show-game.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/show-game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/moderation/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/moderation/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/game/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/ziggy.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/ziggy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/answers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/answers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/header-comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/header-comment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/livewire/comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/comment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +252,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/livewire" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/frontend/partials/comments" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -285,11 +265,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/frontend/partials/comments" />
+      <recent name="$PROJECT_DIR$/app/Http/Requests" />
       <recent name="$PROJECT_DIR$/resources/views/livewire" />
       <recent name="$PROJECT_DIR$/resources/views/backend/comment/partials" />
       <recent name="$PROJECT_DIR$/resources/views/backend/comment" />
-      <recent name="$PROJECT_DIR$/storage/app/public/assets/images" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/frontend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/backend/moderation" />
@@ -369,7 +349,7 @@
       <workItem from="1607156212138" duration="3647000" />
       <workItem from="1607239647202" duration="11676000" />
       <workItem from="1607284884222" duration="5543000" />
-      <workItem from="1607326684673" duration="7715000" />
+      <workItem from="1607326684673" duration="20009000" />
     </task>
     <servers />
   </component>

@@ -73,6 +73,7 @@
             padding: 5px;
             font-weight: bold;
         }
+
     </style>
 
     <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
@@ -82,6 +83,7 @@
     @stack('css')
 
     @livewireStyles
+    @routes
 </head>
 <body>
 @include('frontend.partials.nav-bar-top')
