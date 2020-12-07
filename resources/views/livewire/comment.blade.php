@@ -1,55 +1,41 @@
 <div>
     @foreach($comments as $comment)
-        @if (isset($comment->moderations->last()['status']) && $comment->moderations->last()['status'] === \App\Enums\Moderation::ModerationOk)
-            <div class="box p-0">
-                <div class="level m-0 has-background-dark has-text-white p-1">
-                    <div class="level-left">
-                        <div class="is-size-7">
-                            Author : {{ $comment->user->name }}
-                        </div>
-                    </div>
-                    <div class="level-right">
-                        <div class="is-size-7">
-                            Le : {{ $comment->user->created_at }}
-                        </div>
-                    </div>
-                </div>
-                <hr class="m-0">
-                <div class="mt-2 pl-1 pr-1">
-                    {!! nl2br(e($comment->comment)) !!}
-                </div>
-                @if (isset($comment->answers[0]))
-                    <div class="border p-3">
-                        <p>Réponse :</p>
-                        @foreach($comment->answers as $answers)
-                            <div class="border p-3">
-                                <div class="columns">
-                                    <div class="column is-full">
-                                        <div class="is-pulled-left">
-                                            {{ $answers->comment }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="columns">
-                                    <div class="column is-full">
-                                        <div class="is-pulled-right">
-                                            <a class="is-size-7">répondre </a>
-                                        </div>
-                                    </div>
+        <div class="box p-0">
+            @include('frontend.partials.header-comment', ['comment' => $comment, 'backgroundColor' => 'has-background-dark'])
+            <div class="mt-2 pl-1 pr-1">
+                {!! nl2br(e($comment->comment)) !!}
+                <form wire:submit.prevent="sendAnswer">
+                    <div id="{{$typeDesciption}}_area_answer-{{$comment->id}}" style="display: none" wire:ignore
+                         class="mt-5">
+                        <div class="box">
+                            <div class="is-size-7"> Répondre au commentaire de {{ $comment->user->name }} </div>
+                            <div class="field">
+                                <div class="control" wire:loading.class="is-loading">
+                                <textarea wire:loading.attr="disabled" wire:model.defer="answer"
+                                          class="textarea is-small"
+                                          name="answer" cols="30" rows="10"></textarea>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                @endif
-                <div class="columns">
-                    <div class="column is-full">
-                        <div class="is-pulled-right mt-5 pr-1">
-                            <a class="is-size-7">répondre</a>
+                            <input type="hidden" wire:model="type">
+                            <div class="column is-full mb-3">
+                                <button type="submit" class="button is-small is-info is-rounded is-pulled-right"
+                                        wire:click="sendAnswer('{{$comment->id}}')">
+                                    Envoyer
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @error('comment') <span class="error">{{ $message }}</span> @enderror
+                </form>
             </div>
-        @endif
+
+            {{-- ANSWERS --}}
+            <div class="border p-3">
+                @foreach($answers as $replies)
+                    @include('frontend.partials.answers', ['replies' => $replies, 'comment' => $comment])
+                @endforeach
+            </div>
+        </div>
     @endforeach
 
     <form wire:submit.prevent="sendComment">
@@ -61,7 +47,7 @@
                 </div>
             </div>
             <input type="hidden" wire:model="type">
-            <button type="submit">Envoyer</button>
+            <button type="submit" class="button is-small is-info is-rounded is-pulled-right">Envoyer</button>
         </div>
         @error('comment') <span class="error">{{ $message }}</span> @enderror
     </form>
@@ -70,4 +56,3 @@
         Laisser un {{$typeDesciption}}
     </button>
 </div>
-

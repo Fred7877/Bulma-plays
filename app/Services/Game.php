@@ -111,8 +111,9 @@ class Game
                 $game['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
             }
 
-            $game['comments'] = Comment::where('game_id', $game['id'])->where('type', CommentType::Comments)->get();
-            $game['tips'] = Comment::where('game_id', $game['id'])->where('type', CommentType::Tips)->get();
+            $commentsTips = Comment::with('user')->where('game_id', $game['id'])->where('language', App::getLocale())->get();
+            $game['comments'] = $commentsTips->where('type', CommentType::Comments);
+            $game['tips'] = $commentsTips->where('type', CommentType::Tips);
 
             return $game;
         });

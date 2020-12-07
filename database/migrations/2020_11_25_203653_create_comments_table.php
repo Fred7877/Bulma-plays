@@ -19,8 +19,8 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id');
             $table->longText('comment');
             $table->integer('type');
+            $table->string('language', '4');
             $table->integer('parent_comment_id')->nullable();
-            $table->date('moderated')->nullable();
             $table->timestamps();
         });
     }

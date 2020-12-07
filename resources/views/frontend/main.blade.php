@@ -18,6 +18,7 @@
         body {
             background: #222939;
             font-family: Roboto, serif;
+            padding-bottom: 35px;
         }
 
         .img-content {
@@ -35,7 +36,6 @@
         .pointer {
             cursor: pointer;
         }
-
 
         .loader-wrapper {
             transition: opacity .3s;
@@ -63,11 +63,12 @@
             display: none;
             visibility: hidden;
         }
-        .cookie-consent{
+
+        .cookie-consent {
             position: fixed;
             bottom: 0;
             z-index: 999;
-           color:white;
+            color: white;
             background-color: #0c525d;
             padding: 5px;
             font-weight: bold;
