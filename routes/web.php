@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\CommentController;
+use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\GameController;
@@ -49,5 +50,7 @@ Route::group([
 Route::post('gamers-register', [RegisterController::class, 'create'])->name('gamers.register');
 Route::get('gamers-login', [LoginController::class, 'authenticate'])->name('gamers.login');
 Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.logout');
+
+Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
 
 Auth::routes();

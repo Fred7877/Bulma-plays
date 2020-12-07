@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use App\Enums\CommentType;
+use App\Enums\Moderation;
 use App\Models\Comment as ModelComment;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -15,37 +20,35 @@ class Comment extends Component
     public $comments;
     public $type;
     public $typeDesciption;
+    public $answers;
+    public $answer;
 
-    protected $rules = [
-        'comment' => 'required|min:1',
-    ];
-
+    /**
+     *
+     */
     public function mount()
     {
         $this->typeDesciption = Str::lower(CommentType::fromValue($this->type)->description);
 
-        $this->comments = $this->game[$this->typeDesciption];
+        $this->comments = $this->game[$this->typeDesciption]->filter(function ($item) {
+
+            return $item->parent_comment_id === null && isset($item->moderations->last()['status']) &&
+                $item->moderations->last()['status'] === Moderation::ModerationOk;
+        });
+
+        $this->answers = $this->game[$this->typeDesciption]->filter(function ($item) {
+
+            return $item->parent_comment_id !== null && isset($item->moderations->last()['status']) &&
+                $item->moderations->last()['status'] === Moderation::ModerationOk;
+        });
+
     }
 
-    public function sendComment()
-    {
-        $this->validate();
-
-        ModelComment::create([
-            'game_id' => $this->game['id'],
-            'comment' => $this->comment,
-            'type' => $this->type,
-            'user_id' => 1
-        ]);
-
-        $this->reset('comment');
-        $this->reset('tips');
-        $this->dispatchBrowserEvent('commentAdded', ['type' => $this->typeDesciption]);
-    }
-
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function render()
     {
-
         return view('livewire.comment');
     }
 }

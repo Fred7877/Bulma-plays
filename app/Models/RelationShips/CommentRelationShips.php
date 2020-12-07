@@ -10,13 +10,6 @@ use Illuminate\Foundation\Auth\User;
 
 trait CommentRelationShips
 {
-    /**
-     * @return mixed
-     */
-    public function answers() {
-        return $this->hasMany(Comment::class, 'id', 'parent_comment_id');
-    }
-
     public function user() {
         return $this->belongsTo(User::class, 'user_id');
     }

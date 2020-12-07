@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     $('#btn-signup').on('click', function () {
         Swal.fire({
             title: 'Sign up !',
+            showCloseButton: true,
+            allowEnterKey: true,
             html: `
   <input type="text" id="name" class="swal2-input" placeholder="Pseudo">
   <input type="text" id="login" class="swal2-input" placeholder="@email">
@@ -113,6 +115,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     $('#btn-login').on('click', function () {
         Swal.fire({
             title: 'Log IN !',
+            showCloseButton: true,
+            allowEnterKey: true,
             html: `
   <input type="text" id="login" class="swal2-input" placeholder="@email">
   <input type="password" id="password" class="swal2-input" placeholder="Password">
@@ -161,7 +165,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             left top
                             no-repeat
                           `
-                        }).then(document.location.reload())
+                        }).then(document.location.reload());
                     }).fail(function (error) {
                         Swal.showValidationMessage(error.responseJSON.error)
                     })

@@ -17,7 +17,7 @@ class CreateGamesTable extends Migration
             $table->id();
             $table->bigInteger('game_id');
             $table->json('igdb');
-            $table->string('slug', 100);
+            $table->string('slug', 255);
             $table->string('platform', 50);
             $table->timestamps();
         });

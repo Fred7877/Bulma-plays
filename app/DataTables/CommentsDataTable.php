@@ -16,14 +16,20 @@ class CommentsDataTable extends DataTable
      */
     public function dataTable()
     {
-        $model = Comment::with(['user', 'moderations'])->orderBy('id', 'desc');
+        $model = Comment::with(['user', 'moderations'])->whereNull('parent_comment_id')->orderBy('id', 'desc');
 
         return datatables()
             ->eloquent($model)
             ->addColumn('action', 'backend.comment.buttons-action')
             ->addColumn('type', 'backend.comment.type-comments')
-            ->addColumn('game_title', function($item){
-                return Game::where('game_id', $item->game_id)->first()->igdb['name'];
+            ->addColumn('nb_answers', function ($item) {
+                return Comment::where('parent_comment_id', $item->id)->count();
+            })
+            ->addColumn('language', 'backend.comment.language-comments')
+            ->addColumn('game_title', function ($item) {
+                $game = Game::where('game_id', $item->game_id)->first();
+
+                return optional($game)->igdb['name'] ?? '-';
             })
             ->addColumn('created_at', function ($item) {
                 return Carbon::createFromTimeString($item->created_at)->format('d/m/Y H:i');
@@ -88,6 +94,8 @@ class CommentsDataTable extends DataTable
             Column::make('author')->addClass('text-center'),
             Column::make('game_title')->addClass('text-center'),
             Column::make('type')->addClass('text-center'),
+            Column::make('nb_answers')->addClass('text-center'),
+            Column::make('language')->addClass('text-center'),
             Column::make('moderated')->title('Status moderation')->addClass('text-center'),
             Column::make('created_at'),
             Column::make('action', 'comment.id'),

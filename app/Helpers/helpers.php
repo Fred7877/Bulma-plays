@@ -11,21 +11,14 @@ function getTranslation($gameId, $field = 'summary', $lang = 'FR')
 }
 
 
-function getFlag($lang = null, $size = '16x16')
+function getFlag($lang = null, $size = '16x16', $boostrap = false, $sizeImageBoostrap = '16')
 {
-    $html = '';
-    if ($lang === null) {
-        if (Str::lower(App::getLocale()) == 'fr') {
-            $html = '<img class="image is-'.$size.'" src="' . asset('storage/assets/images/fr_flag.png') . '">';
-        } else {
-            $html = '<img class="image is-'.$size.'" src="' . asset('storage/assets/images/en_flag.png') . '">';
-        }
+    $language = ($lang === null) ? Str::lower(App::getLocale()) : Str::lower($lang);
+
+    if ($boostrap) {
+        $html = '<img width="'. $sizeImageBoostrap . 'px" src="' . asset('storage/assets/images/' . $language . '_flag.png') . '">';
     } else {
-        if (Str::lower($lang) === 'fr') {
-            $html = '<img class="image is-'.$size.'" src="' . asset('storage/assets/images/fr_flag.png') . '">';
-        } else {
-            $html = '<img class="image is-'.$size.'" src="' . asset('storage/assets/images/en_flag.png') . '">';
-        }
+        $html = '<img class="image is-' . $size . '" src="' . asset('storage/assets/images/' . $language . '_flag.png') . '">';
     }
 
     return $html;

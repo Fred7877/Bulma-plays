@@ -225,8 +225,8 @@
 
     @if(Auth::check())
         <div class="block has-background-dark p-4 rounded">
-            <div class="container js-tabs-container">
-                <div class="tabs is-toggle is-fullwidth">
+            <div class="container js-tabs-container ">
+                <div class="tabs is-toggle is-fullwidth is-small">
                     <ul>
                         <li class="is-active" data-tab="tab-comments">
                             <a class="has-text-white">
@@ -267,4 +267,5 @@
 
 @push('js')
     <script src="/js/show-game.js"></script>
+    <script src="/js/comments.js"></script>
 @endpush

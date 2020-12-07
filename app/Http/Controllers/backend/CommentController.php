@@ -10,7 +10,9 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\View;
+use Predis\Client;
 
 class CommentController extends Controller
 {
@@ -21,6 +23,7 @@ class CommentController extends Controller
      */
     public function index(CommentsDataTable $dataTable)
     {
+
         return $dataTable->render('backend.comment.index');
     }
 
@@ -64,7 +67,6 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-
         return View::make('backend.moderation.edit', ['comment' => $comment, 'game' => Game::where('game_id', $comment->game_id)->first()]);
     }
 
