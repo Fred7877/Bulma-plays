@@ -1,4 +1,4 @@
-@if (!empty($replies->first()))
+@if ($replies && !empty($replies->first()))
     <h4>
         @if(optional($replies->first()->parent)->parent_comment_id !== null)
             <span class="badge badge-pill
