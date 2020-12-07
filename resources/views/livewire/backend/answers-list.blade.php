@@ -55,12 +55,31 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
             @include('livewire.backend.table-answsers', ['replies' => $replies, 'level' => $level])
+        </div>
+        <div class="col-6">
+            Liste des commentaires en attente de modération pour <b>{{ optional($game)->igdb['name'] ?? '-' }}</b>
+
+            <table class="table table-bordered table-sm">
+                <tbody>
+                @foreach($waitingModeration as $waitingComment)
+                    <tr>
+                        <td>
+                            {{ $waitingComment->comment }}
+                        </td>
+                        <td>
+                            @include('backend.comment.partials.status-moderation', ['comment' => $waitingComment])
+                        </td>
+                        <td>
+                            <form method="post" action="{{ route('backend.moderation') }}">
+                                @csrf
+                                @include('backend.comment.partials.btn-moderation', ['comment' => $waitingComment, 'game' => $game])
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -8,7 +8,7 @@
         @endif
 
         Answers - niveau {{ $level }} </h4>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-sm">
         <thead>
         <tr>
             <th>Answers</th>

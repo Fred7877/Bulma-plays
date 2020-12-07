@@ -20,20 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="094b0b55-a878-4fb6-88fd-b17b322431ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/CommentController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/CommentRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Comment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/nav-bar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/nav-bar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/ziggy.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/ziggy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/ziggy.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/ziggy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/answers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/answers.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/partials/header-comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/partials/header-comment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/livewire/comment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/comment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Livewire/Backend/AnswersList.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Livewire/Backend/AnswersList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/backend/answers-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/backend/answers-list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/livewire/backend/table-answsers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/livewire/backend/table-answsers.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +339,7 @@
       <workItem from="1607156212138" duration="3647000" />
       <workItem from="1607239647202" duration="11676000" />
       <workItem from="1607284884222" duration="5543000" />
-      <workItem from="1607326684673" duration="20009000" />
+      <workItem from="1607326684673" duration="21487000" />
     </task>
     <servers />
   </component>

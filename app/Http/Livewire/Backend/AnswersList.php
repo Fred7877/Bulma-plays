@@ -20,11 +20,18 @@ class AnswersList extends Component
     public $moderation;
     public $level = 1;
     public $replies = [];
+    public $waitingModeration = [];
 
     public function mount()
     {
         $this->comments = Comment::where('game_id', $this->game->game_id)->get();
+
         $this->replies = $this->comments->where('parent_comment_id', $this->comment->id);
+
+        $this->waitingModeration = $this->comments->filter(function($item){
+            return $item->moderations->isEmpty();
+        });
+
     }
 
     public function backRepliesList($idParentComment)
