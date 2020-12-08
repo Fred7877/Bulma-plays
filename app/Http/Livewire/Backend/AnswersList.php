@@ -52,7 +52,7 @@ class AnswersList extends Component
             Cache::forget('game-' . $slug . '-' . $lang);
         }
 
-        $this->getAnswers($parentId, $parentId);
+        $this->getAnswers($parentId);
     }
 
     public function showAnwsers($idComment)
