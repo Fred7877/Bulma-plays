@@ -1,3 +1,4 @@
+@include('js-localization::head')
 <html>
 <head>
     <meta charset="UTF-8">
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <title>My Games Sites</title>
+    @yield('js-localization.head')
 
     <link
         href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
