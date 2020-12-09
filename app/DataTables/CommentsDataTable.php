@@ -22,7 +22,7 @@ class CommentsDataTable extends DataTable
             ->eloquent($model)
             ->addColumn('action', 'backend.comment.buttons-action')
             ->addColumn('type', 'backend.comment.type-comments')
-            ->addColumn('nb_answers', function ($item) {
+            ->addColumn('nb_replies', function ($item) {
                 return Comment::where('parent_comment_id', $item->id)->count();
             })
             ->addColumn('language', 'backend.comment.language-comments')
@@ -94,7 +94,7 @@ class CommentsDataTable extends DataTable
             Column::make('author')->addClass('text-center'),
             Column::make('game_title')->addClass('text-center'),
             Column::make('type')->addClass('text-center'),
-            Column::make('nb_answers')->addClass('text-center'),
+            Column::make('nb_replies')->addClass('text-center')->searchable(false),
             Column::make('language')->addClass('text-center'),
             Column::make('moderated')->title('Status moderation')->addClass('text-center'),
             Column::make('created_at'),
