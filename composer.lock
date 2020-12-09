@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e93acd43341d294dc1f6fc00f2c70795",
+    "content-hash": "8389436179a541a5d396441e61d13f67",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -44,6 +44,67 @@
                 "web"
             ],
             "time": "2020-05-19T20:41:11+00:00"
+        },
+        {
+            "name": "andywer/js-localization",
+            "version": "dev-laravel-8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andywer/laravel-js-localization.git",
+                "reference": "33cda9e64e51443876086cdaefd8e0fe1d19678d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andywer/laravel-js-localization/zipball/33cda9e64e51443876086cdaefd8e0fe1d19678d",
+                "reference": "33cda9e64e51443876086cdaefd8e0fe1d19678d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "6.*|7.*|8.*",
+                "php": ">=7.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0",
+                "orchestra/testbench": "4.*",
+                "phpunit/phpunit": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "component": "package",
+                "frameworks": [
+                    "Laravel 7",
+                    "Laravel 8"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsLocalization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andy Wermke",
+                    "email": "andy@dev.next-step-software.com"
+                }
+            ],
+            "description": "Laravel package to provide localizations to the Javascript code.",
+            "keywords": [
+                "javascript",
+                "laravel",
+                "localization",
+                "messages",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/andywer/laravel-js-localization/issues",
+                "source": "https://github.com/andywer/laravel-js-localization/tree/laravel-8"
+            },
+            "time": "2020-09-17T07:39:39+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -9556,7 +9617,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "andywer/js-localization": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

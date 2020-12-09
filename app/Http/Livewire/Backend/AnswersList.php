@@ -15,11 +15,10 @@ class AnswersList extends Component
     public $game;
     public $comment;
     public $comments;
-    public $answers = [];
+    public $replies = [];
     public $isOpen;
     public $moderation;
     public $level = 1;
-    public $replies = [];
     public $waitingModeration = [];
 
     public function mount()
@@ -55,7 +54,7 @@ class AnswersList extends Component
         $this->getAnswers($parentId);
     }
 
-    public function showAnwsers($idComment)
+    public function showReplies($idComment)
     {
         $this->getAnswers($idComment);
         $this->level++;
@@ -63,11 +62,11 @@ class AnswersList extends Component
 
     private function getAnswers($idComment)
     {
-        $answers = Comment::where('parent_comment_id', $idComment)->get();
+        $replies = Comment::where('parent_comment_id', $idComment)->get();
 
         $comments = $this->comments;
 
-        $answers->each(function ($item) use($comments) {
+        $replies->each(function ($item) use($comments) {
             $item['parent'] = Comment::find($item->parent_comment_id);
 
             $item['childrens'] = $comments->where('parent_comment_id', $item->id);
@@ -89,11 +88,11 @@ class AnswersList extends Component
             return $item;
         });
 
-        $this->replies = $answers;
+        $this->replies = $replies;
     }
 
     public function render()
     {
-        return View::make('livewire.backend.answers-list');
+        return View::make('livewire.backend.replies-list');
     }
 }

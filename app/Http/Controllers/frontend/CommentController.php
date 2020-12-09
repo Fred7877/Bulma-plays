@@ -18,7 +18,7 @@ class CommentController
             'comment' => $request->get('comment'),
             'type' => $request->get('type'),
             'parent_comment_id' => $request->get('parentCommentId'),
-            'language' => App::getLocale(),
+            'language' => $request->get('lang'),
             'user_id' => Auth::user()->id
         ]);
 

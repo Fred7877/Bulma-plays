@@ -34,7 +34,7 @@
                     {{ $comment->where('parent_comment_id', $anwsers->id )->count() }}
                     @if($comment->where('parent_comment_id', $anwsers->id )->count() > 0)
                         <br>
-                        <a href="#" class="text-decoration-none" wire:click="showAnwsers({{$anwsers->id}})">voir
+                        <a href="#" class="text-decoration-none" wire:click="showReplies({{$anwsers->id}})">voir
                             les réponses</a>
                     @endif
                 </td>
