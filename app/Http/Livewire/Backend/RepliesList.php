@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Livewire\Component;
 
-class AnswersList extends Component
+class RepliesList extends Component
 {
     public $game;
     public $comment;
