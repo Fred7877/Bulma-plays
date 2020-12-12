@@ -19,24 +19,24 @@ class Comment extends Component
     public $game;
     public $comments;
     public $type;
-    public $typeDesciption;
-    public $answers;
-    public $answer;
+    public $typeDescription;
+    public $replies;
+    public $reply;
 
     /**
      *
      */
     public function mount()
     {
-        $this->typeDesciption = Str::lower(CommentType::fromValue($this->type)->description);
+        $this->typeDescription = Str::lower(CommentType::fromValue($this->type)->key); //Str::lower(CommentType::getDescription($this->type));
 
-        $this->comments = $this->game[$this->typeDesciption]->filter(function ($item) {
+        $this->comments = $this->game[$this->typeDescription]->filter(function ($item) {
 
             return $item->parent_comment_id === null && isset($item->moderations->last()['status']) &&
                 $item->moderations->last()['status'] === Moderation::ModerationOk;
         });
 
-        $this->answers = $this->game[$this->typeDesciption]->filter(function ($item) {
+        $this->replies = $this->game[$this->typeDescription]->filter(function ($item) {
 
             return $item->parent_comment_id !== null && isset($item->moderations->last()['status']) &&
                 $item->moderations->last()['status'] === Moderation::ModerationOk;

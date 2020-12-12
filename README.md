@@ -6,7 +6,6 @@ php artisan vendor:publish --provider="JsLocalization\JsLocalizationServiceProvi
 ### Laravel-Permissions
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
 
-
 ### R.A.F
 Login backend
     => empêcher n'importe qui de povoir entrer (rôle)
@@ -14,8 +13,7 @@ Login backend
 Regarder si les assets sont bien minifier coté prod
 
 Système de commentaires
-    => Réponse et réponse aux réponses
-    => Modération des réponses
+    => Permettre au users de modifer leurs commentaire (modérer la modification)
 
 Système de création d'un jeux
     => En tant qu'utilisateur, je peux créer une fiche jeux, celle-ci sera modérée par l'admin.

@@ -232,33 +232,31 @@
                             <a class="has-text-white">
                                 <span class="icon is-small"><i class="fas fa-lg fa-comments"
                                                                aria-hidden="true"></i></span>
-                                <span>Commentaires et Avis</span>
+                                <span>{{ __('frontend.comments_and_reviews') }}</span>
                             </a>
                         </li>
                         <li data-tab="tab-tips">
                             <a class="has-text-white">
                                 <span class="icon is-small"><i class="fas fa-lg fa-comment-medical"
                                                                aria-hidden="true"></i></span>
-                                <span>Trucs & Asctuces</span>
+                                <span>{{ __('frontend.tips_and_tricks') }}</span>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="js-tab-content" id="tab-comments">
-                    <article class="message is-dark">
+                    <article class="message is-dark" id="box-comments">
                         <div class="message-body">
                             <livewire:comment :game="$game" :type="\App\Enums\CommentType::Comments"/>
                         </div>
                     </article>
                 </div>
                 <div class="has-display-none js-tab-content" id="tab-tips">
-                    <div class="js-tab-content" id="tab-tips">
-                        <article class="message is-dark">
-                            <div class="message-body">
-                                <livewire:comment :game="$game" :type="\App\Enums\CommentType::Tips"/>
-                            </div>
-                        </article>
-                    </div>
+                    <article class="message is-dark box-tips" id="box-tips">
+                        <div class="message-body">
+                            <livewire:comment :game="$game" :type="\App\Enums\CommentType::Tips"/>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
@@ -268,4 +266,26 @@
 @push('js')
     <script src="/js/show-game.js"></script>
     <script src="/js/comments.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('.show-replies').on('click', function(elem){
+               commentId = elem.target.dataset.commentId;
+                $("div[id^=reply-to-reply-"+commentId+"]").removeClass('is-hidden');
+
+                $(elem.target).closest('.btn-show-replies').addClass('is-hidden');
+                $(elem.target).closest('.btn-show-replies').next('.btn-hide-replies').removeClass('is-hidden');
+            });
+
+            $('.hide-replies').on('click', function(elem){
+                commentId = elem.target.dataset.commentId;
+                $("div[id^=reply-to-reply-"+commentId+"]").addClass('is-hidden');
+
+                $(elem.target).closest('.btn-hide-replies').addClass('is-hidden');
+                $(elem.target).closest('.btn-hide-replies').prev('.btn-show-replies').removeClass('is-hidden');
+            });
+        });
+    </script>
 @endpush

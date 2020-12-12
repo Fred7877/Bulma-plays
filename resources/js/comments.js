@@ -1,5 +1,8 @@
 const Swal = require('sweetalert2');
 $(document).ready(() => {
+    let txtSend = Lang.get('frontend.send');
+    let txtModerate = Lang.get('frontend.comment_will_moderate');
+    let txtError = Lang.get('frontend.something_went_wrong');
 
     $('#add-comments').on('click', function () {
         $('#comments_area').toggle();
@@ -9,8 +12,8 @@ $(document).ready(() => {
         $('#tips_area').toggle();
     });
 
-    $('.answer-comments').on('click', function (elem) {
-        $('#comments_area_answer-' + elem.target.dataset.idComment).toggle();
+    $('.reply-comments').on('click', function (elem) {
+        $('#comments_area_reply-' + elem.target.dataset.idComment).toggle();
 
         if ($(elem.target).css('visibility') === 'hidden')
             $(elem.target).css('visibility', 'visible');
@@ -19,7 +22,7 @@ $(document).ready(() => {
 
     });
 
-    $('.answers-answers').on('click', function (elem) {
+    $('.replies-replies').on('click', function (elem) {
 
         let reply = elem.target.dataset.reply;
         let authorName = elem.target.dataset.authorName;
@@ -27,20 +30,18 @@ $(document).ready(() => {
         let typeComment = elem.target.dataset.type;
         let typeTxt = elem.target.dataset.typeTxt;
         let gameId = elem.target.dataset.gameId;
+        let txtReplyTo = Lang.get('frontend.reply_to');
 
         let htmlModal = `<div class="columns">
     <div class="column">
         <div class="row">
             <div class="has-text-left">
-                <h5>Répondre à :</h5>
-                 <div class="level m-0 has-background-grey has-text-white p-1">
-                    <div class="is-size-7">`
-            + authorName +
-            `</div>
-                 </div>
-                 <div class="mt-2 mb-2">
-                   ` + reply + `
-                </div>
+            <div class="level m-0 has-background-dark has-text-white p-1">
+                <h5> ` + txtReplyTo + ` `  + authorName + `</h5>
+            </div>
+            <div class="mt-2 mb-2">
+                ` + reply + `
+            </div>
                 <textarea class="textarea" name="reply"></textarea>
             </div>
         </div>
@@ -49,7 +50,7 @@ $(document).ready(() => {
             showCloseButton: true,
             allowEnterKey: true,
             html: htmlModal,
-            confirmButtonText: 'Envoyer',
+            confirmButtonText: txtSend,
             focusConfirm: false,
             preConfirm: () => {
                 $.ajaxSetup({
@@ -65,6 +66,7 @@ $(document).ready(() => {
                         type: typeComment,
                         parentCommentId: replyId,
                         gameId: gameId,
+                        lang: Lang.locale(),
                     }
                 }).done(() => {
                     Swal.fire({
@@ -73,13 +75,13 @@ $(document).ready(() => {
                         title: typeTxt.toUpperCase() + ' Added !',
                         showConfirmButton: false,
                         timer: 2000,
-                        text: "Ton message sera soumis à une modération.",
+                        html: txtModerate,
                     })
                 }).fail(() => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Something went wrong!',
+                        text: txtError,
                     })
                 });
             }
@@ -97,7 +99,7 @@ $(document).ready(() => {
     <div class="column">
         <div class="row">
             <div class="has-text-left">
-                <h5>Laisser un commentaire :</h5>
+                <h5>` + Lang.get('frontend.leave_a') + ` :</h5>
                 <textarea class="textarea" name="reply"></textarea>
             </div>
         </div>
@@ -106,7 +108,7 @@ $(document).ready(() => {
             showCloseButton: true,
             allowEnterKey: true,
             html: htmlModal,
-            confirmButtonText: 'Envoyer',
+            confirmButtonText: txtSend,
             focusConfirm: false,
             preConfirm: () => {
                 $.ajaxSetup({
@@ -122,6 +124,7 @@ $(document).ready(() => {
                         type: typeComment,
                         parentCommentId: null,
                         gameId: gameId,
+                        lang: Lang.locale(),
                     }
                 }).done(() => {
                     Swal.fire({
@@ -130,13 +133,13 @@ $(document).ready(() => {
                         title: typeTxt.toUpperCase() + ' Added !',
                         showConfirmButton: false,
                         timer: 2000,
-                        text: "Ton message sera soumis à une modération.",
+                        html: txtModerate,
                     })
                 }).fail(() => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'Something went wrong!',
+                        text: txtError,
                     })
                 });
             }
@@ -177,8 +180,6 @@ $(document).ready(() => {
         for (var i = 0; i < tabs.length; i++) {
             _loop();
         }
-
-
     }
 });
 
