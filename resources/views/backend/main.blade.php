@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@routes
 @section('title', 'Dashboard')
 @livewireStyles
 @section('content_header')

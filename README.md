@@ -3,6 +3,9 @@
 ### JsLocalization
 php artisan vendor:publish --provider="JsLocalization\JsLocalizationServiceProvider"
 
+### Laravel-Permissions
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
 ### R.A.F
 Login backend
     => empêcher n'importe qui de povoir entrer (rôle)

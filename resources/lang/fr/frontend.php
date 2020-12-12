@@ -29,4 +29,13 @@ return [
     'send' => 'Envoyer',
     'show_replies' => 'voir les réponses',
     'hide_replies' => 'cacher les réponses',
+    'pseudo_must_contain' => 'Le pseudo doit avoir 10 charactères maximum.',
+    'password_must_contain' => 'Le password doit avoir 8 charactères minimum, au moins 1 nombres et au moins 1 lettres majuscules et minuscules',
+    'error_pseudo' => 'Le pseudo doit avoir 10 charactères maximum.',
+    'login_pass_mandatory' => 'Login and password obligatoire.',
+    'login_must_be_email' => 'Le login doit-être un email valide.',
+    'password_6_char_min' => 'Le password doit avoir 6 charactères minimum.',
+    'password_format_incorrect' => 'Format du password incorrect.',
+    'password_not_match' => 'Les password sont différents.',
+    'you_can_login' => 'Top ! Tu vas pouvoir te connecter avec tes identifiants <i class="far fa-smile"></i>',
 ];

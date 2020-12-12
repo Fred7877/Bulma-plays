@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
   <input type="text" id="login" class="swal2-input" placeholder="@email">
   <input type="password" id="password" class="swal2-input" placeholder="Password">
   <input type="password" id="password_confirm" class="swal2-input" placeholder="Password confirm">
-<i class="is-size-7 is-pulled-left">Pseudo must contain max 10 chars</i>
-<i class="is-size-7 is-pulled-left">Password must contain min 8 characters, number, capital and lower letters</i>
+<i class="is-size-7 is-pulled-left">`+Lang.get('frontend.pseudo_must_contain')+`</i>
+<i class="is-size-7 is-pulled-left">`+Lang.get('frontend.password_must_contain')+`</i>
 `,
             confirmButtonText: 'Sign in',
             focusConfirm: false,
@@ -46,32 +46,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 let error = false;
                 if (name.length > 8) {
-                    Swal.showValidationMessage(`Pseudo must contain max 10 chars.`);
+                    Swal.showValidationMessage(Lang.get('frontend.error_pseudo'));
                     error = true;
                 }
 
                 if (!login || !password) {
-                    Swal.showValidationMessage(`Please enter login and password.`);
+                    Swal.showValidationMessage(Lang.get('frontend.login_pass_mandatory'));
                     error = true;
                 }
 
                 if (!validateEmail(login)) {
-                    Swal.showValidationMessage(`The login must be an email valid.`);
+                    Swal.showValidationMessage(Lang.get('frontend.login_must_be_email'));
                     error = true;
                 }
 
                 if (password.length < 6) {
-                    Swal.showValidationMessage(`Password must contained min 6 characters.`);
+                    Swal.showValidationMessage(Lang.get('frontend.password_6_char_min'));
                     error = true;
                 }
 
                 if (!validatePasswordFormat(password)) {
-                    Swal.showValidationMessage(`Password format incorrect.`);
+                    Swal.showValidationMessage(Lang.get('frontend.password_format_incorrect'));
                     error = true;
                 }
 
                 if (password !== password_confirm) {
-                    Swal.showValidationMessage(`The passwords are different.`);
+                    Swal.showValidationMessage(Lang.get('frontend.password_not_match'));
                     error = true;
                 }
 

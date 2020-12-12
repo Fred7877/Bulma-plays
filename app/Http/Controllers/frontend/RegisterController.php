@@ -18,11 +18,14 @@ class RegisterController extends Controller
      */
     public function create(GamerRegistrerRequest $request)
     {
-
-        return User::create([
+        $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
+
+        $user->assignRole('user');
+
+        return $user;
     }
 }
