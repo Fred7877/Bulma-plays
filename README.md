@@ -1,6 +1,16 @@
 # bulma-plays
 
-R.A.F
+### JsLocalization
+php artisan vendor:publish --provider="JsLocalization\JsLocalizationServiceProvider"
+
+### Laravel-Permissions
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+
+### R.A.F
+Login backend
+    => empêcher n'importe qui de povoir entrer (rôle)
+
 Regarder si les assets sont bien minifier coté prod
 
 Système de commentaires
@@ -14,7 +24,6 @@ Scraper le site instant gaming pour ajouter un lien dans la fiche d'un jeux si i
 
 Mettre des pubs
     => Attention à la RGPD !
-
 
 En Cours
  => Modération réponse de réponse (liveWire)

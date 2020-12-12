@@ -39,9 +39,7 @@ Route::get('/backend', function () {
     return redirect(route('users.index'));
 });
 
-Route::group([
-    'prefix' => 'backend'
-], function () {
+Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group( function () {
     Route::resource('users', UserController::class);
     Route::resource('comments', CommentController::class);
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
@@ -54,3 +52,7 @@ Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.l
 Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
 
 Auth::routes();
+
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');
