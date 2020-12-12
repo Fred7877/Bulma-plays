@@ -2,21 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Game;
-use App\Models\Platform;
-use App\Models\ReleaseDate;
-use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Hash;
-use MarcReichel\IGDBLaravel\Models\Game as GamesIGDB;
-use MarcReichel\IGDBLaravel\Models\Platform as PlatformIGDB;
-use MarcReichel\IGDBLaravel\Models\ReleaseDate as ReleaseDateIGDB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class CreateAdmin extends Command
+class GenerateRoles extends Command
 {
     /**
      * The name and signature of the console command.
