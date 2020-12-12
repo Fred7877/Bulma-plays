@@ -18,7 +18,7 @@ class AutoTranslation
 
     public function translate($text = '', $field = 'summary', $gameId = null, $targetLang = 'FR', $sourceLang = 'EN')
     {
-        if ($text !== '' && $gameId !== null) {
+        if (($text !== '' && $gameId !== null) && config('deepl.is_translate')) {
 
             // Is the md5 exist ?
             $md5 = md5($text);
@@ -46,13 +46,16 @@ class AutoTranslation
                         [
                             'game_id' => $gameId,
                             'field' => $field,
-                            'translations' => [$targetLang => $translation['translations'][0]['text']],
+                            'translations' => [
+                                $sourceLang => $text,
+                                $targetLang => $translation['translations'][0]['text'],
+                            ],
                         ]
                     );
                 }
             }
         }
 
-        return null;
+        return $text;
     }
 }

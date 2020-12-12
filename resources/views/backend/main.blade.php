@@ -1,7 +1,7 @@
 @extends('adminlte::page')
-
+@routes
 @section('title', 'Dashboard')
-
+@livewireStyles
 @section('content_header')
     <h1>Dashboard</h1>
 @stop
@@ -11,9 +11,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
 
+@stop
+@livewireScripts
 @section('js')
-    <script> console.log('Hi!'); </script>
+
 @stop

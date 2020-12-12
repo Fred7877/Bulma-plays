@@ -15,8 +15,10 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->json('data');
-            $table->string('slug', 100);
+            $table->bigInteger('game_id');
+            $table->json('igdb');
+            $table->string('slug', 255);
+            $table->string('platform', 50);
             $table->timestamps();
         });
     }

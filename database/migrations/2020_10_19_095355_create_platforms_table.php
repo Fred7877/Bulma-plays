@@ -15,6 +15,7 @@ class CreatePlatformsTable extends Migration
     {
         Schema::create('platforms', function (Blueprint $table) {
             $table->id();
+            $table->integer('platform_id');
             $table->json('data');
             $table->string('slug', 100);
             $table->timestamps();

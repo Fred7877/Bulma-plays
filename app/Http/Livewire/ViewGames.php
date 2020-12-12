@@ -3,47 +3,62 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
-use Livewire\WithPagination;
 use MarcReichel\IGDBLaravel\Models\Game;
 
 class ViewGames extends Component
 {
     public $games;
     public $platform = null;
-    public $sort;
+    public $sort = 'desc';
     public $searchWord;
     private $with = ['release_dates', 'platforms', 'cover', 'genres'];
     public $genre = '';
 
     public $offset = 0;
     public $limit = 10;
+    public $pageCount;
+    public $currentPage = 1;
     public $totalItem;
-    public $infiniteScroll = [];
+    public $totalQueryGame;
+    public $pageNumber = 1;
 
     private $ttl = 7200;
-    private $loadMore = false;
 
-    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'loadMore'];
+    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh'];
 
     public function mount()
     {
-        $this->totalItem = Cache::remember('total-item', $this->ttl, function () {
-            return Game::count();
-        });
-        $this->getGames();
+        if (session()->has('paginate')) {
+            $this->totalItem = session('paginate')['totalItem'];
+            $this->offset = session('paginate')['offset'];
+            $this->currentPage = session('paginate')['currentPage'];
+            $this->totalItem = session('paginate')['totalItem'];
+            $this->genre = session('paginate')['genre'];
+            $this->platform = session('paginate')['platform'];
+            $this->searchWord = session('paginate')['searchWord'];
+            $this->sort = session('paginate')['sort'];
 
-        /*
-         *
-        $this->>games = Game::with($this->with)
-            ->where('first_release_date', '<', Carbon::now())
-            ->whereNotNull('first_release_date')
-            ->orderByDesc('first_release_date')
-            ->get()->toArray();
+            $this->paginate(null, $this->currentPage);
+        } else {
+            $this->totalItem = Cache::remember('total-item-' . Game::count(), $this->ttl, function () {
 
-         */
+                return Game::where('first_release_date', '<', Carbon::now())
+                    ->whereNotNull('first_release_date')->count();
+            });
+
+            // Doit-on vider le cache ? si le nombre de games est différent du nombre en cache, oui
+            if ((int)$this->totalItem !== (int)Game::where('first_release_date', '<', Carbon::now())
+                    ->whereNotNull('first_release_date')->count()) {
+
+                Cache::flush();
+            }
+
+            $this->getGames();
+        }
     }
 
     public function platformChange($value)
@@ -53,15 +68,23 @@ class ViewGames extends Component
             $this->platform = null;
         } else {
             $this->platform = $value;
-            $this->searchWord = null;
         }
+        $this->offset = 0;
+        $this->currentPage = 1;
 
         $this->getGames();
     }
 
     public function genre($value)
     {
-        $this->genre = $value;
+        if ($value !== '') {
+            $this->genre = $value;
+        } else {
+            $this->genre = null;
+        }
+        $this->offset = 0;
+        $this->currentPage = 1;
+
         $this->getGames();
     }
 
@@ -74,78 +97,97 @@ class ViewGames extends Component
     public function search($value)
     {
         if ($value !== '') {
-            $this->games = Cache::remember('games-search-' . $value, $this->ttl, function () use ($value) {
-                return Game::with($this->with)->search($value)->orderByDesc('first_release_date')->get()->toArray();
-            });
             $this->searchWord = $value;
         } else {
             $this->searchWord = null;
-            $this->getGames();
         }
+
+        $this->offset = 0;
+        $this->currentPage = 1;
+
+        $this->getGames();
     }
 
     private function getGames()
     {
+        $keyCache = 'games_' . Str::studly($this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
 
-        if (empty($this->games)) {
-            $this->games = [];
-            $this->infiniteScroll = [];
+        $this->totalQueryGame = $this->queryGames()->count();
+        $this->pageCount = (int)ceil($this->totalQueryGame / $this->limit);
+
+        $games = Cache::remember($keyCache, $this->ttl, function () {
+            $query = $this->queryGames();
+
+            $query->offset($this->offset)->limit($this->limit);
+
+            return $query->get()->toArray();
+        });
+
+        foreach ($games as $k => $game) {
+            $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
         }
 
-        // On trie sur le search ou non
-        if ($this->searchWord !== null) {
-            $gamesCache = collect(Cache::get('games-search-' . $this->searchWord));
+        session()->put([
+            'paginate' => [
+                'offset' => $this->offset,
+                'currentPage' => $this->currentPage,
+                'pageNumber' => $this->pageNumber,
+                'totalItem' => $this->totalItem,
+                'genre' => $this->genre,
+                'platform' => $this->platform,
+                'searchWord' => $this->searchWord,
+                'sort' => $this->sort,
+            ]
+        ]);
 
-            if ($this->sort === 'asc') {
-                $this->games = $gamesCache->sortBy('first_release_date')->all();
-            } else {
-                $this->games = $gamesCache->sortByDesc('first_release_date')->all();
-            }
-
-        } else {
-            $keyCache = 'games_' . Str::studly($this->platform . '_' . $this->sort . '_' . $this->genre . '_' . $this->offset);
-
-            $games = Cache::remember($keyCache, $this->ttl, function () {
-                $games = Game::with($this->with);
-                if ($this->platform !== null) {
-                    $games->where('platforms.slug', $this->platform);
-                }
-
-                $games->where('first_release_date', '<', Carbon::now())
-                    ->whereNotNull('first_release_date');
-                if ($this->sort === 'asc') {
-                    $games->orderBy('first_release_date');
-                } else {
-                    $games->orderByDesc('first_release_date');
-                }
-
-                if ($this->genre) {
-                    $games->where('genres.slug', $this->genre);
-                }
-
-                $games->offset($this->offset)->limit($this->limit)->get();
-
-                return $games->get()->toArray();
-            });
-
-            foreach($games as $k => $game){
-                $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary');
-            }
-
-            if ($this->loadMore) {
-                $this->infiniteScroll = array_merge($this->infiniteScroll, $games);
-            } else {
-                $this->games = $games;
-            }
-        }
+        $this->games = $games;
     }
 
-    public function loadMore()
+    public function paginate($direction, $numberPage = null)
     {
-        $this->loadMore = true;
-        $this->offset += 11;
+        if ($direction === '+') {
+            if (($this->offset + $this->limit) <= $this->totalItem) {
+                $this->offset += $this->limit;
+                $this->pageNumber += 1;
+                $this->currentPage++;
+            }
+        } else {
+            if (($this->offset - $this->limit) >= 0) {
+                $this->offset -= $this->limit;
+                $this->pageNumber -= 1;
+                $this->currentPage--;
+            }
+        }
+
+        if ($numberPage !== null) {
+            $this->offset = ($numberPage - 1) * $this->limit;
+            $this->currentPage = $numberPage;
+        }
 
         $this->getGames();
+    }
+
+    private function queryGames()
+    {
+        $query = Game::with($this->with);
+
+        $query->where('first_release_date', '<', Carbon::now());
+
+        if ($this->searchWord != '') {
+            $query->search($this->searchWord);
+        }
+
+        if ($this->genre) {
+            $query->where('genres.slug', $this->genre);
+        }
+
+        if ($this->platform != '') {
+            $query->where('platforms.slug', $this->platform);
+        }
+
+        $query->orderBy('first_release_date', $this->sort);
+
+        return $query;
     }
 
     public function render()
