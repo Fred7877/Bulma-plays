@@ -46,9 +46,9 @@ class UpdateDb extends Command
     {
 
         if ($this->option('lastest')) {
-            GamesIGDB::take(500)->where('first_release_date', '<', Carbon::now())->orderBy('first_release_date', 'desc')->get()->each(function ($data) {
+            GamesIGDB::take(20)->where('first_release_date', '<', Carbon::now())->orderBy('first_release_date', 'desc')->get()->each(function ($data) {
 
-                $game = Game::firstOrCreate(
+                Game::firstOrCreate(
                     [
                         'slug' => $data->slug,
                         'game_id' => $data->id,
@@ -58,10 +58,6 @@ class UpdateDb extends Command
                         'igdb' => $data->toArray(),
                     ],
                 );
-
-                if ($data->platforms) {
-                    // $game->platforms()->attach(Platform::whereIn('data->id', $data->platforms)->get('id')->pluck('id'));
-                }
             });
         } else {
 
@@ -74,13 +70,7 @@ class UpdateDb extends Command
                     ['data' => $data->toArray()]
                 );
             });
-            /*
-                    ReleaseDateIGDB::all()->each(function($data){
-                        ReleaseDate::firstOrCreate(
-                            ['checksum' => $data->checksum],
-                            ['data' => $data->toArray()]
-                        );
-                    });*/
+
             $countGames = GamesIGDB::count();
             $this->info($countGames);
             for ($i = 0; $i < $countGames; $i++) {
@@ -88,7 +78,7 @@ class UpdateDb extends Command
                 $skip = $i * $take;
                 GamesIGDB::skip($skip)->take($take)->where('first_release_date', '<', Carbon::now())->orderBy('first_release_date', 'desc')->get()->each(function ($data) {
 
-                    $game = Game::firstOrCreate(
+                    Game::firstOrCreate(
                         [
                             'slug' => $data->slug,
                             'game_id' => $data->id,
@@ -98,10 +88,6 @@ class UpdateDb extends Command
                             'igdb' => $data->toArray(),
                         ],
                     );
-
-                    if ($data->platforms) {
-                        // $game->platforms()->attach(Platform::whereIn('data->id', $data->platforms)->get('id')->pluck('id'));
-                    }
                 });
 
                 $this->info($skip);
