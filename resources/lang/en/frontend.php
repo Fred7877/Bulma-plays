@@ -42,37 +42,36 @@ return [
     Welcome to Bulma-playz!
 </p>
 <p>
-    Video games occupy a large part of your life, do you want to keep up to date with upcoming releases or do you
+    Video games are a big part of your life, you want to keep up to date with upcoming releases or you are
     looking for a specific game?
     <br>
-    You will find on this site all the past and future video games of which the oldest is <a
-            href ="%s"> Cathode
-        Ray Tube Amusement Device </a> dating from 1947!
+    You will find on this site all the past and future video games, the oldest of which is <a
+            href="%s">Cathode
+        Ray Tube Amusement Device</a> that dates back to 1947!
     <br>
     You have at your disposal a search field or filters that will allow you to
     find more easily a game or a category of games on a certain platform.
     <br>
     <br>
 Find the games on <a
-            href = "%s"> Nintendo
-        Switch </a>?
+            href="%s">Nintendo
+        Switch</a> ?
     <br>
 Find the games on <a
-            href = "%s"> PlayStation
-        4 </a>?
+            href="%s">PlayStation
+        4</a> ?
     <br>
 Or on <a
-            href = "%s"> Linux </a>
+            href="%s">Linux</a>
 or <a
-            href = "%s"> Windows </a>
+            href="%s">Windows</a>
     ?
-    <br>
+    <?
     <br>
 They are all here!
     <br>
-    <br>
-By registering, you will also be able to leave a comment, respond to other comments or
-    to leave tips & news to help other players who might be blocked :)
+By registering, you will also have the opportunity to leave a comment, reply to other comments or
+    to leave tips & tricks to help other players who may be blocked :)
     <br>
     <br>
     <a href="%s">

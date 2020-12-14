@@ -42,15 +42,15 @@ return [
     Bienvenue sur Bulma-playz !
 </p>
 <p>
-    Les jeux-vidéos occupe une grande part de votre vie, tu souhaite te tenir au courant des sorties à venir ou bien tu
-    recherche un jeux spécifique ?
+    Les jeux-vidéos occupent une grande part de ta vie, tu souhaites te tenir au courant des sorties à venir ou bien tu
+    recherches un jeux spécifique ?
     <br>
-    Tu trouvera sur ce site tous les jeux-vidéo passés et à venir dont le plus vieux est <a
+    Tu trouveras sur ce site tous les jeux-vidéo passés et à venir dont le plus vieux est <a
             href="%s">Cathode
-        Ray Tube Amusement Device</a> et qui date 1947 !
+        Ray Tube Amusement Device</a> qui date 1947 !
     <br>
-    Tu as a t\'a disposition un champ de recherche ou bien des filtres qui te permetteront de
-    retrouver plus facilement un jeux ou une catégorie de jeux sur une certaine plate-forme.
+    Tu as à ta disposition un champ de recherche ou bien des filtres qui te permetteront de
+    retrouver plus facilement un jeu ou une catégorie de jeux sur une certaine plateforme.
     <br>
     <br>
 Retrouver les jeux sur <a
@@ -71,8 +71,8 @@ ou <a
 Ils sont tous ici !
     <br>
     <br>
-En t\'inscrivant, tu aura aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
-    de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqué :)
+En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
+    de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqués :)
     <br>
     <br>
     <a href="%s">
