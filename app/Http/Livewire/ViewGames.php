@@ -36,7 +36,6 @@ class ViewGames extends Component
             $this->totalItem = session('paginate')['totalItem'];
             $this->offset = session('paginate')['offset'];
             $this->currentPage = session('paginate')['currentPage'];
-            $this->totalItem = session('paginate')['totalItem'];
             $this->genre = session('paginate')['genre'];
             $this->platform = session('paginate')['platform'];
             $this->searchWord = session('paginate')['searchWord'];

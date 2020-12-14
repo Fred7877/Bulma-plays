@@ -38,4 +38,5 @@ return [
     'password_format_incorrect' => 'Format du password incorrect.',
     'password_not_match' => 'Les password sont différents.',
     'you_can_login' => 'Top ! Tu vas pouvoir te connecter avec tes identifiants <i class="far fa-smile"></i>',
+    'speach_home' => ''
 ];
