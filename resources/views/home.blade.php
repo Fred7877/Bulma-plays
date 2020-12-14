@@ -1,23 +1,23 @@
-@extends('layouts.app')
+@extends('frontend.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+    <div class="box mt-5">
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    {!!
+                        sprintf(
+                            __('frontend.speach_home'),
+                            "http://local.bulma-playz.test/{{App::getLocale()}}/games/cathode-ray-tube-amusement-device",
+                            route('filter.game', ['platformSlug' => 'switch', 'platformName' => 'Nintendo Switch']),
+                            route('filter.game', ['platformSlug' => 'ps4--1', 'platformName' => 'PlayStation 4']),
+                            route('filter.game', ['platformSlug' => 'linux', 'platformName' => 'Linux']),
+                            route('filter.game', ['platformSlug' => 'win', 'platformName' => 'PC (Microsoft Windows)']),
+                            route('games.index'),
+                        )
+                        !!}
                 </div>
             </div>
-        </div>
+        </article>
     </div>
-</div>
 @endsection
