@@ -38,5 +38,45 @@ return [
     'password_format_incorrect' => 'Format du password incorrect.',
     'password_not_match' => 'Les password sont différents.',
     'you_can_login' => 'Top ! Tu vas pouvoir te connecter avec tes identifiants <i class="far fa-smile"></i>',
-    'speach_home' => ''
+    'speach_home' => '<p>
+    Bienvenue sur Bulma-playz !
+</p>
+<p>
+    Les jeux-vidéos occupe une grande part de votre vie, tu souhaite te tenir au courant des sorties à venir ou bien tu
+    recherche un jeux spécifique ?
+    <br>
+    Tu trouvera sur ce site tous les jeux-vidéo passés et à venir dont le plus vieux est <a
+            href="%s">Cathode
+        Ray Tube Amusement Device</a> et qui date 1947 !
+    <br>
+    Tu as a t\'a disposition un champ de recherche ou bien des filtres qui te permetteront de
+    retrouver plus facilement un jeux ou une catégorie de jeux sur une certaine plate-forme.
+    <br>
+    <br>
+Retrouver les jeux sur <a
+            href="%s">Nintendo
+        Switch</a> ?
+    <br>
+Retrouver les jeux sur <a
+            href="%s">PlayStation
+        4</a> ?
+    <br>
+Ou encore sur <a
+            href="%s">Linux</a>
+ou <a
+            href="%s">Windows</a>
+    ?
+    <br>
+    <br>
+Ils sont tous ici !
+    <br>
+    <br>
+En t\'inscrivant, tu aura aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
+    de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqué :)
+    <br>
+    <br>
+    <a href="%s">
+    Explore la liste complète des jeux-vidéo !
+    </a>
+</p>'
 ];
