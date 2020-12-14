@@ -48,6 +48,6 @@ class FilterGamesController extends Controller
             ]
         ]);
 
-        return redirect(App::getLocale().route('games.index', [], false));
+        return redirect(route('games.index', [], false));
     }
 }

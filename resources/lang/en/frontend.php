@@ -38,5 +38,46 @@ return [
     'password_format_incorrect' => 'Password format incorrect.',
     'password_not_match' => 'The passwords are different.',
     'you_can_login' => 'Greet ! You will be able to log in with your identifiers <i class="far fa-smile"></i>',
-    'speach_home' => ''
+    'speach_home' => '<p>
+    Welcome to Bulma-playz!
+</p>
+<p>
+    Video games occupy a large part of your life, do you want to keep up to date with upcoming releases or do you
+    looking for a specific game?
+    <br>
+    You will find on this site all the past and future video games of which the oldest is <a
+            href ="%s"> Cathode
+        Ray Tube Amusement Device </a> dating from 1947!
+    <br>
+    You have at your disposal a search field or filters that will allow you to
+    find more easily a game or a category of games on a certain platform.
+    <br>
+    <br>
+Find the games on <a
+            href = "%s"> Nintendo
+        Switch </a>?
+    <br>
+Find the games on <a
+            href = "%s"> PlayStation
+        4 </a>?
+    <br>
+Or on <a
+            href = "%s"> Linux </a>
+or <a
+            href = "%s"> Windows </a>
+    ?
+    <br>
+    <br>
+They are all here!
+    <br>
+    <br>
+By registering, you will also be able to leave a comment, respond to other comments or
+    to leave tips & news to help other players who might be blocked :)
+    <br>
+    <br>
+    <a href="%s">
+    Explore the complete list of video games!
+    </a>
+</p>'
+
 ];
