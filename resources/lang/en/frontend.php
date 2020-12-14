@@ -38,4 +38,5 @@ return [
     'password_format_incorrect' => 'Password format incorrect.',
     'password_not_match' => 'The passwords are different.',
     'you_can_login' => 'Greet ! You will be able to log in with your identifiers <i class="far fa-smile"></i>',
+    'speach_home' => ''
 ];

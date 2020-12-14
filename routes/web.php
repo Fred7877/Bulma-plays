@@ -4,7 +4,9 @@ use App\Http\Controllers\backend\CommentController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\LoginController;
 use App\Http\Controllers\frontend\LogoutController;
 use App\Http\Controllers\frontend\RegisterController;
@@ -27,12 +29,15 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale()
 ], function () {
     Route::get('/', function () {
-        return redirect(route('games.index'));
+        return redirect(route('home'));
     });
 
     Route::get('games', [GameController::class, 'index'])->name('games.index');
     Route::get('reset-filter', [GameController::class, 'resetFilter'])->name('reset.filter');
     Route::get('games/{slug}', [GameController::class, 'show'])->name('games.show');
+
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
 });
 
 Route::get('/backend', function () {
@@ -53,6 +58,3 @@ Route::post('comment/create', [FrontendComment::class, 'create'])->name('comment
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');

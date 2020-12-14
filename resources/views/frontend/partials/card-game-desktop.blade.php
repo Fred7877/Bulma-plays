@@ -43,7 +43,7 @@
                             <span class="text-gray-900 leading-none">
                             {!! collect($game['platforms'])->map(function($value) use($platform){
                                     if ( $platform === $value['slug']){
-                                        return ['platforms' => '<b>'.$value['name'].'</b>'];
+                                        return ['platforms' => '<span class="has-text-primary has-text-weight-bold ">'.$value['name'].'</span>'];
                                     }
 
                                     return ['platforms' => $value['name']];
