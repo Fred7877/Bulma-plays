@@ -78,5 +78,7 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     <a href="%s">
     Explore la liste complète des jeux-vidéo !
     </a>
-</p>'
+</p>',
+    'current' => 'actuel',
+    'coming_soon' => 'a venir',
 ];

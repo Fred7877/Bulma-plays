@@ -32,7 +32,7 @@
                                     wire:model="platform">
                                 <option value="">{{ Str::Ucfirst(__('frontend.choose')) }}</option>
                                 @foreach(collect($platformNintendo)->sortBy('name')->toArray() as $platform1)
-                                    <option value="{{ $platform1['slug'] }}" >{{ $platform1['name'] }}</option>
+                                    <option value="{{ $platform1['slug'] }}">{{ $platform1['name'] }}</option>
                                 @endforeach
                             </select>
                             <hr class="dropdown-divider">
@@ -129,7 +129,7 @@
                     {{ Str::ucFirst($sortName) }}
                 </div>
             </div>
-            <div class="column is-narrow-desktop mr-5 is-mobile">
+            <div class="column is-narrow-desktop is-mobile">
                 <input class="input" type="text" id="searching"
                        placeholder="{{ Str::Ucfirst(__('frontend.research')) }}" name="searching" value="{{ $search }}"
                        wire:model.debounce.500ms="search">
@@ -138,8 +138,16 @@
                        href="{{ route('reset.filter') }}">{{ Str::ucFirst(__('frontend.reset_filter')) }}</a>
                 </div>
             </div>
-        </div>
 
+            <div class="column is-narrow-desktop mr-5 is-mobile">
+                <div class="row mb-2">
+                    <button class="button is-small is-primary @if(!$temporalityActual) is-light @endif" wire:click="temporality">{{ Str::ucFirst(__('frontend.current')) }}</button>
+                </div>
+                <div class="row">
+                    <button class="button is-small is-primary @if($temporalityActual) is-light @endif" wire:click="temporality">{{ Str::ucFirst(__('frontend.coming_soon')) }}</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

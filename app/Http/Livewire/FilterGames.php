@@ -11,8 +11,6 @@ use MarcReichel\IGDBLaravel\Models\Platform;
 class FilterGames extends Component
 {
     const PLATFORM_FAMILLY_PLAYSTATION = 1;
-    const PLATFORM_FAMILLY_XBOX = 2;
-    const PLATFORM_FAMILLY_SEGA = 3;
     const PLATFORM_FAMILLY_LINUX = 4;
     const PLATFORM_FAMILLY_NINTENDO = 5;
     const PLATFORM_SLUG_WINDOWS = 'win';
@@ -34,6 +32,7 @@ class FilterGames extends Component
     public $genres = '';
     public $genre;
     public $genreName = '';
+    public $temporalityActual = true;
 
     public function mount()
     {
@@ -110,6 +109,11 @@ class FilterGames extends Component
         }
     }
 
+    /**
+     * Show the games about selected genre
+     *
+     * @param $value
+     */
     public function updatedGenre($value)
     {
         $this->genreName = collect($this->genres)->where('slug', $value)->first()['name'];
@@ -120,6 +124,11 @@ class FilterGames extends Component
         $this->emitUp('genre', $value);
     }
 
+    /**
+     * Show the games about field search
+     *
+     * @param $value
+     */
     public function updatedSearch($value)
     {
         $this->sortName = Str::ucFirst(__('frontend.descending'));
@@ -130,6 +139,11 @@ class FilterGames extends Component
         $this->emitUp('search', $value);
     }
 
+    /**
+     * Change the list about the selected platform
+     *
+     * @param $value
+     */
     public function updatedPlatform($value)
     {
         if ($value !== '') {
@@ -144,6 +158,9 @@ class FilterGames extends Component
         $this->emitUp('platformChange', $value);
     }
 
+    /**
+     * Sort the game list
+     */
     public function updatedSort($value)
     {
         $this->sortName = $value === 'asc' ? Str::ucFirst(__('frontend.ascending')) : Str::ucFirst(__('frontend.descending'));
@@ -151,6 +168,21 @@ class FilterGames extends Component
         session()->put('filter.sortName', $this->sortName);
 
         $this->emitUp('sortChange', $value);
+    }
+
+    /**
+     * Change the temporality to show actual games or incoming games
+     */
+    public function temporality()
+    {
+        $this->temporalityActual = !$this->temporalityActual;
+        if ($this->temporalityActual) {
+            $this->updatedSort('desc');
+        } else {
+            $this->updatedSort('asc');
+        }
+
+        $this->emit('changeTemporality', $this->temporalityActual);
     }
 
     public function render()
