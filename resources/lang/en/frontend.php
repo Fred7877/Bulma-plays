@@ -77,6 +77,7 @@ By registering, you will also have the opportunity to leave a comment, reply to 
     <a href="%s">
     Explore the complete list of video games!
     </a>
-</p>'
-
+</p>',
+    'current' => 'current',
+    'coming_soon' => 'coming soon',
 ];

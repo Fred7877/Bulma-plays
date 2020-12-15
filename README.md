@@ -10,9 +10,7 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 php artisan vendor:publish --provider="Spatie\Sitemap\SitemapServiceProvider" --tag=config
 
 ### R.A.F
-Sitemap
-
-Page d'accueille
+Améliorer le champ de recherche, actuellement, il faut parfois le nom exacte du jeu, il faudrai peut-être mettre le nom et l'id des jeux en base (normalement, j'ai déjà) pour effectuer la recherche
 
 Mettre les dates en fonction de la locale choisie
 
