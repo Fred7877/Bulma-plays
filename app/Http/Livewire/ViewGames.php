@@ -25,10 +25,11 @@ class ViewGames extends Component
     public $totalItem;
     public $totalQueryGame;
     public $pageNumber = 1;
+    public $directionTemporality = '<';
 
     private $ttl = 7200;
 
-    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh'];
+    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh', 'changeTemporality'];
 
     public function mount()
     {
@@ -109,7 +110,7 @@ class ViewGames extends Component
 
     private function getGames()
     {
-        $keyCache = 'games_' . Str::studly($this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
+        $keyCache = 'games_' . Str::studly($this->directionTemporality.'_'.$this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
 
         $this->totalQueryGame = $this->queryGames()->count();
         $this->pageCount = (int)ceil($this->totalQueryGame / $this->limit);
@@ -170,7 +171,7 @@ class ViewGames extends Component
     {
         $query = Game::with($this->with);
 
-        $query->where('first_release_date', '<', Carbon::now());
+        $query->where('first_release_date', $this->directionTemporality, Carbon::now());
 
         if ($this->searchWord != '') {
             $query->search($this->searchWord);
@@ -187,6 +188,17 @@ class ViewGames extends Component
         $query->orderBy('first_release_date', $this->sort);
 
         return $query;
+    }
+
+    public function changeTemporality($temporalityActual)
+    {
+        if ($temporalityActual) {
+            $this->directionTemporality = '<';
+        } else {
+            $this->directionTemporality = '>';
+        }
+
+        $this->getGames();
     }
 
     public function render()

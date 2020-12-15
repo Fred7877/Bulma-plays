@@ -2,8 +2,10 @@
     <article class="media">
         <div class="media-left">
             <figure class="image">
+                @if(isset($game['cover']))
                 <img
                     src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')  }}"/>
+                @endif
             </figure>
         </div>
         <div class="media-content">
