@@ -8,7 +8,7 @@
                     {!!
                         sprintf(
                             __('frontend.speach_home'),
-                            App::getLocale()."/games/cathode-ray-tube-amusement-device",
+                            '/'.App::getLocale()."/games/cathode-ray-tube-amusement-device",
                             route('filter.game', ['platformSlug' => 'switch', 'platformName' => 'Nintendo Switch']),
                             route('filter.game', ['platformSlug' => 'ps4--1', 'platformName' => 'PlayStation 4']),
                             route('filter.game', ['platformSlug' => 'linux', 'platformName' => 'Linux']),
