@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\backend\CommentController;
+use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\UserController as UserFront;
 use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
 use App\Http\Controllers\frontend\HomeController;
@@ -55,5 +57,8 @@ Route::get('gamers-login', [LoginController::class, 'authenticate'])->name('game
 Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.logout');
 
 Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
+
+Route::get('get-user', [AjaxController::class, 'getUser'])->name('ajax.get.user');
+Route::get('get-comments-user', [AjaxController::class, 'getCommentsUser'])->name('ajax.user.comments');
 
 Auth::routes();
