@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
+        <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('home')) }}">
             <img src="{{ asset('storage/assets/images/logo_1.png') }}">
         </a>
 
