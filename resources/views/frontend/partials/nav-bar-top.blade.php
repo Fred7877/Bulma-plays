@@ -13,7 +13,7 @@
 
     <div id="navbarBasic" class="navbar-menu">
         @if (Route::currentRouteName() === 'games.show')
-            <div class="navbar-start">
+            <div class="navbar-start is-hidden-mobile">
                 <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
                     <i class="fas fa-list-ul icon is-medium"></i>
                 </a>
