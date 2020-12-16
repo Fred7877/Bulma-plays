@@ -57,4 +57,3 @@ Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.l
 Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
 
 Auth::routes();
-

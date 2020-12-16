@@ -6,6 +6,7 @@ use App\Services\Game;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use function React\Promise\all;
 
 class GameController extends Controller
 {
@@ -21,6 +22,7 @@ class GameController extends Controller
 
     public function index()
     {
+
         return view('frontend.game.index');
     }
 
@@ -32,7 +34,7 @@ class GameController extends Controller
 
     public function resetFilter()
     {
-        session()->flush();
+        session()->forget(['paginate', 'filter']);
 
         return redirect(route('games.index'));
     }
