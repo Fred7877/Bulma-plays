@@ -58,25 +58,53 @@
                 </div>
             </div>
 
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        @if(!Auth::check())
+
+            @if(!Auth::check())
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
                             <a class="button is-primary" id="btn-signup">
                                 <strong>Sign up</strong>
                             </a>
                             <a class="button is-light" id="btn-login">
                                 Log in
                             </a>
-                        @endif
-                        @if(Auth::check())
-                            <a class="button is-dark" id="btn-logout" href="{{ route('gamers.logout') }}">
-                                Log out
-                            </a>
-                        @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
+            @if(Auth::check())
+                <div class="navbar-end mr-3 mt-2">
+                    <div class="dropdown dropdown-menu-user is-right">
+                        <div class="dropdown-trigger">
+                            <button id="nav-user" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span><i class="fas fa-ellipsis-h"></i></i></span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item" id="btn-profil">
+                                    Profil
+                                </a>
+                                <hr class="dropdown-divider m-0">
+                                <a href="#" class="dropdown-item" id="btn-comments-user">
+                                    Mes commentaires
+                                </a>
+                                <a class="dropdown-item">
+                                    Mes fiches jeux
+                                </a>
+
+                                <div class="dropdown-item">
+                                    <a class="button is-dark is-small" id="btn-logout"
+                                       href="{{ route('gamers.logout') }}">
+                                        Log out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <meta name="_token" content="{{ csrf_token() }}">
@@ -84,4 +112,5 @@
 
 @push('js')
     <script src="/js/nav-bar.js"></script>
+    <script src="/js/menu-user.js"></script>
 @endpush
