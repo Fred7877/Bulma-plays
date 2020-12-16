@@ -62,3 +62,4 @@ Route::get('get-user', [AjaxController::class, 'getUser'])->name('ajax.get.user'
 Route::get('get-comments-user', [AjaxController::class, 'getCommentsUser'])->name('ajax.user.comments');
 
 Auth::routes();
+
