@@ -12,11 +12,13 @@
     </div>
 
     <div id="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
-                <i class="fas fa-home"></i>
-            </a>
-        </div>
+        @if (Route::currentRouteName() === 'games.show')
+            <div class="navbar-start">
+                <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
+                    <i class="fas fa-list-ul icon is-medium"></i>
+                </a>
+            </div>
+        @endif
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="dropdown dropdown-languages">
