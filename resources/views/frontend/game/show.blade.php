@@ -114,6 +114,7 @@
                                 @foreach($game['age_ratings'] as $ageRating)
                                     <div class="column is-2">
                                         <figure class="image is-48x48">
+                                            dsfdf
                                             <img src="{{ $ageRating }}" alt="">
                                         </figure>
                                     </div>
@@ -164,12 +165,16 @@
                             @if (isset($game['aggregated_rating']))
                                 <div class="column">
                                     <div
-                                        class="mt-3 is-pulled-right rounded-full h-20 w-20 flex items-center justify-center bg-teal-500 text-xs text-white font-medium shadow-lg transform rotate-12">
+                                        class="mt-3 mr-3 is-pulled-right rounded-full is-rounded">
                                         <div class="columns">
-                                            <div class="column is-full text-xs text-center">
-                                                <span class="text-xl"> {{ $game['aggregated_rating'] }}% </span>
-                                                <hr class="dropdown-divider m-0">
-                                                {{ $game['aggregated_rating_count'] }} {{ Str::plural(__('frontend.voter'), $game['aggregated_rating_count']) }}
+                                            <div
+                                                class="column has-text-centered has-background-primary is-rounded has-text-white p-4 "
+                                                style="border-radius: 100%;">
+                                                <span class="is-size-3"> {{ ceil($game['aggregated_rating']) }}% </span>
+                                                <hr class="dropdown-divider m-0 has-text-centered">
+                                                <span class=" is-size-7">
+                                                    {{ $game['aggregated_rating_count'] }} {{ Str::plural(__('frontend.voter'), $game['aggregated_rating_count']) }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +220,7 @@
             <div class="block has-background-dark p-4 rounded">
                 <div class="owl-carousel owl-theme" id="carousel-video">
                     @foreach($game['videos'] as $video)
-                        <iframe class="item-video" data-merge="1"
+                        <iframe class="item-video" data-merge="1" allowfullscreen="allowfullscreen"
                                 src="https://www.youtube.com/embed/{{ $video['video_id'] }}"></iframe>
                     @endforeach
                 </div>
@@ -267,21 +272,22 @@
     <script src="/js/show-game.js"></script>
     <script src="/js/comments.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 
-            $('.show-replies').on('click', function(elem){
-               commentId = elem.target.dataset.commentId;
-                $("div[id^=reply-to-reply-"+commentId+"]").removeClass('is-hidden');
+            $('.show-replies').on('click', function (elem) {
+                commentId = elem.target.dataset.commentId;
+                $("div[id^=reply-to-reply-" + commentId + "]").removeClass('is-hidden');
 
                 $(elem.target).closest('.btn-show-replies').addClass('is-hidden');
                 $(elem.target).closest('.btn-show-replies').next('.btn-hide-replies').removeClass('is-hidden');
             });
 
-            $('.hide-replies').on('click', function(elem){
+            $('.hide-replies').on('click', function (elem) {
                 commentId = elem.target.dataset.commentId;
-                $("div[id^=reply-to-reply-"+commentId+"]").addClass('is-hidden');
+                $("div[id^=reply-to-reply-" + commentId + "]").addClass('is-hidden');
 
                 $(elem.target).closest('.btn-hide-replies').addClass('is-hidden');
                 $(elem.target).closest('.btn-hide-replies').prev('.btn-show-replies').removeClass('is-hidden');
