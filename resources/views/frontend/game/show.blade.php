@@ -114,7 +114,6 @@
                                 @foreach($game['age_ratings'] as $ageRating)
                                     <div class="column is-2">
                                         <figure class="image is-48x48">
-                                            dsfdf
                                             <img src="{{ $ageRating }}" alt="">
                                         </figure>
                                     </div>
