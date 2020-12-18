@@ -49,6 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
         });
+
+        // Create game
+        /*document.getElementById("btn-comments-user").addEventListener("click", function (e) {
+            Swal.fire({
+                html: `<div class="row" id="modal-create-game">
+                    <input id="date_first_release" name="date_first_release">
+                    <input id="platform" name="platform">
+                    </div>`,
+            });
+        });*/
     }
 });
 
