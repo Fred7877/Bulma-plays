@@ -70,24 +70,22 @@
                                 <b>Mode multijoueur :</b>
                             <p>
                             <ul>
-                                @foreach($game['multiplayer_modes'] as $multiplayerMode)
-                                    <li>
+                                <li>
                                     <span
-                                        class="underline">Lan :</span> {{ $multiplayerMode['lancoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Lan :</span> {{ end($game['multiplayer_modes'])['lancoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Coop offline :</span> {{ $multiplayerMode['offlinecoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Coop offline :</span> {{ end($game['multiplayer_modes'])['offlinecoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Coop online :</span> {{ $multiplayerMode['onlinecoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Coop online :</span> {{ end($game['multiplayer_modes'])['onlinecoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Max coop online :</span> {{ isset($multiplayerMode['onlinecoopmax']) ? 'Oui' : 'Non' }}
-                                    </li>
-                                @endforeach
+                                        class="underline">Max coop online :</span> {{ isset(end($game['multiplayer_modes'])['onlinecoopmax']) ? 'Oui' : 'Non' }}
+                                </li>
                             </ul>
                         @endif
                         <p>
@@ -115,7 +113,6 @@
                                 @foreach($game['age_ratings'] as $ageRating)
                                     <div class="column is-2">
                                         <figure class="image is-48x48">
-                                            dsfdf
                                             <img src="{{ $ageRating }}" alt="">
                                         </figure>
                                     </div>
@@ -135,8 +132,8 @@
                                         <a href="{{ $siteweb['url'] }}" class="word-break"
                                            target="_blank"> - {{ $siteweb['url'] }}
                                         </a>
-                                        <span class="icon is-small has-text-info">
-                                             <i class="fas fa-external-link-alt "></i>
+                                        <span class="has-text-info">
+                                             <i class="is-size-7 fas fa-external-link-alt "></i>
                                         </span>
                                     </li>
                                 @endforeach
@@ -145,23 +142,19 @@
 
                         <div class="columns is-mobile">
                             <div class="column">
-                                @if(isset($game['compagnies']) && $game['compagnies'] !== null)
+                                @if(isset($game['compagnies']))
                                     <div class="mt-2">
                                         <b>{{ Str::ucFirst(__('frontend.produced_by')) }} :</b>
                                         <ul>
                                             @foreach($game['compagnies'] as $compagny)
-                                                @if ($compagny)
-                                                    <li class="text-gray-900 leading-none">
-                                                        <a href="{{ $compagny->url }}" target="_blank">
-                                                            - {{ $compagny->name }}
-                                                        </a>
-                                                        <span class="icon is-small has-text-info">
-                                             <i class="fas fa-external-link-alt "></i>
+                                                <li class="text-gray-900 leading-none">
+                                                    <a href="{{ $compagny->url }}" target="_blank">
+                                                        - {{ $compagny->name }}
+                                                    </a>
+                                                    <span class="icon is-small has-text-info">
+                                             <i class="is-size-7 fas fa-external-link-alt"></i>
                                         </span>
-                                                    </li>
-                                                @else
-                                                    <li>-</li>
-                                                @endif
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div>

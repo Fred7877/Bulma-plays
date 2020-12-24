@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\backend\CommentController;
+use App\Http\Controllers\CustomGameController;
 use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\CreateGameController;
 use App\Http\Controllers\frontend\UserController as UserFront;
 use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
@@ -27,7 +29,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 Route::group([
-    'namespace' => 'frontend',
     'prefix' => LaravelLocalization::setLocale()
 ], function () {
     Route::get('/', function () {
@@ -40,7 +41,11 @@ Route::group([
 
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
+
+    Route::resource('custom-game', CustomGameController::class);
 });
+
+
 
 Route::get('/backend', function () {
     return redirect(route('users.index'));

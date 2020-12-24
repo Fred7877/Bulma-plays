@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\RelationShips\CustomGameRelationShipsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Moderation extends Model
+class Link extends Model
 {
-    use HasFactory, CustomGameRelationShipsTrait;
+    use HasFactory;
 
     protected $guarded = [];
+
+    public function customGame()
+    {
+        return $this->belongsTo(CustomGame::class);
+    }
 }
