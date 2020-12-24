@@ -69,24 +69,22 @@
                                 <b>Mode multijoueur :</b>
                             <p>
                             <ul>
-                                @foreach($game['multiplayer_modes'] as $multiplayerMode)
-                                    <li>
+                                <li>
                                     <span
-                                        class="underline">Lan :</span> {{ $multiplayerMode['lancoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Lan :</span> {{ end($game['multiplayer_modes'])['lancoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Coop offline :</span> {{ $multiplayerMode['offlinecoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Coop offline :</span> {{ end($game['multiplayer_modes'])['offlinecoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Coop online :</span> {{ $multiplayerMode['onlinecoop'] ? 'Oui' : 'Non' }}
-                                    </li>
-                                    <li>
+                                        class="underline">Coop online :</span> {{ end($game['multiplayer_modes'])['onlinecoop'] ? 'Oui' : 'Non' }}
+                                </li>
+                                <li>
                                     <span
-                                        class="underline">Max coop online :</span> {{ isset($multiplayerMode['onlinecoopmax']) ? 'Oui' : 'Non' }}
-                                    </li>
-                                @endforeach
+                                        class="underline">Max coop online :</span> {{ isset(end($game['multiplayer_modes'])['onlinecoopmax']) ? 'Oui' : 'Non' }}
+                                </li>
                             </ul>
                         @endif
                         <p>
@@ -133,8 +131,8 @@
                                         <a href="{{ $siteweb['url'] }}" class="word-break"
                                            target="_blank"> - {{ $siteweb['url'] }}
                                         </a>
-                                        <span class="icon is-small has-text-info">
-                                             <i class="fas fa-external-link-alt "></i>
+                                        <span class="has-text-info">
+                                             <i class="is-size-7 fas fa-external-link-alt "></i>
                                         </span>
                                     </li>
                                 @endforeach
@@ -153,7 +151,7 @@
                                                         - {{ $compagny->name }}
                                                     </a>
                                                     <span class="icon is-small has-text-info">
-                                             <i class="fas fa-external-link-alt "></i>
+                                             <i class="is-size-7 fas fa-external-link-alt"></i>
                                         </span>
                                                 </li>
                                             @endforeach

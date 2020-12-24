@@ -87,7 +87,7 @@
                                     Profil
                                 </a>
                                 <hr class="dropdown-divider m-0">
-                                <a href="{{ route('create-game.index') }}" class="dropdown-item" id="btn-create-game">
+                                <a href="{{ route('custom-game.create') }}" class="dropdown-item" id="btn-create-game">
                                     Créer une fiche jeux
                                 </a>
                                 <hr class="dropdown-divider m-0">

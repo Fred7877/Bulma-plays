@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\CommentController;
+use App\Http\Controllers\CustomGameController;
 use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
@@ -41,7 +42,7 @@ Route::group([
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
 
-    Route::resource('create-game', CreateGameController::class);
+    Route::resource('custom-game', CustomGameController::class);
 });
 
 

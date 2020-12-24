@@ -1,35 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Enums\PopularPlatform;
 use App\Models\CustomGame;
 use App\Models\GameMode;
 use App\Models\Genre;
 use App\Models\Link;
 use App\Models\Platform;
 use App\Models\Productor;
+use App\Models\Theme;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Theme;
 use Illuminate\Support\Facades\Auth;
 
-class CreateGameController extends Controller
+class CustomGameController extends Controller
 {
-    const PLATFORM_SLUG_WINDOWS = 'win';
-    const PLATFORM_SLUG_LINUX = 'linux';
-    const PLATFORM_SLUG_MAC = 'mac';
-    const PLATFORM_BROWER = 'browser';
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        //
+    }
 
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     */
+    public function create()
+    {
         return view('frontend.createGame.index', [
             'platforms' => $this->getPopularPlatforms(),
             'genres' => Genre::all(),
@@ -39,19 +42,9 @@ class CreateGameController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
@@ -108,16 +101,16 @@ class CreateGameController extends Controller
         $customGame->themes()->sync($themes);
         $customGame->gameModes()->sync($gameModes);
 
-        return redirect(route('create-game.edit', [$customGame]));
+        return redirect(route('custom-game.edit', [$customGame]));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  \App\Models\CustomGame  $customGame
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CustomGame $customGame)
     {
         //
     }
@@ -125,16 +118,15 @@ class CreateGameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  \App\Models\CustomGame  $customGame
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CustomGame $customGame)
     {
         return view('frontend.createGame.edit',
             [
                 'customGame' =>
-                    CustomGame::with(['genres', 'platforms', 'themes', 'gameModes', 'customLinks', 'productors'])
-                        ->find($id),
+                    $customGame->load(['genres', 'platforms', 'themes', 'gameModes', 'customLinks', 'productors']),
                 'platforms' => $this->getPopularPlatforms(),
                 'genres' => Genre::all(),
                 'gameModes' => GameMode::all(),
@@ -146,9 +138,9 @@ class CreateGameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param CustomGame $customGame
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\CustomGame  $customGame
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, CustomGame $customGame)
     {
@@ -174,14 +166,16 @@ class CreateGameController extends Controller
             ]
         );
 
-        collect($request->get('links'))->map(function ($link) use ($customGame) {
-            return Link::firstOrCreate([
+        Link::where('custom_game_id', $customGame->id)->delete();
+        collect($request->get('links'))->each(function ($link, $i) use ($customGame) {
+            Link::firstOrCreate([
                     'custom_game_id' => $customGame->id,
                     'url' => $link
                 ]
             );
         });
 
+        Productor::where('custom_game_id', $customGame->id)->delete();
         collect($request->get('productors'))->map(function ($productor, $index) use ($customGame, $linksProductors) {
             return Productor::firstOrCreate([
                     'custom_game_id' => $customGame->id,
@@ -203,15 +197,17 @@ class CreateGameController extends Controller
         $customGame->platforms()->sync($platforms);
         $customGame->themes()->sync($themes);
         $customGame->gameModes()->sync($gameModes);
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  \App\Models\CustomGame  $customGame
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CustomGame $customGame)
     {
         //
     }
@@ -222,10 +218,10 @@ class CreateGameController extends Controller
 
             if (isset($item['slug'])) {
                 return (
-                    $item['slug'] === self:: PLATFORM_SLUG_WINDOWS ||
-                    $item['slug'] === self:: PLATFORM_SLUG_LINUX ||
-                    $item['slug'] === self:: PLATFORM_SLUG_MAC ||
-                    $item['slug'] === self:: PLATFORM_BROWER
+                    $item['slug'] === PopularPlatform::PLATFORM_SLUG_WINDOWS ||
+                    $item['slug'] === PopularPlatform:: PLATFORM_SLUG_LINUX ||
+                    $item['slug'] === PopularPlatform:: PLATFORM_SLUG_MAC ||
+                    $item['slug'] === PopularPlatform:: PLATFORM_BROWER
                 );
             }
 
