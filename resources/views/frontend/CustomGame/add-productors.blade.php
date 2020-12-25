@@ -18,7 +18,7 @@
     </div>
 
     <div class="column is-1">
-        @if (count($newProductors) == $position)
+        @if (count($newProductors) == $position &&  isset($newProductorValues[$position]))
             <span class="icon is-small ml-1 has-text-info is-clickable" wire:click="addProductor">
           <i class="fas fa-plus-circle"></i>
         </span>

@@ -35,7 +35,7 @@ class CustomGameController extends Controller
      */
     public function create()
     {
-        return view('frontend.createGame.index', [
+        return view('frontend.CustomGame.index', [
             'platforms' => $this->getPopularPlatforms(),
             'genres' => Genre::all(),
             'gameModes' => GameMode::all(),
@@ -128,7 +128,7 @@ class CustomGameController extends Controller
      */
     public function edit(CustomGame $customGame)
     {
-        return view('frontend.createGame.edit',
+        return view('frontend.CustomGame.edit',
             [
                 'customGame' =>
                     $customGame->load(['genres', 'platforms', 'themes', 'gameModes', 'customLinks', 'productors']),
