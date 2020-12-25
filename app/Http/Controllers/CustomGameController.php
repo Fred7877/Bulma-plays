@@ -13,6 +13,8 @@ use App\Models\Theme;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CustomGameController extends Controller
 {
@@ -60,6 +62,8 @@ class CustomGameController extends Controller
 
         $linksProductors = $request->get('productor_links');
 
+        $pathImage = $request->imagePresentation->storeAs('custom_game_images', Str::slug($request->get('title')), 'public');
+
         $customGame = CustomGame::firstOrCreate(
             [
                 'user_id' => Auth::user()->id,
@@ -67,7 +71,8 @@ class CustomGameController extends Controller
             ],
             [
                 'publish_date' => $request->get('published') ? Carbon::now() : null,
-                'date_release' => Carbon::createFromFormat('d/m/Y', $request->get('date_release'))
+                'date_release' => Carbon::createFromFormat('d/m/Y', $request->get('date_release')),
+                'image' => $pathImage,
             ]
         );
 
@@ -159,8 +164,6 @@ class CustomGameController extends Controller
             [
                 'user_id' => Auth::user()->id,
                 'name' => $request->get('title'),
-            ],
-            [
                 'publish_date' => $request->get('published') ? Carbon::now() : null,
                 'date_release' => Carbon::createFromFormat('d/m/Y', $request->get('date_release'))
             ]

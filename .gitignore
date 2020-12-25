@@ -10,3 +10,6 @@
 npm-debug.log
 yarn-error.log
 .idea/*
+/storage/app/public/custom_game_images
+/storage/app/livewire-tmp
+/public/custom_game_images

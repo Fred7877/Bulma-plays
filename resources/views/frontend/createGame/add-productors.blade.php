@@ -8,7 +8,9 @@
                 <input class="input is-small" type="text" wire:model="newProductorValues.{{$position}}.value" name="productors[{{$position}}]">
             </div>
 
-            <a class="button @if(isset($linkables[$position]) && $linkables[$position]) has-text-info @else has-text-light @endif is-small" wire:click="linkable({{$position}})">
+            <a class="button @if(isset($linkables[$position]) && $linkables[$position]) has-text-info @else has-text-light @endif is-small"
+               wire:click="linkable({{$position}})"
+            >
                 <i class="fas fa-external-link-alt" ></i>
             </a>
             @if(isset($linkables[$position]) && $linkables[$position]) <input  type="hidden" name="productor_links[{{$position}}]">  @endif
