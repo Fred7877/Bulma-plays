@@ -1,5 +1,5 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <form method="post" action="{{ $actionForm }}">
+    <form method="post" action="{{ $actionForm }}" enctype="multipart/form-data">
         @if($actionMethod === 'put')
             @method('put')
         @endif
@@ -19,6 +19,34 @@
                                     <div class="control">
                                         <input class="input is-small" type="text" name="title" wire:model="title">
                                     </div>
+                                </li>
+                                <li class="mt-4">
+                                    <label class="label">Image de présentation</label>
+
+                                    <div class="file has-name is-small">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" wire:model="imagePresentation"
+                                                   name="imagePresentation">
+                                            <span class="file-cta">
+                                              <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                              </span>
+                                              <span class="file-label">
+                                                Choose a file…
+                                              </span>
+                                            </span>
+                                            <span class="file-name">
+                                                @if($imagePresentation)
+                                                    @if(!is_string($imagePresentation))
+                                                        {{ $imagePresentation->getClientOriginalName() }}
+                                                    @else
+                                                        {{ $imagePresentation }}
+                                                    @endif
+                                                @endif
+                                            </span>
+                                        </label>
+                                    </div>
+                                    @error('imagePresentation') <span class="error">{{ $message }}</span> @enderror
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Date première version</label>
@@ -126,7 +154,6 @@
                                         @include('frontend.createGame.add-productors', ['position' => $k])
                                     @endforeach
                                 </li>
-
                                 <li>
                                     <button type="submit" class="button is-link is-light">Save</button>
                                     <div class="is-pulled-right pt-5">
@@ -146,7 +173,15 @@
                             <div class="column ">
                                 <figure class="image static shadow-2xl">
                                     <img
-                                        src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'screenshot_big')  }}">
+                                        src="
+                                        @if($imagePresentation)
+                                        @if(!is_string($imagePresentation))
+                                        {{ $imagePresentation->temporaryUrl() }}
+                                        @else
+                                        {{ asset($imagePresentation) }}
+                                        @endif
+                                        @endif
+                                            ">
                                 </figure>
                             </div>
                             <div class="column ">
@@ -193,7 +228,7 @@
                                             <ul>
                                                 @foreach($newLinkValues as $k => $link)
                                                     <li>
-                                                        {!! isset($link['value']) ? '<a href='.$link['value'].' target="_blank"> '.$link['value'].' </a><i class="has-text-info is-size-7 fas fa-external-link-alt "></i>' : '' !!}
+                                                        {!! isset($link['value']) ? '<a href="'. (Str::contains($link['value'], 'http') ? $link['value'] : 'https://'.$link['value']).'" target="_blank"> '.$link['value'].' </a><i class="has-text-info is-size-7 fas fa-external-link-alt "></i>' : '' !!}
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -207,7 +242,7 @@
                                                 @foreach($newProductorValues as $k => $productor)
                                                     <li>
                                                         @if(isset($linkables[$k]) && $linkables[$k])
-                                                            {!! isset($productor['value']) && !empty($productor['value']) ? '<a href='.$productor['value'].' target="_blank"> '.$productor['value'].' </a> <i class="has-text-info is-size-7 fas fa-external-link-alt "></i>' : ''; !!}
+                                                            {!! isset($productor['value']) && !empty($productor['value']) ? '<a href="'. (Str::contains($productor['value'], 'http') ? $productor['value'] : 'https://'.$productor['value']).'" target="_blank"> '.$productor['value'].' </a> <i class="has-text-info is-size-7 fas fa-external-link-alt "></i>' : ''; !!}
                                                         @else
                                                             {{ $productor['value'] }}
                                                         @endif
@@ -243,7 +278,7 @@
                 {
                     language: '{{ App::getLocale() }}',
                     autoHide: true,
-                    autoPick: true,
+                    autoPick: @if ($dateRelease) true @else false @endif,
                     date: date
                 }
             );

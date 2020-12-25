@@ -3,9 +3,14 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateGame extends Component
 {
+    use WithFileUploads;
+
+    public $imagePresentation;
+
     public $customGame;
 
     public $platforms;
@@ -32,6 +37,8 @@ class CreateGame extends Component
     public $actionForm;
     public $actionMethod;
 
+    public $metas = [];
+
     protected $listeners = [
         'selectedDateRelease',
         'selectedPlatform',
@@ -46,6 +53,15 @@ class CreateGame extends Component
         'selectedTheme',
         'linkable',
     ];
+
+    public function save()
+    {
+        $this->validate([
+            'photo' => 'image|max:1024', // 1MB Max
+        ]);
+
+        $this->photo->store('photos');
+    }
 
     public function linkable($key)
     {
@@ -191,7 +207,7 @@ class CreateGame extends Component
                 $this->gameModesSelected[$item->game_mode_id]['name'] = $item->name;
 
                 if ($item->game_mode_id === 2) {
-                    $this->multiplayer = view('frontend.createGame.multiplayer-form', ['metas' => $item->metas])->toHtml();
+                    $this->multiplayer = view('frontend.createGame.multiplayer-form', ['metas' => $item->metas ?? []])->toHtml();
                 }
             });
 
@@ -209,6 +225,8 @@ class CreateGame extends Component
                 }
                 $this->linkables[$i] = (bool)$item->is_link;
             });
+
+            $this->imagePresentation = $this->customGame->image;
         }
     }
 

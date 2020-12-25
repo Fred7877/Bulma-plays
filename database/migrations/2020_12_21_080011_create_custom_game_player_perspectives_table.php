@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomGameGamePlayerPerspectivesTable extends Migration
+class CreateCustomGamePlayerPerspectivesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCustomGameGamePlayerPerspectivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('custom_game_game_player_perspectives', function (Blueprint $table) {
+        Schema::create('custom_game_player_perspectives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('custom_game_id')->constrained();
-            $table->foreignId('game_player_perspective_id')->constrained();
+            $table->foreignId('player_perspective_id')->constrained();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCustomGameGamePlayerPerspectivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('custom_game_game_player_perspectives');
+        Schema::dropIfExists('custom_game_player_perspectives');
     }
 }
