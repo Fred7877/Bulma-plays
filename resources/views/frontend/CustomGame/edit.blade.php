@@ -1,7 +1,7 @@
-@extends('frontend.createGame.main')
+@extends('frontend.CustomGame.main')
 
 @section('content')
-    <livewire:create-game
+    <livewire:custom-game
         :platforms="$platforms"
         :genres="$genres"
         :gameModes="$gameModes"

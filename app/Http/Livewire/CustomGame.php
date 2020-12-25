@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class CreateGame extends Component
+class CustomGame extends Component
 {
     use WithFileUploads;
+
+    const SYNOPSIS_MAX_LENGTH = 500;
 
     public $imagePresentation;
 
@@ -27,8 +29,13 @@ class CreateGame extends Component
     public $multiplayer;
 
     public $title;
+    public $synopsis;
+    public $numCharSynopsis = 0;
+    public $classNumCharSynopsis = 'has-text-grey';
     public $newLinks = [];
     public $newLinkValues = [];
+    public $newScreenshotValues = [];
+    public $newScreenshots = [];
 
     public $newProductors = [];
     public $newProductorValues = [];
@@ -38,6 +45,8 @@ class CreateGame extends Component
     public $actionMethod;
 
     public $metas = [];
+
+    public $screenshots = [];
 
     protected $listeners = [
         'selectedDateRelease',
@@ -54,13 +63,25 @@ class CreateGame extends Component
         'linkable',
     ];
 
-    public function save()
+    public function updatedSynopsis()
     {
-        $this->validate([
-            'photo' => 'image|max:1024', // 1MB Max
-        ]);
+        $synopsisLength = strlen($this->synopsis);
+        $this->numCharSynopsis = $synopsisLength;
 
-        $this->photo->store('photos');
+        if ($synopsisLength >= self::SYNOPSIS_MAX_LENGTH) {
+            $this->synopsis = substr($this->synopsis, 0, self::SYNOPSIS_MAX_LENGTH);
+            $this->numCharSynopsis = self::SYNOPSIS_MAX_LENGTH;
+        }
+
+        if ($this->numCharSynopsis > 150 && $this->numCharSynopsis < 300) {
+            $this->classNumCharSynopsis = 'has-text-success';
+        } else if ($this->numCharSynopsis > 300 && $this->numCharSynopsis < 425) {
+            $this->classNumCharSynopsis = 'has-text-warning';
+        } else if ($this->numCharSynopsis > 425) {
+            $this->classNumCharSynopsis = 'has-text-danger';
+        } else {
+            $this->classNumCharSynopsis = 'has-text-grey';
+        }
     }
 
     public function linkable($key)
@@ -79,6 +100,16 @@ class CreateGame extends Component
         if (isset($this->newProductorValues[$key])) {
             $this->newProductorValues[$key - 1];
         }
+    }
+
+    public function addScreenshot()
+    {
+        $key = array_key_last($this->newScreenshots) + 1;
+        $this->newScreenshots[$key] = $key;
+        if (isset($this->newScreenshotValues[$key])) {
+            $this->newScreenshotValues[$key - 1];
+        }
+
     }
 
     public function removeProductor($key)
@@ -100,6 +131,12 @@ class CreateGame extends Component
     {
         unset($this->newLinks[$key]);
         unset($this->newLinkValues[$key]);
+    }
+
+    public function removeScreenshot($key)
+    {
+        unset($this->newScreenshots[$key]);
+        unset($this->newScreenshotValues[$key]);
     }
 
     /**
@@ -157,7 +194,7 @@ class CreateGame extends Component
     {
         $this->gameModesSelected[$gameMode] = $this->gameModes->where('id', $gameMode)->pluck('name')->first();
         if ($gameMode === '2') {
-            $this->multiplayer = view('frontend.createGame.multiplayer-form', ['metas' => []])->toHtml();
+            $this->multiplayer = view('frontend.CustomGame.multiplayer-form', ['metas' => []])->toHtml();
         }
     }
 
@@ -207,18 +244,18 @@ class CreateGame extends Component
                 $this->gameModesSelected[$item->game_mode_id]['name'] = $item->name;
 
                 if ($item->game_mode_id === 2) {
-                    $this->multiplayer = view('frontend.createGame.multiplayer-form', ['metas' => $item->metas ?? []])->toHtml();
+                    $this->multiplayer = view('frontend.CustomGame.multiplayer-form', ['metas' => $item->metas ?? []])->toHtml();
                 }
             });
 
-            $this->customGame->customLinks->each(function ($item ,$i) {
+            $this->customGame->customLinks->each(function ($item, $i) {
                 $this->newLinkValues[$i]['value'] = $item->url;
                 if ($i > 0) {
                     $this->newLinks[$i]['value'] = $item->url;
                 }
             });
 
-            $this->customGame->productors->each(function ($item ,$i) {
+            $this->customGame->productors->each(function ($item, $i) {
                 $this->newProductorValues[$i]['value'] = $item->value;
                 if ($i > 0) {
                     $this->newProductors[$i]['value'] = $item->url;
@@ -232,6 +269,6 @@ class CreateGame extends Component
 
     public function render()
     {
-        return view('livewire.create-game');
+        return view('livewire.custom-game');
     }
 }

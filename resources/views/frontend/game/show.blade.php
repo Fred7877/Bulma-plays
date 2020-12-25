@@ -200,7 +200,7 @@
             </div>
         </div>
         @if (isset($game['screenshots']))
-            <div class="block has-background-dark p-4 rounded">
+            <div class="box has-background-dark p-4">
                 <div class="owl-carousel owl-theme" id="carousel-screenshot">
                     @foreach($game['screenshots'] as $screenshot)
                         @if (isset($screenshot['url']))

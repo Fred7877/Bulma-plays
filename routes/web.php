@@ -6,8 +6,6 @@ use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
 use App\Http\Controllers\backend\UserController;
-use App\Http\Controllers\frontend\CreateGameController;
-use App\Http\Controllers\frontend\UserController as UserFront;
 use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
 use App\Http\Controllers\frontend\HomeController;

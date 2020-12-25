@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\Theme;
 use Illuminate\Support\Facades\Auth;
 
-class CreateGameController extends Controller
+class CustomGameController extends Controller
 {
     const PLATFORM_SLUG_WINDOWS = 'win';
     const PLATFORM_SLUG_LINUX = 'linux';
@@ -28,9 +28,7 @@ class CreateGameController extends Controller
      */
     public function index()
     {
-
-
-        return view('frontend.createGame.index', [
+        return view('frontend.CustomGame.index', [
             'platforms' => $this->getPopularPlatforms(),
             'genres' => Genre::all(),
             'gameModes' => GameMode::all(),
@@ -130,7 +128,7 @@ class CreateGameController extends Controller
      */
     public function edit($id)
     {
-        return view('frontend.createGame.edit',
+        return view('frontend.CustomGame.edit',
             [
                 'customGame' =>
                     CustomGame::with(['genres', 'platforms', 'themes', 'gameModes', 'customLinks', 'productors'])

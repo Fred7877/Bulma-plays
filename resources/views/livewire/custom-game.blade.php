@@ -17,7 +17,8 @@
                                 <li>
                                     <label class="label">Titre</label>
                                     <div class="control">
-                                        <input class="input is-small" type="text" name="title" wire:model="title">
+                                        <input class="input is-small" type="text" name="title" wire:model="title"
+                                               autocomplete="off">
                                     </div>
                                 </li>
                                 <li class="mt-4">
@@ -50,7 +51,8 @@
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Date première version</label>
-                                    <input class="input is-small" id="datepicker" name="date_release">
+                                    <input class="input is-small" id="datepicker" name="date_release"
+                                           autocomplete="off">
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Themes</label>
@@ -112,7 +114,7 @@
                                                    name="links[]">
                                         </div>
                                         <div class="column is-1">
-                                            @if (count($newLinks) == 0)
+                                            @if (isset($newLinkValues[0]))
                                                 <span class="icon has-text-info is-clickable"
                                                       wire:click="addLink">
                                              <i class="fas fa-plus-circle"></i>
@@ -121,7 +123,7 @@
                                         </div>
                                     </div>
                                     @foreach($newLinks as $k => $link)
-                                        @include('frontend.createGame.add-links', ['position' => $k])
+                                        @include('frontend.CustomGame.add-links', ['position' => $k])
                                     @endforeach
                                 </li>
                                 <li class="mt-4">
@@ -142,7 +144,7 @@
                                             </div>
                                         </div>
                                         <div class="column is-1">
-                                            @if (count($newProductors) == 0)
+                                            @if (isset($newProductorValues[0]))
                                                 <span class="icon has-text-info is-clickable"
                                                       wire:click="addProductor">
                                               <i class="fas fa-plus-circle"></i>
@@ -151,16 +153,70 @@
                                         </div>
                                     </div>
                                     @foreach($newProductors as $k => $productor)
-                                        @include('frontend.createGame.add-productors', ['position' => $k])
+                                        @include('frontend.CustomGame.add-productors', ['position' => $k])
                                     @endforeach
                                 </li>
-                                <li>
+
+                                <li class="mt-4">
+                                    <label class="label" for="synopsis">Synopsis <span
+                                            class="is-size-7 {{ $classNumCharSynopsis }}">({{ $numCharSynopsis }}/500)</span></label>
+                                    <textarea class="textarea" name="synopsis" id="" cols="30" rows="5"
+                                              wire:model="synopsis"></textarea>
+                                </li>
+                                <li class="mt-4">
+                                    <label class="label">Screenshots</label>
+                                    <div class="columns is-gapless mb-1">
+                                        <div class="column is-10">
+                                            <div class="file has-name is-small">
+                                                <label class="file-label">
+                                                    <input class="file-input" type="file"
+                                                           wire:model="newScreenshotValues.0.value"
+                                                           name="screenshots[0]">
+                                                    <span class="file-cta">
+                                                    <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                      </span>
+                                                      <span class="file-label">
+                                                        Choose a file…
+                                                      </span>
+                                                    </span>
+                                                    <span class="file-name">
+                                                        @if(isset($newScreenshotValues[0]))
+                                                            @if(!is_string($newScreenshotValues[0]['value']))
+                                                                {{ $newScreenshotValues[0]['value']->getClientOriginalName() }}
+                                                            @else
+                                                                {{ $newScreenshotValues[0]['value'] }}
+                                                            @endif
+                                                        @endif
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="column is-1">
+                                            @if (isset($newScreenshotValues[0]))
+                                                <span class="icon has-text-info is-clickable"
+                                                      wire:click="addScreenshot">
+                                                     <i class="fas fa-plus-circle"></i>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    @foreach($newScreenshots as $k => $screenshot)
+                                        @include('frontend.CustomGame.add-screenshots', ['position' => $k])
+                                    @endforeach
+
+                                </li>
+
+                                <li class="mt-4">
                                     <button type="submit" class="button is-link is-light">Save</button>
                                     <div class="is-pulled-right pt-5">
                                         <label for="published"> Publier</label>
                                         <input class="checkbox" type="checkbox" name="published">
                                     </div>
                                 </li>
+
                             </ul>
                         </aside>
                     </div>
@@ -254,16 +310,50 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if($synopsis)
+                            <hr class="dropdown-divider">
+
+                            <div class="block">
+                                <div class="content">
+                                    <b>Synopsis :</b>
+                                    <p>
+                                        {{ $synopsis }}
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+                        @if (isset($newScreenshotValues[0]))
+                            <div class="box has-background-dark p-4">
+                                <div class="owl-carousel owl-theme" id="carousel-screenshot">
+                                    @foreach($newScreenshotValues as $screenshot)
+                                        <a id="single_image-{{ $loop->index }}"
+                                           href="{{ $screenshot['value']->temporaryUrl()  }}"></a>
+                                        <img
+                                            src="
+                                        @if($screenshot['value'])
+                                            @if(!is_string($screenshot['value']))
+                                            {{ $screenshot['value']->temporaryUrl() }}
+                                            @else
+                                            {{ asset($screenshot['value']) }}
+                                            @endif
+                                            @endif
+                                                ">
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
 @push('js')
     <script>
         $(document).ready(() => {
+
             $('select').select2();
 
             $.fn.datepicker.languages['fr'] = {format: 'dd/mm/yyyy'};
