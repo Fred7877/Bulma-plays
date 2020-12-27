@@ -13,3 +13,4 @@ yarn-error.log
 /storage/app/public/custom_game_images
 /storage/app/livewire-tmp
 /public/custom_game_images
+public/custom_game_screenshot

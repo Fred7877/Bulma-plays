@@ -2,9 +2,9 @@
     <div class="column is-10">
         <div class="file has-name is-small">
             <label class="file-label">
-
                 <input class="file-input" type="file" wire:model="newScreenshotValues.{{$position}}.value"
-                       name="screenshots[0]">
+                       name="screenshots[{{$position}}]" value="{{ $newScreenshotValues[$position]['value'] ?? '' }}">
+                <input type="hidden"  value="{{ $newScreenshotValues[$position]['value'] ?? '' }}" name="screenshotsHidden[{{ $position }}]" >
                 <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -27,14 +27,14 @@
     </div>
 
     <div class="column is-1">
-
-        @if (isset($newScreenshotValues[$position]))
+        @if ($newScreenshotValues[$position]['value'] != '' && count($newScreenshotValues) == $position + 1)
             <span class="icon is-small ml-2 has-text-info is-clickable" wire:click="addScreenshot">
           <i class="fas fa-plus-circle"></i>
         </span>
+        @endif
             <span class="icon is-small ml-2 has-text-danger is-clickable" wire:click="removeScreenshot({{$position}})">
           <i class="fas fa-minus-circle"></i>
         </span>
-        @endif
+
     </div>
 </div>

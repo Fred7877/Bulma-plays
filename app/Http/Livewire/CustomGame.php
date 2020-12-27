@@ -32,12 +32,8 @@ class CustomGame extends Component
     public $synopsis;
     public $numCharSynopsis = 0;
     public $classNumCharSynopsis = 'has-text-grey';
-    public $newLinks = [];
     public $newLinkValues = [];
     public $newScreenshotValues = [];
-    public $newScreenshots = [];
-
-    public $newProductors = [];
     public $newProductorValues = [];
 
     public $linkables = [];
@@ -95,48 +91,56 @@ class CustomGame extends Component
 
     public function addProductor()
     {
-        $key = array_key_last($this->newProductors) + 1;
-        $this->newProductors[$key] = $key;
-        if (isset($this->newProductorValues[$key])) {
-            $this->newProductorValues[$key - 1];
-        }
-    }
-
-    public function addScreenshot()
-    {
-        $key = array_key_last($this->newScreenshots) + 1;
-        $this->newScreenshots[$key] = $key;
-        if (isset($this->newScreenshotValues[$key])) {
-            $this->newScreenshotValues[$key - 1];
-        }
-
+        $key = count($this->newProductorValues);
+        $this->newProductorValues[$key]['value'] = '';
     }
 
     public function removeProductor($key)
     {
-        unset($this->newProductors[$key]);
         unset($this->newProductorValues[$key]);
+
+        // Keep the productors linkables
+        $linkables = [];
+        foreach ($this->newProductorValues as $k => $productor) {
+            if (key_exists($k, $this->linkables)) {
+                $linkables[$k] = $productor['value'];
+            }
+        }
+
+        // Reindex the array newProductorValues and reset linkables
+        $this->newProductorValues = array_values($this->newProductorValues);
+        $this->linkables = [];
+
+        // Restore the productors linkables
+        foreach ($this->newProductorValues as $k => $productor) {
+            if (in_array($productor['value'], $linkables)) {
+                $this->linkables[$k] = true;
+            }
+        }
     }
 
     public function addLink()
     {
-        $key = array_key_last($this->newLinks) + 1;
-        $this->newLinks[$key] = $key;
-        if (isset($this->newLinkValues[$key])) {
-            $this->newLinkValues[$key - 1];
-        }
+        $key = count($this->newLinkValues);
+        $this->newLinkValues[$key]['value'] = '';
     }
 
     public function removeLink($key)
     {
-        unset($this->newLinks[$key]);
         unset($this->newLinkValues[$key]);
+        $this->newLinkValues = array_values($this->newLinkValues);
+    }
+
+    public function addScreenshot()
+    {
+        $key = count($this->newScreenshotValues);
+        $this->newScreenshotValues[$key]['value'] = '';
     }
 
     public function removeScreenshot($key)
     {
-        unset($this->newScreenshots[$key]);
         unset($this->newScreenshotValues[$key]);
+        $this->newScreenshotValues = array_values($this->newScreenshotValues);
     }
 
     /**
@@ -217,6 +221,9 @@ class CustomGame extends Component
         $this->dateRelease = $dateRelease;
     }
 
+    /**
+     * Init.
+     */
     public function mount()
     {
         $this->actionForm = route('custom-game.store');
@@ -258,12 +265,21 @@ class CustomGame extends Component
             $this->customGame->productors->each(function ($item, $i) {
                 $this->newProductorValues[$i]['value'] = $item->value;
                 if ($i > 0) {
-                    $this->newProductors[$i]['value'] = $item->url;
+                    $this->newProductors[$i]['value'] = $item->value;
                 }
                 $this->linkables[$i] = (bool)$item->is_link;
             });
 
             $this->imagePresentation = $this->customGame->image;
+
+            $this->synopsis = $this->customGame->synopsis;
+
+            $this->customGame->screenshots->each(function ($item, $i) {
+                $this->newScreenshotValues[$i]['value'] = $item->path;
+                if ($i > 0) {
+                    $this->newScreenshots[$i]['value'] = $item->path;
+                }
+            });
         }
     }
 

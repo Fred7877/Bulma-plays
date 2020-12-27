@@ -5,7 +5,7 @@
 
 <div class="column is-1">
 
-    @if (count($newLinks) == $position && isset($newLinkValues[$position]))
+    @if ($newLinkValues[$position]['value'] != '' && count($newLinkValues) == $position + 1)
         <span class="icon is-small ml-2 has-text-info is-clickable" wire:click="addLink">
           <i class="fas fa-plus-circle"></i>
         </span>
