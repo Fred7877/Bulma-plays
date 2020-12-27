@@ -27,6 +27,7 @@
                                     <div class="file has-name is-small">
                                         <label class="file-label">
                                             <input class="file-input" type="file" wire:model="imagePresentation"
+                                                   value="{{ $imagePresentation }}"
                                                    name="imagePresentation">
                                             <span class="file-cta">
                                               <span class="file-icon">
@@ -111,19 +112,27 @@
                                     <div class="columns is-gapless mb-1">
                                         <div class="column is-10">
                                             <input class="input is-small" type="text" wire:model="newLinkValues.0.value"
-                                                   name="links[]">
+                                                   name="links[0]">
                                         </div>
                                         <div class="column is-1">
-                                            @if (isset($newLinkValues[0]))
-                                                <span class="icon has-text-info is-clickable"
+                                            @if (isset($newLinkValues[0]) && $newLinkValues[0]['value'] != '' && count($newLinkValues) == 1)
+                                                <span class="icon is-small ml-2 has-text-info is-clickable"
                                                       wire:click="addLink">
                                              <i class="fas fa-plus-circle"></i>
                                          </span>
                                             @endif
+                                                @if (isset($newLinkValues[0]))
+                                                    <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                          wire:click="removeLink(0)">
+                                                  <i class="fas fa-minus-circle"></i>
+                                                </span>
+                                                @endif
                                         </div>
                                     </div>
-                                    @foreach($newLinks as $k => $link)
+                                    @foreach($newLinkValues as $k => $link)
+                                        @if($k !== 0)
                                         @include('frontend.CustomGame.add-links', ['position' => $k])
+                                        @endif
                                     @endforeach
                                 </li>
                                 <li class="mt-4">
@@ -144,16 +153,24 @@
                                             </div>
                                         </div>
                                         <div class="column is-1">
-                                            @if (isset($newProductorValues[0]))
-                                                <span class="icon has-text-info is-clickable"
+                                            @if (isset($newProductorValues[0]) && $newProductorValues[0]['value'] != '' && count($newProductorValues) == 1)
+                                                <span class="icon is-small ml-2 has-text-info is-clickable"
                                                       wire:click="addProductor">
                                               <i class="fas fa-plus-circle"></i>
                                             </span>
                                             @endif
+                                                @if (isset($newProductorValues[0]))
+                                                    <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                          wire:click="removeProductor(0)">
+                                                  <i class="fas fa-minus-circle"></i>
+                                                </span>
+                                                @endif
                                         </div>
                                     </div>
-                                    @foreach($newProductors as $k => $productor)
+                                    @foreach($newProductorValues as $k => $productor)
+                                        @if($k !== 0)
                                         @include('frontend.CustomGame.add-productors', ['position' => $k])
+                                        @endif
                                     @endforeach
                                 </li>
 
@@ -171,7 +188,11 @@
                                                 <label class="file-label">
                                                     <input class="file-input" type="file"
                                                            wire:model="newScreenshotValues.0.value"
-                                                           name="screenshots[0]">
+                                                           name="screenshots[0]"
+                                                           value="{{ $newScreenshotValues[0]['value'] ?? '' }}">
+                                                    <input type="hidden"
+                                                           value="{{ $newScreenshotValues[0]['value'] ?? '' }}"
+                                                           name="screenshotsHidden[0]">
                                                     <span class="file-cta">
                                                     <span class="file-icon">
                                                         <i class="fas fa-upload"></i>
@@ -194,17 +215,25 @@
                                         </div>
 
                                         <div class="column is-1">
-                                            @if (isset($newScreenshotValues[0]))
-                                                <span class="icon has-text-info is-clickable"
+                                            @if (isset($newScreenshotValues[0]) && $newScreenshotValues[0]['value'] != '' && count($newScreenshotValues) == 1)
+                                                <span class="icon has-text-info is-small ml-2 is-clickable"
                                                       wire:click="addScreenshot">
                                                      <i class="fas fa-plus-circle"></i>
+                                                </span>
+                                            @endif
+                                            @if (isset($newScreenshotValues[0]))
+                                                <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                      wire:click="removeScreenshot(0)">
+                                                  <i class="fas fa-minus-circle"></i>
                                                 </span>
                                             @endif
                                         </div>
                                     </div>
 
-                                    @foreach($newScreenshots as $k => $screenshot)
+                                    @foreach($newScreenshotValues as $k => $screenshot)
+                                        @if($k !== 0)
                                         @include('frontend.CustomGame.add-screenshots', ['position' => $k])
+                                        @endif
                                     @endforeach
 
                                 </li>
@@ -310,7 +339,6 @@
                                 </div>
                             </div>
                         </div>
-
                         @if($synopsis)
                             <hr class="dropdown-divider">
 
@@ -328,7 +356,13 @@
                                 <div class="owl-carousel owl-theme" id="carousel-screenshot">
                                     @foreach($newScreenshotValues as $screenshot)
                                         <a id="single_image-{{ $loop->index }}"
-                                           href="{{ $screenshot['value']->temporaryUrl()  }}"></a>
+                                           href=" @if($screenshot['value'])
+                                           @if(!is_string($screenshot['value']))
+                                           {{ $screenshot['value']->temporaryUrl() }}
+                                           @else
+                                           {{ asset($screenshot['value']) }}
+                                           @endif
+                                           @endif"></a>
                                         <img
                                             src="
                                         @if($screenshot['value'])
