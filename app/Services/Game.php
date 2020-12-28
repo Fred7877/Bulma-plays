@@ -82,7 +82,11 @@ class Game
 
             if (isset($game['involved_companies'])) {
                 $game['compagnies'] = collect($game['involved_companies'])->map(function ($item) {
-                    return Company::find($item['company']);
+                    try {
+                        return Company::find($item['company']);
+                    } catch (\Exception $e) {
+                        return null;
+                    }
                 });
             }
 
