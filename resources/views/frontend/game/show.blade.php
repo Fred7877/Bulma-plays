@@ -144,19 +144,23 @@
 
                         <div class="columns is-mobile">
                             <div class="column">
-                                @if(isset($game['compagnies']))
+                                @if(isset($game['compagnies']) && $game['compagnies'] !== null)
                                     <div class="mt-2">
                                         <b>{{ Str::ucFirst(__('frontend.produced_by')) }} :</b>
                                         <ul>
                                             @foreach($game['compagnies'] as $compagny)
-                                                <li class="text-gray-900 leading-none">
-                                                    <a href="{{ $compagny->url }}" target="_blank">
-                                                        - {{ $compagny->name }}
-                                                    </a>
-                                                    <span class="icon is-small has-text-info">
+                                                @if ($compagny)
+                                                    <li class="text-gray-900 leading-none">
+                                                        <a href="{{ $compagny->url }}" target="_blank">
+                                                            - {{ $compagny->name }}
+                                                        </a>
+                                                        <span class="icon is-small has-text-info">
                                              <i class="fas fa-external-link-alt "></i>
                                         </span>
-                                                </li>
+                                                    </li>
+                                                @else
+                                                    <li>-</li>
+                                                @endif
                                             @endforeach
                                         </ul>
                                     </div>
