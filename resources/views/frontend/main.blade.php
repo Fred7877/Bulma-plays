@@ -13,32 +13,27 @@
         rel='stylesheet' type='text/css'>
 
     <style>
-        p, span {
+
+        p,span.icon {
             font-size: 14px;
         }
-
         body {
             background: #222939;
             font-family: Roboto, serif;
             padding-bottom: 35px;
         }
-
         .img-content {
             background: white;
         }
-
         label {
             color: #3273dc;
         }
-
         .block-filters {
             background: #323a45;
         }
-
         .pointer {
             cursor: pointer;
         }
-
         .loader-wrapper {
             transition: opacity .3s;
             display: flex;
@@ -46,26 +41,21 @@
             align-items: center;
             border-radius: 6px;
         }
-
         .loader {
             height: 80px;
             width: 80px;
         }
-
         .is-active {
             opacity: 1;
             z-index: 1;
         }
-
         .word-break {
             word-break: break-all;
         }
-
         .has-display-none {
             display: none;
             visibility: hidden;
         }
-
         .cookie-consent {
             position: fixed;
             bottom: 0;
@@ -75,12 +65,7 @@
             padding: 5px;
             font-weight: bold;
         }
-
     </style>
-
-    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/fancyBox-3.5.7.min.css') }}">
 
     @stack('css')
 

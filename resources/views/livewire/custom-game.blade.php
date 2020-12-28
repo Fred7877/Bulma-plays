@@ -1,4 +1,10 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
+    @if(Session::has('message'))
+        <input type="hidden" name="message">
+    @endif
+
+    <input type="hidden" name="date_release_custom" value="{{ $dateRelease }}">
+
     <form method="post" action="{{ $actionForm }}" enctype="multipart/form-data">
         @if($actionMethod === 'put')
             @method('put')
@@ -52,13 +58,14 @@
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Date première version</label>
-                                    <input class="input is-small" id="datepicker" name="date_release"
+                                    <input class="input is-small" id="datepicker" name="date_release" value="{{ $dateRelease ?? '' }}"
                                            autocomplete="off">
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Themes</label>
                                     <div class="control" wire:ignore>
-                                        <select name="themes[]" multiple="multiple" id="themes" style="width: 100%">
+                                        <select name="themes[]" multiple="multiple" id="themes" style="width: 100%"
+                                                class="selector">
                                             <option disabled="disabled">Choose genres</option>
                                             @foreach($themes as $theme)
                                                 <option value="{{ $theme->id }}"
@@ -70,7 +77,8 @@
                                 <li class="mt-4">
                                     <label class="label">Genre</label>
                                     <div class="control" wire:ignore>
-                                        <select name="genres[]" multiple="multiple" id="genres" style="width: 100%">
+                                        <select name="genres[]" multiple="multiple" id="genres" style="width: 100%"
+                                                class="selector">
                                             <option disabled="disabled">Choose genres</option>
                                             @foreach($genres as $genre)
                                                 <option value="{{ $genre->id }}"
@@ -83,7 +91,7 @@
                                     <label class="label">Platforme</label>
                                     <div class="control" wire:ignore>
                                         <select name="platforms[]" multiple="multiple" id="platforms"
-                                                style="width: 100%">
+                                                style="width: 100%" class="selector">
                                             <option disabled="disabled">Choose platforms</option>
                                             @foreach($platforms as $platformSelection)
                                                 <option
@@ -97,7 +105,7 @@
                                     <label class="label">Game mode</label>
                                     <div class="control" wire:ignore>
                                         <select name="gameModes[]" multiple="multiple" id="gameModes"
-                                                style="width: 100%">
+                                                style="width: 100%" class="selector">
                                             <option disabled="disabled">Choose game modes</option>
                                             @foreach($gameModes as $gameMode)
                                                 <option
@@ -121,17 +129,17 @@
                                              <i class="fas fa-plus-circle"></i>
                                          </span>
                                             @endif
-                                                @if (isset($newLinkValues[0]))
-                                                    <span class="icon is-small ml-2 has-text-danger is-clickable"
-                                                          wire:click="removeLink(0)">
+                                            @if (isset($newLinkValues[0]))
+                                                <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                      wire:click="removeLink(0)">
                                                   <i class="fas fa-minus-circle"></i>
                                                 </span>
-                                                @endif
+                                            @endif
                                         </div>
                                     </div>
                                     @foreach($newLinkValues as $k => $link)
                                         @if($k !== 0)
-                                        @include('frontend.CustomGame.add-links', ['position' => $k])
+                                            @include('frontend.CustomGame.add-links', ['position' => $k])
                                         @endif
                                     @endforeach
                                 </li>
@@ -159,17 +167,17 @@
                                               <i class="fas fa-plus-circle"></i>
                                             </span>
                                             @endif
-                                                @if (isset($newProductorValues[0]))
-                                                    <span class="icon is-small ml-2 has-text-danger is-clickable"
-                                                          wire:click="removeProductor(0)">
+                                            @if (isset($newProductorValues[0]))
+                                                <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                      wire:click="removeProductor(0)">
                                                   <i class="fas fa-minus-circle"></i>
                                                 </span>
-                                                @endif
+                                            @endif
                                         </div>
                                     </div>
                                     @foreach($newProductorValues as $k => $productor)
                                         @if($k !== 0)
-                                        @include('frontend.CustomGame.add-productors', ['position' => $k])
+                                            @include('frontend.CustomGame.add-productors', ['position' => $k])
                                         @endif
                                     @endforeach
                                 </li>
@@ -232,7 +240,7 @@
 
                                     @foreach($newScreenshotValues as $k => $screenshot)
                                         @if($k !== 0)
-                                        @include('frontend.CustomGame.add-screenshots', ['position' => $k])
+                                            @include('frontend.CustomGame.add-screenshots', ['position' => $k])
                                         @endif
                                     @endforeach
 
@@ -339,9 +347,9 @@
                                 </div>
                             </div>
                         </div>
+
                         @if($synopsis)
                             <hr class="dropdown-divider">
-
                             <div class="block">
                                 <div class="content">
                                     <b>Synopsis :</b>
@@ -351,91 +359,29 @@
                                 </div>
                             </div>
                         @endif
-                        @if (isset($newScreenshotValues[0]))
-                            <div class="box has-background-dark p-4">
-                                <div class="owl-carousel owl-theme" id="carousel-screenshot">
-                                    @foreach($newScreenshotValues as $screenshot)
-                                        <a id="single_image-{{ $loop->index }}"
-                                           href=" @if($screenshot['value'])
-                                           @if(!is_string($screenshot['value']))
-                                           {{ $screenshot['value']->temporaryUrl() }}
-                                           @else
-                                           {{ asset($screenshot['value']) }}
-                                           @endif
-                                           @endif"></a>
-                                        <img
-                                            src="
-                                        @if($screenshot['value'])
-                                            @if(!is_string($screenshot['value']))
-                                            {{ $screenshot['value']->temporaryUrl() }}
-                                            @else
-                                            {{ asset($screenshot['value']) }}
-                                            @endif
-                                            @endif
-                                                ">
+                        <div
+                            class="is-widescreen box has-background-dark p-4" style="max-width: 960px"
+                        >
+                            <div class="owl-carousel owl-theme" id="carousel-screenshot" wire:ignore>
+                                @if(isset($screenshotValues[0]))
+                                    @foreach($screenshotValues as $s => $screenshot)
+                                        <a id='single_image-{{ $s }}'
+                                           href='{{ asset($screenshot['value']) }}'>
+                                            <img src="{{ asset($screenshot['value']) }}">
+                                            <input type="hidden" name="screenshotsHidden[{{$s}}]" value="{{ asset($screenshot['value']) }}">
+
                                         </a>
                                     @endforeach
-                                </div>
+                                @endif
                             </div>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
 @push('js')
-    <script>
-        $(document).ready(() => {
-
-            $('select').select2();
-
-            $.fn.datepicker.languages['fr'] = {format: 'dd/mm/yyyy'};
-            $.fn.datepicker.languages['en'] = {format: 'mm/dd/yyyy'};
-
-            let date = null;
-            @if ($dateRelease)
-                date = new Date({{ Str::of($dateRelease)->split('/-/')->get(0) }}, {{ Str::of($dateRelease)->split('/-/')->get(1)-1}}, {{ Str::of($dateRelease)->split('/-/')->get(2)}});
-            @endif
-
-            $('#datepicker').datepicker(
-                {
-                    language: '{{ App::getLocale() }}',
-                    autoHide: true,
-                    autoPick: @if ($dateRelease) true @else false @endif,
-                    date: date
-                }
-            );
-        });
-
-        // Select
-        $(document).on('select2:select', function (e) {
-            if (e.target.id === 'platforms') {
-                Livewire.emit('selectedPlatform', e.params.data.id);
-            } else if (e.target.id === 'genres') {
-                Livewire.emit('selectedGenre', e.params.data.id);
-            } else if (e.target.id === 'gameModes') {
-                Livewire.emit('selectedGameMode', e.params.data.id);
-            } else if (e.target.id === 'themes') {
-                Livewire.emit('selectedTheme', e.params.data.id);
-            }
-        });
-
-        // Unselect
-        $(document).on('select2:unselect', function (e) {
-            if (e.target.id === 'platforms') {
-                Livewire.emit('unSelectedPlatform', e.params.data.id);
-            } else if (e.target.id === 'genres') {
-                Livewire.emit('unSelectedGenre', e.params.data.id);
-            } else if (e.target.id === 'gameModes') {
-                Livewire.emit('unSelectedGameMode', e.params.data.id);
-            } else if (e.target.id === 'themes') {
-                Livewire.emit('unSelectedTheme', e.params.data.id);
-            }
-        });
-
-        $(document).on('change', '#datepicker', function (e) {
-            Livewire.emit('selectedDateRelease', e.target.value);
-        });
-    </script>
+    <script src="/js/custom-game.js"></script>
 @endpush

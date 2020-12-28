@@ -4,7 +4,6 @@ use App\Http\Controllers\backend\CommentController;
 use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
-use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\CustomGameController;
 use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
@@ -50,7 +49,6 @@ Route::get('/backend', function () {
 });
 
 Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group( function () {
-    Route::resource('users', UserController::class);
     Route::resource('comments', CommentController::class);
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
 });

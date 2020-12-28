@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\RelationShips\CommentRelationShips;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Comment extends Model
+class PlayerPerspective extends Model
 {
-    use HasFactory, CommentRelationShips;
+    use HasFactory;
 
     protected $guarded = [];
 }

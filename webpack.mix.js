@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/menu-user.js', 'public/js')
     .js('resources/js/ziggy.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    .js('resources/js/custom-game.js', 'public/js')
     .autoload({
         jquery: ['$', 'jQuery', 'window.jQuery']
     })

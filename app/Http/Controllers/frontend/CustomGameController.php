@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -89,10 +90,10 @@ class CustomGameController extends Controller
             );
         });
 
-        collect($request->file('screenshots'))->each(function ($screenshot) use ($request, $title) {
+        collect($request->file('screenshots'))->each(function ($screenshot) use ($customGame, $title) {
             $pathScreenshot = $screenshot->storeAs('custom_game_screenshot/' . Str::slug($title), $screenshot->getClientOriginalName(), 'public');
             CustomGameScreenshot::firstOrCreate([
-                    'custom_game_id' => 1,
+                    'custom_game_id' => $customGame->id,
                     'path' => $pathScreenshot,
                 ]
             );
@@ -120,6 +121,8 @@ class CustomGameController extends Controller
         $customGame->themes()->sync($themes);
         $customGame->gameModes()->sync($gameModes);
 
+        Session::flash('message', 'Travail sauvegardé !');
+
         return redirect(route('custom-game.edit', [$customGame]));
     }
 
@@ -142,6 +145,7 @@ class CustomGameController extends Controller
      */
     public function edit(CustomGame $customGame)
     {
+
         return view('frontend.CustomGame.edit',
             [
                 'customGame' =>
@@ -163,6 +167,7 @@ class CustomGameController extends Controller
      */
     public function update(Request $request, CustomGame $customGame)
     {
+
         $genres = isset($request->get('genres')[0]) && count($request->get('genres')) > 1 ?
             Genre::whereIn('id', $request->get('genres'))->pluck('id') : $request->get('genres');
         $platforms = isset($request->get('platforms')[0]) && count($request->get('platforms')) > 1 ?
@@ -209,18 +214,21 @@ class CustomGameController extends Controller
             );
         });
 
-        $screenshotsCustoGame = CustomGameScreenshot::where('custom_game_id', $customGame->id)->get();
+
+       $screenshotsCustoGame = CustomGameScreenshot::where('custom_game_id', $customGame->id)->get();
         $screenshotsCustoGame->each(function ($screenshotCustoGame) use ($request) {
-            if (!in_array($screenshotCustoGame->path, $request->get('screenshotsHidden'))) {
+            if (!in_array(Str::of($screenshotCustoGame->path)->basename(), collect($request->get('screenshotsHidden'))->map(function($item){
+                return Str::of($item)->basename();
+            })->toArray())) {
                 File::delete(public_path($screenshotCustoGame->path));
                 $screenshotCustoGame->delete();
             }
         });
 
-        collect($request->file('screenshots'))->each(function ($screenshot) use ($request, $title) {
+        collect($request->file('screenshots'))->each(function ($screenshot) use ($request, $title, $customGame) {
             $pathScreenshot = $screenshot->storeAs('custom_game_screenshot/' . Str::slug($title), $screenshot->getClientOriginalName(), 'public');
             CustomGameScreenshot::firstOrCreate([
-                    'custom_game_id' => 1,
+                    'custom_game_id' => $customGame->id,
                     'path' => $pathScreenshot,
                 ]
             );
@@ -239,7 +247,9 @@ class CustomGameController extends Controller
         $customGame->themes()->sync($themes);
         $customGame->gameModes()->sync($gameModes);
 
-        return back();
+        Session::flash('message', 'Travail sauvegardé !');
+
+        return redirect(route('custom-game.edit', ['custom_game' => $customGame]));
     }
 
     /**

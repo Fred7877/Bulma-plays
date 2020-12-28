@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -39,6 +40,7 @@ class CustomGame extends Component
     public $linkables = [];
     public $actionForm;
     public $actionMethod;
+    public $screenshotValues = [];
 
     public $metas = [];
 
@@ -131,6 +133,16 @@ class CustomGame extends Component
         $this->newLinkValues = array_values($this->newLinkValues);
     }
 
+    public function updatedNewScreenshotValues()
+    {
+        $this->dispatchBrowserEvent('updatedNewScreenshotValues',
+            [
+                'position' => count($this->newScreenshotValues),
+                'temporaryUrl' => last($this->newScreenshotValues)['value']->temporaryUrl()
+            ]
+        );
+    }
+
     public function addScreenshot()
     {
         $key = count($this->newScreenshotValues);
@@ -140,7 +152,14 @@ class CustomGame extends Component
     public function removeScreenshot($key)
     {
         unset($this->newScreenshotValues[$key]);
+        unset($this->screenshotValues[$key]);
         $this->newScreenshotValues = array_values($this->newScreenshotValues);
+
+        $this->dispatchBrowserEvent('removeScreenshot',
+            [
+                'position' => $key,
+            ]
+        );
     }
 
     /**
@@ -257,16 +276,10 @@ class CustomGame extends Component
 
             $this->customGame->customLinks->each(function ($item, $i) {
                 $this->newLinkValues[$i]['value'] = $item->url;
-                if ($i > 0) {
-                    $this->newLinks[$i]['value'] = $item->url;
-                }
             });
 
             $this->customGame->productors->each(function ($item, $i) {
                 $this->newProductorValues[$i]['value'] = $item->value;
-                if ($i > 0) {
-                    $this->newProductors[$i]['value'] = $item->value;
-                }
                 $this->linkables[$i] = (bool)$item->is_link;
             });
 
@@ -275,10 +288,8 @@ class CustomGame extends Component
             $this->synopsis = $this->customGame->synopsis;
 
             $this->customGame->screenshots->each(function ($item, $i) {
-                $this->newScreenshotValues[$i]['value'] = $item->path;
-                if ($i > 0) {
-                    $this->newScreenshots[$i]['value'] = $item->path;
-                }
+                $this->newScreenshotValues[$i]['value'] = Str::of($item->path)->basename()->__ToString();
+                $this->screenshotValues[$i]['value'] = $item->path;
             });
         }
     }

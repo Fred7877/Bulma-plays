@@ -20,6 +20,8 @@ try {
  */
 
 window.axios = require('axios');
+window.select2 = require('select2');
+window.datepicker = require('@fengyuanchen/datepicker');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -42,3 +44,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 require('bootstrap');
 require('datatables.net-bs4');
 require('datatables.net-buttons-bs4');
+
