@@ -49,8 +49,9 @@
                             @endif
                         </p>
                         <p>
-                            <b>{{ Str::ucFirst(Str::plural(__('frontend.platform'), count($game['platforms']))) }} :</b>
                             @if (isset($game['platforms']))
+                                <b>{{ Str::ucFirst(Str::plural(__('frontend.platform'), count($game['platforms']))) }}
+                                    :</b>
                                 <span class="text-gray-900 leading-none">
                                     {{ collect($game['platforms'])->implode('name', ', ') }}
                                 </span>
