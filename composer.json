@@ -27,6 +27,7 @@
         "spatie/laravel-cookie-consent": "^2.12",
         "spatie/laravel-permission": "^3.18",
         "spatie/laravel-sitemap": "^5.9",
+        "spatie/laravel-sluggable": "^2.6",
         "tightenco/ziggy": "^1.0",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.15"

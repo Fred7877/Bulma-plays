@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\RelationShips\CustomGameRelationShipsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Moderation extends Model
 {
-    use HasFactory;
+    use HasFactory, CustomGameRelationShipsTrait;
 
     protected $guarded = [];
 }

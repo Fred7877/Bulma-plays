@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\backend\CommentController;
+use App\Http\Controllers\frontend\AjaxController;
 use App\Http\Controllers\frontend\CommentController as FrontendComment;
 use App\Http\Controllers\backend\ModerationController;
-use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\frontend\CustomGameController;
 use App\Http\Controllers\frontend\FilterGamesController;
 use App\Http\Controllers\frontend\GameController;
 use App\Http\Controllers\frontend\HomeController;
@@ -25,7 +26,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 Route::group([
-    'namespace' => 'frontend',
     'prefix' => LaravelLocalization::setLocale()
 ], function () {
     Route::get('/', function () {
@@ -38,14 +38,17 @@ Route::group([
 
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
+
+    Route::resource('custom-game', CustomGameController::class);
 });
+
+
 
 Route::get('/backend', function () {
     return redirect(route('users.index'));
 });
 
 Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group( function () {
-    Route::resource('users', UserController::class);
     Route::resource('comments', CommentController::class);
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
 });
@@ -56,4 +59,8 @@ Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.l
 
 Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
 
+Route::get('get-user', [AjaxController::class, 'getUser'])->name('ajax.get.user');
+Route::get('get-comments-user', [AjaxController::class, 'getCommentsUser'])->name('ajax.user.comments');
+
 Auth::routes();
+

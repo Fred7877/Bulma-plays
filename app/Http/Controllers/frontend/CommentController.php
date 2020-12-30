@@ -3,13 +3,12 @@
 
 namespace App\Http\Controllers\frontend;
 
-
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment as ModelComment;
-use Illuminate\Support\Facades\App;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class CommentController
+class CommentController extends Controller
 {
     public function create(CommentRequest $request)
     {

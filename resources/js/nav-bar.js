@@ -1,12 +1,18 @@
 const Swal = require('sweetalert2');
-import route from 'ziggy';
-import {Ziggy} from './ziggy';
 
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("languages").addEventListener("click", function (e) {
         var element = document.querySelector(".dropdown-languages");
         element.classList.toggle("is-active");
     });
+
+    if (document.body.contains(document.getElementById("nav-user")) ) {
+        document.getElementById("nav-user").addEventListener("click", function (e) {
+            var element = document.querySelector(".dropdown-menu-user");
+            element.classList.toggle("is-active");
+        });
+    }
+
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
     if ($navbarBurgers.length > 0) {
 

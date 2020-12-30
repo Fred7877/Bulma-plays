@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Scheduler extends Model
+class GamePlatform extends Model
 {
     use HasFactory;
 

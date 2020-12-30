@@ -163,6 +163,7 @@
       <path value="$PROJECT_DIR$/vendor/nicmart/tree" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-sitemap" />
       <path value="$PROJECT_DIR$/vendor/spatie/crawler" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-sluggable" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
