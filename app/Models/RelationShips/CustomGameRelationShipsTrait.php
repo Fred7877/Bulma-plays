@@ -4,6 +4,7 @@
 namespace App\Models\RelationShips;
 
 use App\Models\CustomGameScreenshot;
+use App\Models\CustomGameVideo;
 use App\Models\GameMode;
 use App\Models\Genre;
 use App\Models\Link;
@@ -52,5 +53,10 @@ trait CustomGameRelationShipsTrait
     public function screenshots()
     {
         return $this->hasMany(CustomGameScreenshot::class);
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(CustomGameVideo::class);
     }
 }
