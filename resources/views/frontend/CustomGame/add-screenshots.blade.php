@@ -18,14 +18,14 @@
                         @if(!is_string($newScreenshotValues[$position]['value']))
                             {{ $newScreenshotValues[$position]['value']->getClientOriginalName() }}
                         @else
-                            {{ $newScreenshotValues[$position]['value'] }}
+                            {{ basename($newScreenshotValues[$position]['value']) }}
                         @endif
                     @endif
                 </span>
             </label>
         </div>
+        @error('newScreenshotValues.'.$position.'.value') <div class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
     </div>
-
     <div class="column is-1">
         @if ($newScreenshotValues[$position]['value'] != '' && count($newScreenshotValues) == $position + 1)
             <span class="icon is-small ml-2 has-text-info is-clickable" wire:click="addScreenshot">
@@ -35,6 +35,5 @@
             <span class="icon is-small ml-2 has-text-danger is-clickable" wire:click="removeScreenshot({{$position}})">
           <i class="fas fa-minus-circle"></i>
         </span>
-
     </div>
 </div>

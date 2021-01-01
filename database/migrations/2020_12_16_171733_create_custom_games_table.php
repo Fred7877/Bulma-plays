@@ -20,7 +20,7 @@ class CreateCustomGamesTable extends Migration
             $table->string('slug', 120);
             $table->string('image', 255)->nullable();
             $table->string('synopsis', 510)->nullable();
-            $table->date('date_release');
+            $table->date('date_release')->nullable();
             $table->dateTime('publish_date')->nullable();
             $table->softDeletes();
             $table->timestamps();

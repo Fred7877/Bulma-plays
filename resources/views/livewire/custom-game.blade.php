@@ -21,18 +21,23 @@
                             <!-- BEGIN FORM -->
                             <ul class="menu-list">
                                 <li>
-                                    <label class="label">Titre</label>
+                                    <label class="label">Titre*</label>
                                     <div class="control">
-                                        <input class="input is-small" type="text" name="title" wire:model="title"
+                                        <input class="input is-small @error('title') is-danger @enderror" type="text"
+                                               name="title" wire:model.debounce.500ms="title"
                                                autocomplete="off">
                                     </div>
+                                    @error('title')
+                                    <div
+                                        class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Image de présentation</label>
 
                                     <div class="file has-name is-small">
                                         <label class="file-label">
-                                            <input class="file-input" type="file" wire:model="imagePresentation"
+                                            <input class="file-input @error('imagePresentation') is-danger @enderror"
+                                                   type="file" wire:model="imagePresentation"
                                                    value="{{ $imagePresentation }}"
                                                    name="imagePresentation">
                                             <span class="file-cta">
@@ -48,17 +53,20 @@
                                                     @if(!is_string($imagePresentation))
                                                         {{ $imagePresentation->getClientOriginalName() }}
                                                     @else
-                                                        {{ $imagePresentation }}
+                                                        {{ basename($imagePresentation) }}
                                                     @endif
                                                 @endif
                                             </span>
                                         </label>
                                     </div>
-                                    @error('imagePresentation') <span class="error">{{ $message }}</span> @enderror
+                                    @error('imagePresentation')
+                                    <div
+                                        class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Date première version</label>
-                                    <input class="input is-small" id="datepicker" name="date_release" value="{{ $dateRelease ?? '' }}"
+                                    <input class="input is-small" id="datepicker" name="date_release"
+                                           value="{{ $dateRelease ?? '' }}"
                                            autocomplete="off">
                                 </li>
                                 <li class="mt-4">
@@ -214,12 +222,15 @@
                                                             @if(!is_string($newScreenshotValues[0]['value']))
                                                                 {{ $newScreenshotValues[0]['value']->getClientOriginalName() }}
                                                             @else
-                                                                {{ $newScreenshotValues[0]['value'] }}
+                                                                {{ basename($newScreenshotValues[0]['value']) }}
                                                             @endif
                                                         @endif
                                                     </span>
                                                 </label>
                                             </div>
+                                            @error('newScreenshotValues.0.value')
+                                            <div
+                                                class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
                                         </div>
 
                                         <div class="column is-1">
@@ -237,23 +248,77 @@
                                             @endif
                                         </div>
                                     </div>
-
                                     @foreach($newScreenshotValues as $k => $screenshot)
                                         @if($k !== 0)
                                             @include('frontend.CustomGame.add-screenshots', ['position' => $k])
                                         @endif
                                     @endforeach
-
+                                </li>
+                                <li class="mt-4">
+                                    <label class="label">Vidéos</label>
+                                    <div class="columns is-gapless mb-1">
+                                        <div class="column is-10">
+                                            <div class="file has-name is-small">
+                                                <label class="file-label">
+                                                    <input class="file-input" type="file"
+                                                           wire:model="newVideoValues.0.value"
+                                                           name="videos[0]"
+                                                           value="{{ $newVideoValues[0]['value'] ?? '' }}">
+                                                    <input type="hidden"
+                                                           value="{{ $newVideoValues[0]['value'] ?? '' }}"
+                                                           name="videosHidden[0]">
+                                                    <span class="file-cta">
+                                                    <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                      </span>
+                                                      <span class="file-label">
+                                                        Choose a file…
+                                                      </span>
+                                                    </span>
+                                                    <span class="file-name">
+                                                        @if(isset($newVideoValues[0]))
+                                                            @if(!is_string($newVideoValues[0]['value']))
+                                                                {{ $newVideoValues[0]['value']->getClientOriginalName() }}
+                                                            @else
+                                                                {{ basename($newVideoValues[0]['value'] )}}
+                                                            @endif
+                                                        @endif
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            @error('newVideoValues.0.value')
+                                            <div
+                                                class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
+                                        </div>
+                                        <div class="column is-1">
+                                            @if (isset($newVideoValues[0]) && $newVideoValues[0]['value'] != '' && count($newVideoValues) == 1)
+                                                <span class="icon has-text-info is-small ml-2 is-clickable"
+                                                      wire:click="addVideo">
+                                                     <i class="fas fa-plus-circle"></i>
+                                                </span>
+                                            @endif
+                                            @if (isset($newVideoValues[0]))
+                                                <span class="icon is-small ml-2 has-text-danger is-clickable"
+                                                      wire:click="removeVideo(0)">
+                                                  <i class="fas fa-minus-circle"></i>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @foreach($newVideoValues as $k => $video)
+                                        @if($k !== 0)
+                                            @include('frontend.CustomGame.add-videos', ['position' => $k])
+                                        @endif
+                                    @endforeach
                                 </li>
 
                                 <li class="mt-4">
                                     <button type="submit" class="button is-link is-light">Save</button>
                                     <div class="is-pulled-right pt-5">
                                         <label for="published"> Publier</label>
-                                        <input class="checkbox" type="checkbox" name="published">
+                                        <input class="checkbox" type="checkbox" @if($published) checked="checked" @endif name="published" id="published" wire:model="published">
                                     </div>
                                 </li>
-
                             </ul>
                         </aside>
                     </div>
@@ -262,9 +327,15 @@
 
                 <div class="column">
                     <div class="box mt-3">
-                        <div class="columns">
+                        <div class="columns is-vcentered">
                             <div class="column ">
-                                <figure class="image static shadow-2xl">
+
+                                <div class="is-flex is-justify-content-center ">
+                                    <div wire:loading wire:target="imagePresentation"><div class="loader is-loading"></div></div>
+
+                                </div>
+                                <figure class="image static" wire:loading.remove
+                                        wire:target="imagePresentation">
                                     <img
                                         src="
                                         @if($imagePresentation)
@@ -358,19 +429,44 @@
                                     </p>
                                 </div>
                             </div>
-                        @endif
+                    @endif
+
+                    <!-- SCREENSHOTS -->
                         <div
-                            class="is-widescreen box has-background-dark p-4" style="max-width: 960px"
-                        >
-                            <div class="owl-carousel owl-theme" id="carousel-screenshot" wire:ignore>
+                            class="box has-background-dark p-4"
+                            wire:ignore
+                            id="screenshots"
+                            @if(!isset($screenshotValues[0])) style="display:none;max-width: 960px"
+                            @else style="max-width: 960px" @endif >
+                            <div class="owl-carousel owl-theme" id="carousel-screenshot">
                                 @if(isset($screenshotValues[0]))
                                     @foreach($screenshotValues as $s => $screenshot)
                                         <a id='single_image-{{ $s }}'
-                                           href='{{ asset($screenshot['value']) }}'>
-                                            <img src="{{ asset($screenshot['value']) }}">
-                                            <input type="hidden" name="screenshotsHidden[{{$s}}]" value="{{ asset($screenshot['value']) }}">
-
+                                           href='{{ $screenshot['value'] }}'>
+                                            <img src="{{ $screenshot['value'] }}">
+                                            <input type="hidden" name="screenshotsHidden[{{$s}}]"
+                                                   value="{{ $screenshot['value'] }}">
                                         </a>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- VIDEOS -->
+                        <div
+                            class="box has-background-dark p-4"
+                            wire:ignore
+                            id="videos"
+                            @if(!isset($newVideoValues[0])) style="display:none;max-width: 960px"
+                            @else style="max-width: 960px" @endif >
+                            <div class="owl-carousel owl-theme" id="carousel-video">
+                                @if(isset($newVideoValues[0]))
+                                    @foreach($newVideoValues as $v => $video)
+                                        <video width="320" height="240" controls>
+                                            <source src="{{ $video['value'] }}">
+                                        </video>
+                                        <input type="hidden" name="videosHidden[{{ $v }}]"
+                                               value="{{ $video['value'] }}">
                                     @endforeach
                                 @endif
                             </div>

@@ -39,7 +39,7 @@ Route::group([
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
 
-    Route::resource('custom-game', CustomGameController::class);
+    Route::resource('custom-game', CustomGameController::class)->middleware('auth.frontend');
 });
 
 

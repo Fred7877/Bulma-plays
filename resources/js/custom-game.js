@@ -48,15 +48,22 @@ $(document).ready(() => {
     );
 
 
-    $owlScreenshot = $('#carousel-screenshot').owlCarousel(
+    owlScreenshot = $('#carousel-screenshot').owlCarousel(
         {
             margin: 10,
             items: 3,
         }
     );
 
-    owl = $('#carousel-screenshot').owlCarousel();
+    owlVideo = $('#carousel-video').owlCarousel(
+        {
+            margin: 10,
+            items: 3,
+        }
+    );
+
     $("a[id^=single_image]").fancybox();
+    $("a[id^=single_video]").fancybox();
 
     // Select
     $(document).on('select2:select', function (e) {
@@ -89,19 +96,37 @@ $(document).ready(() => {
     });
 
     window.addEventListener('updatedNewScreenshotValues', event => {
-
         let html = `<a id='single_image-` + (event.detail.position - 1) + `'
                      href='` + event.detail.temporaryUrl + `'>
                          <img src="` + event.detail.temporaryUrl + `">
                      </a>
-                     <input type="hidden" name="screenshotsHidden[(event.detail.position - 1)]" value="`+event.detail.temporaryUrl+`">`;
+                     <input type="hidden" name="screenshotsHidden[`+(event.detail.position - 1)+`]" value="` + event.detail.temporaryUrl + `">`;
 
-        owl.trigger('add.owl.carousel', [html], event.detail.position - 1).trigger('refresh.owl.carousel');
+        owlScreenshot.trigger('add.owl.carousel', [html], event.detail.position - 1).trigger('refresh.owl.carousel');
         $("a[id^=single_image]").fancybox();
+        $('#screenshots').show();
     });
 
     window.addEventListener('removeScreenshot', event => {
-        owl.trigger('remove.owl.carousel', event.detail.position).trigger('refresh.owl.carousel');
+        owlScreenshot.trigger('remove.owl.carousel', event.detail.position).trigger('refresh.owl.carousel');
+    });
+
+
+    window.addEventListener('updatedNewVideoValues', event => {
+        let html = `<video class="item-video" width="320" height="240" controls>
+            <source src="` + event.detail.temporaryUrl + `"></video>
+            <input type="hidden" name="videosHidden[`+(event.detail.position - 1)+`]" value="` + event.detail.temporaryUrl + `">`;
+
+        owlVideo.trigger('add.owl.carousel', [html], event.detail.position - 1).trigger('refresh.owl.carousel');
+        $('#videos').show();
+    });
+
+    window.addEventListener('removeVideo', event => {
+        owlVideo.trigger('remove.owl.carousel', event.detail.position).trigger('refresh.owl.carousel');
+    });
+
+    window.addEventListener('published', event => {
+        Swal.fire('Tu as coché "Publier", la fiche de ce jeu sera soumis à modération');
     });
 });
 

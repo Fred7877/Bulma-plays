@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,13 +13,14 @@ class CustomGame extends Component
     const SYNOPSIS_MAX_LENGTH = 500;
 
     public $imagePresentation;
+    public $published = false;
 
     public $customGame;
 
-    public $platforms;
-    public $genres;
-    public $gameModes;
-    public $themes;
+    public $platforms = null;
+    public $genres = null;
+    public $gameModes = null;
+    public $themes = null;
 
     public $platformsSelected = [];
     public $genresSelected = [];
@@ -36,15 +37,30 @@ class CustomGame extends Component
     public $newLinkValues = [];
     public $newScreenshotValues = [];
     public $newProductorValues = [];
+    public $newVideoValues = [];
 
     public $linkables = [];
     public $actionForm;
     public $actionMethod;
     public $screenshotValues = [];
+    public $videoValues = [];
 
     public $metas = [];
 
     public $screenshots = [];
+
+    protected $rules = [
+        'title' => 'required|min:2',
+        'newScreenshotValues.*.value' => 'image',
+        'imagePresentation' => 'image',
+        'newVideoValues.*.value' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
+    ];
+
+    protected $messages = [
+        'imagePresentation.image' => 'Doit-être une image',
+        'newScreenshotValues.image' => 'Doit-être une image',
+        'newVideoValues.mimetypes' => 'Doit-être une vidéo',
+    ];
 
     protected $listeners = [
         'selectedDateRelease',
@@ -60,6 +76,18 @@ class CustomGame extends Component
         'selectedTheme',
         'linkable',
     ];
+
+    public function updatedPublished($published)
+    {
+        if ($published) {
+            $this->dispatchBrowserEvent('published');
+        }
+    }
+
+    public function updated($propertyName, $value)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function updatedSynopsis()
     {
@@ -162,6 +190,35 @@ class CustomGame extends Component
         );
     }
 
+    public function updatedNewVideoValues()
+    {
+        $this->dispatchBrowserEvent('updatedNewVideoValues',
+            [
+                'position' => count($this->newVideoValues),
+                'temporaryUrl' => last($this->newVideoValues)['value']->temporaryUrl()
+            ]
+        );
+    }
+
+    public function addVideo()
+    {
+        $key = count($this->newVideoValues);
+        $this->newVideoValues[$key]['value'] = '';
+    }
+
+    public function removeVideo($key)
+    {
+        unset($this->newVideoValues[$key]);
+        unset($this->newVideoValues[$key]);
+        $this->newVideoValues = array_values($this->newVideoValues);
+
+        $this->dispatchBrowserEvent('removeVideo',
+            [
+                'position' => $key,
+            ]
+        );
+    }
+
     /**
      * @param $platform
      */
@@ -252,6 +309,8 @@ class CustomGame extends Component
             $this->actionForm = route('custom-game.update', ['custom_game' => $this->customGame]);
             $this->actionMethod = 'put';
 
+            $this->published = $this->customGame->publish_date !== null;
+
             $this->title = $this->customGame->name;
             $this->dateRelease = $this->customGame->date_release;
             $this->customGame->genres->each(function ($item) {
@@ -283,13 +342,22 @@ class CustomGame extends Component
                 $this->linkables[$i] = (bool)$item->is_link;
             });
 
-            $this->imagePresentation = $this->customGame->image;
+            if ($this->customGame->image) {
+                $this->imagePresentation = Storage::disk('s3')->url($this->customGame->image);
+            }
 
             $this->synopsis = $this->customGame->synopsis;
 
             $this->customGame->screenshots->each(function ($item, $i) {
-                $this->newScreenshotValues[$i]['value'] = Str::of($item->path)->basename()->__ToString();
-                $this->screenshotValues[$i]['value'] = $item->path;
+                $path = Storage::disk('s3')->url($item->path);
+                $this->newScreenshotValues[$i]['value'] = $path;
+                $this->screenshotValues[$i]['value'] = $path;
+            });
+
+            $this->customGame->videos->each(function ($item, $i) {
+                $path = Storage::disk('s3')->url($item->path);
+                $this->newVideoValues[$i]['value'] = $path;
+                $this->newVideoValues[$i]['value'] = $path;
             });
         }
     }

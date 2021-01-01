@@ -1,4 +1,4 @@
-<div>
+<div class="mb-2">
 
     <p>
         <b>Mode multijoueur :</b>
