@@ -244,6 +244,12 @@ return [
             'icon' => 'fas fa-comments',
             'active' => ['backend/comments*']
         ],
+        [
+            'text' => 'Custom Game',
+            'url'  => 'backend/custom-games',
+            'icon' => 'fas fa-tools',
+            'active' => ['backend/custom-games*']
+        ],
     ],
 
     /*

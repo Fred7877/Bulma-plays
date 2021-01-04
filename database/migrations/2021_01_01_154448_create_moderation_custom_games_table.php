@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModerationsTable extends Migration
+class CreateModerationCustomGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateModerationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('moderations', function (Blueprint $table) {
+        Schema::create('moderation_custom_games', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_id');
+            $table->integer('custom_game_id');
             $table->integer('status');
             $table->text('comment')->nullable();
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateModerationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moderations');
+        Schema::dropIfExists('moderation_custom_games');
     }
 }
