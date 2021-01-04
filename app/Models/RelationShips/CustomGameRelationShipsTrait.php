@@ -8,6 +8,7 @@ use App\Models\CustomGameVideo;
 use App\Models\GameMode;
 use App\Models\Genre;
 use App\Models\Link;
+use App\Models\ModerationCustomGame;
 use App\Models\Platform;
 use App\Models\Productor;
 use App\Models\Theme;
@@ -58,5 +59,10 @@ trait CustomGameRelationShipsTrait
     public function videos()
     {
         return $this->hasMany(CustomGameVideo::class);
+    }
+
+    public function moderations()
+    {
+        return $this->hasMany(ModerationCustomGame::class);
     }
 }
