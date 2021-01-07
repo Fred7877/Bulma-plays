@@ -1,6 +1,6 @@
 <?php
 return [
-    'platform' => 'platform',
+    'platforms' => 'platform',
     'choose' => 'choose',
     'others-platform' => 'others platform',
     'choose_genre' => 'Choose a genre',
@@ -13,8 +13,8 @@ return [
     'previous' => 'previous',
     'voter' => 'voter',
     'first_release_date' => 'first date release',
-    'genre' => 'genre',
-    'theme' => 'theme',
+    'genres' => 'genres',
+    'themes' => 'themes',
     'produced_by' => 'produced by',
     'comments_and_reviews' => 'Comments & Reviews',
     'tips_and_tricks' => 'Tips & Tricks',
@@ -80,4 +80,13 @@ By registering, you will also have the opportunity to leave a comment, reply to 
 </p>',
     'current' => 'current',
     'coming_soon' => 'coming soon',
+    'title' => 'title',
+    'presentation_image' => 'presentation image',
+    'choose_file' => 'choose a file…',
+    'choose_theme' => 'choose themes',
+    'choose_platform' => 'choose platform',
+    'choose_game_mode' => 'Choose game modes',
+    'video' => 'video',
+    'publish' => 'publish',
+    'save' => 'save',
 ];

@@ -50,7 +50,7 @@
                         </p>
                         <p>
                             @if (isset($game['platforms']))
-                                <b>{{ Str::ucFirst(Str::plural(__('frontend.platform'), count($game['platforms']))) }}
+                                <b>{{ Str::ucFirst(Str::plural(__('frontend.platforms'), count($game['platforms']))) }}
                                     :</b>
                                 <span class="text-gray-900 leading-none">
                                     {{ collect($game['platforms'])->implode('name', ', ') }}
@@ -90,7 +90,7 @@
                         @endif
                         <p>
                             @if (isset($game['themes']))
-                                <b>{{ Str::ucFirst(Str::plural(__('frontend.theme'), count($game['themes']))) }}
+                                <b>{{ Str::ucFirst(Str::plural(__('frontend.themes'), count($game['themes']))) }}
                                     :</b>
                                 <span class="text-gray-900 leading-none">
                                         {{ collect($game['themes'])->implode('name', ', ') }}

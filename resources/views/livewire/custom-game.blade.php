@@ -21,7 +21,7 @@
                             <!-- BEGIN FORM -->
                             <ul class="menu-list">
                                 <li>
-                                    <label class="label">Titre*</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.title')) }}*</label>
                                     <div class="control">
                                         <input class="input is-small @error('title') is-danger @enderror" type="text"
                                                name="title" wire:model.debounce.500ms="title"
@@ -32,7 +32,7 @@
                                         class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Image de présentation</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.presentation_image')) }}</label>
 
                                     <div class="file has-name is-small">
                                         <label class="file-label">
@@ -45,7 +45,7 @@
                                                 <i class="fas fa-upload"></i>
                                               </span>
                                               <span class="file-label">
-                                                Choose a file…
+                                                {{ Str::ucFirst(__('frontend.choose_file')) }}
                                               </span>
                                             </span>
                                             <span class="file-name">
@@ -64,17 +64,17 @@
                                         class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Date première version</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.first_release_date')) }}</label>
                                     <input class="input is-small" id="datepicker" name="date_release"
                                            value="{{ $dateRelease ?? '' }}"
                                            autocomplete="off">
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Themes</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.themes')) }}</label>
                                     <div class="control" wire:ignore>
                                         <select name="themes[]" multiple="multiple" id="themes" style="width: 100%"
                                                 class="selector">
-                                            <option disabled="disabled">Choose genres</option>
+                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_theme')) }}</option>
                                             @foreach($themes as $theme)
                                                 <option value="{{ $theme->id }}"
                                                         @if(isset($this->themesSelected[$theme->id])) selected="selected" @endif >{{ $theme->name }}</option>
@@ -83,11 +83,11 @@
                                     </div>
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Genre</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.genres')) }}</label>
                                     <div class="control" wire:ignore>
                                         <select name="genres[]" multiple="multiple" id="genres" style="width: 100%"
                                                 class="selector">
-                                            <option disabled="disabled">Choose genres</option>
+                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
                                             @foreach($genres as $genre)
                                                 <option value="{{ $genre->id }}"
                                                         @if(isset($this->genresSelected[$genre->id])) selected="selected" @endif >{{ $genre->name }}</option>
@@ -96,11 +96,11 @@
                                     </div>
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Platforme</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.platforms')) }}</label>
                                     <div class="control" wire:ignore>
                                         <select name="platforms[]" multiple="multiple" id="platforms"
                                                 style="width: 100%" class="selector">
-                                            <option disabled="disabled">Choose platforms</option>
+                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
                                             @foreach($platforms as $platformSelection)
                                                 <option
                                                     value="{{ $platformSelection->id }}"
@@ -114,7 +114,7 @@
                                     <div class="control" wire:ignore>
                                         <select name="gameModes[]" multiple="multiple" id="gameModes"
                                                 style="width: 100%" class="selector">
-                                            <option disabled="disabled">Choose game modes</option>
+                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_game_mode')) }}</option>
                                             @foreach($gameModes as $gameMode)
                                                 <option
                                                     value="{{ $gameMode->id }}"
@@ -152,7 +152,7 @@
                                     @endforeach
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Produit par</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.produced_by')) }}</label>
                                     <div class="columns is-gapless mb-2">
                                         <div class="column is-10">
                                             <div class="field has-addons">
@@ -191,7 +191,7 @@
                                 </li>
 
                                 <li class="mt-4">
-                                    <label class="label" for="synopsis">Synopsis <span
+                                    <label class="label" for="synopsis">Synopsis<span
                                             class="is-size-7 {{ $classNumCharSynopsis }}">({{ $numCharSynopsis }}/500)</span></label>
                                     <textarea class="textarea" name="synopsis" id="" cols="30" rows="5"
                                               wire:model="synopsis"></textarea>
@@ -214,7 +214,7 @@
                                                         <i class="fas fa-upload"></i>
                                                       </span>
                                                       <span class="file-label">
-                                                        Choose a file…
+                                                        {{ Str::ucFirst(__('frontend.choose_file')) }}
                                                       </span>
                                                     </span>
                                                     <span class="file-name">
@@ -255,7 +255,7 @@
                                     @endforeach
                                 </li>
                                 <li class="mt-4">
-                                    <label class="label">Vidéos</label>
+                                    <label class="label">{{ Str::ucFirst(__('frontend.video')) }}</label>
                                     <div class="columns is-gapless mb-1">
                                         <div class="column is-10">
                                             <div class="file has-name is-small">
@@ -272,7 +272,7 @@
                                                         <i class="fas fa-upload"></i>
                                                       </span>
                                                       <span class="file-label">
-                                                        Choose a file…
+                                                       {{ Str::ucFirst(__('frontend.choose_file')) }}
                                                       </span>
                                                     </span>
                                                     <span class="file-name">
@@ -311,11 +311,10 @@
                                         @endif
                                     @endforeach
                                 </li>
-
                                 <li class="mt-4">
-                                    <button type="submit" class="button is-link is-light">Save</button>
+                                    <button type="submit" class="button is-link is-light">{{ Str::ucFirst(__('frontend.save')) }}</button>
                                     <div class="is-pulled-right pt-5">
-                                        <label for="published"> Publier</label>
+                                        <label for="published">{{ Str::ucFirst(__('frontend.publish')) }}</label>
                                         <input class="checkbox" type="checkbox" @if($published) checked="checked" @endif name="published" id="published" wire:model="published">
                                     </div>
                                 </li>
@@ -360,21 +359,21 @@
                                             {{ $dateRelease }}
                                         </p>
                                         <p class="mb-2">
-                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.genre'), count($genresSelected) === 0 ? 1 : count($genresSelected))) }}
+                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.genres'), count($genresSelected) === 0 ? 1 : count($genresSelected))) }}
                                                 : </b>
                                             <span class="text-gray-900 leading-none">
                                        {{ implode(', ', $genresSelected) }}
                                     </span>
                                         </p>
                                         <p class="mb-2">
-                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.platform'), count($platformsSelected) === 0 ? 1 : count($platformsSelected))) }}
+                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.platforms'), count($platformsSelected) === 0 ? 1 : count($platformsSelected))) }}
                                                 :</b>
                                             <span class="text-gray-900 leading-none">
                                             {{ implode(', ', $platformsSelected) }}
                                         </span>
                                         </p>
                                         <p class="mb-2">
-                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.theme'), count($themesSelected ) === 0 ? 1 : count($themesSelected ))) }}
+                                            <b>{{ Str::ucFirst(Str::plural(__('frontend.themes'), count($themesSelected ) === 0 ? 1 : count($themesSelected ))) }}
                                                 : </b>
                                             <span class="text-gray-900 leading-none">
                                              {{ implode(', ', $themesSelected ) }}
