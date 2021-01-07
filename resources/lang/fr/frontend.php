@@ -1,6 +1,6 @@
 <?php
 return [
-    'platform' => 'plate-forme',
+    'platforms' => 'plate-forme',
     'choose' => 'choisir',
     'others-platform' => 'autres plate forme',
     'choose_genre' => 'choisir un genre',
@@ -13,8 +13,8 @@ return [
     'previous' => 'précédent',
     'voter' => 'voteur',
     'first_release_date' => 'Date première version',
-    'genre' => 'genre',
-    'theme' => 'thème',
+    'genres' => 'genres',
+    'themes' => 'thèmes',
     'produced_by' => 'produit par',
     'commentes_and_reviews' => 'Commentaires & Avis',
     'tips_and_tricks' => 'Trucs & Astuces',
@@ -81,4 +81,13 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
 </p>',
     'current' => 'actuel',
     'coming_soon' => 'a venir',
+    'title' => 'titre',
+    'presentation_image' => 'image de présentation',
+    'choose_file' => 'choisir un fichier…',
+    'choose_theme' => 'choisir thèmes',
+    'choose_platform' => 'choose platforme',
+    'choose_game_mode' => 'choisir game modes',
+    'video' => 'vidéo',
+    'publish' => 'publier',
+    'save' => 'enregistrer',
 ];

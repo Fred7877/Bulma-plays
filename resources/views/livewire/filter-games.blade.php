@@ -6,7 +6,7 @@
                     <div class="dropdown-trigger">
                         <button class="button filter" aria-haspopup="true" aria-controls="dropdown-menu3"
                                 id="filter-nintendo">
-                            <span>{{ Str::Ucfirst(__('frontend.platform')) }}</span>
+                            <span>{{ Str::Ucfirst(__('frontend.platforms')) }}</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
                               </span>
@@ -90,7 +90,7 @@
                     <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                         <div class="dropdown-content p-3">
                             <select class="input is-small" id="genres" name="genres" wire:model="genre">
-                                <option value="">{{ Str::Ucfirst(__('frontend.choose_genre')) }}</option>
+                                <option value="">{{ Str::Ucfirst(__('frontend.choose_genres')) }}</option>
                                 @foreach(collect($genres)->sortBy('name')->toArray() as $genre)
                                     <option value="{{ $genre['slug'] }}"
                                             @if($genre['slug'] == $genre) selected @endif>{{ Str::ucFirst($genre['name']) }}</option>
