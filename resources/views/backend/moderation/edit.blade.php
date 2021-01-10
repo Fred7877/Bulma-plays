@@ -5,5 +5,5 @@
 @stop
 
 @section('content')
-    <livewire:backend.replies-list :game="$game" :comment="$comment"/>
+    <livewire:backend.replies-list :game="$game" :comment="$comment" :typeComment="$commentType"/>
 @endsection

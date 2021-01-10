@@ -91,7 +91,7 @@
                                     Créer une fiche jeux
                                 </a>
                                 <hr class="dropdown-divider m-0">
-                                <a href="#" class="dropdown-item" id="btn-comments-user">
+                                <a href="{{ route('comments.user') }}" class="dropdown-item" id="btn-comments-user">
                                     Mes commentaires
                                 </a>
                                 <a class="dropdown-item">

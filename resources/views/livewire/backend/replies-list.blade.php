@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <table class="table table-bordered table-sm">
                 <thead>
                 <tr>
@@ -8,6 +8,7 @@
                     <th scope="col">TYPE</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">Langue</th>
+                    <th scope="col">Commentaire modération</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@
                             {!! getFlag($comment->language, '', true, 64) !!}
                         </div>
                     </td>
+                    <td>{{ $comment->moderations->last()->comment }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -50,19 +52,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 m-0 p-0">
                         @include('backend.comment.partials.btn-moderation', ['comment' => $comment, 'game' => $game])
                     </div>
                 </div>
             </form>
-            @include('livewire.backend.table-answsers', ['replies' => $replies, 'level' => $level])
+            @include('livewire.backend.table-replies', ['replies' => $replies, 'level' => $level])
         </div>
-        <div class="col-6">
+        <div class="col">
             Liste des commentaires en attente de modération pour <b>{{ optional($game)->igdb['name'] ?? '-' }}</b>
 
             <table class="table table-bordered table-sm">
                 <tbody>
                 @foreach($waitingModeration as $waitingComment)
+                    @if ($waitingComment->id !== $comment->id)
                     <tr>
                         <td>
                             {{ $waitingComment->comment }}
@@ -77,9 +80,37 @@
                             </form>
                         </td>
                     </tr>
+                    @endif
                 @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#btn-moderation-nok', function (e) {
+                let commentId = e.target.dataset.commentId;
+
+                Swal.fire({
+                    title: 'Commentaire N-ok',
+                    html: `
+       <textarea cols='50' rows='5' name='comment'></textarea>
+      `,
+                    confirmButtonText: 'Save!',
+                    onBeforeOpen: function(){
+                        $('textarea[name=comment]').val($('#comment_moderation_' + commentId).val())
+                    },
+                    preConfirm: () => {
+                        $('#comment_moderation_' + commentId).val($('textarea[name=comment]').val());
+                        $(e.target).toggleClass('btn-danger', $('textarea[name=comment]').val() === '');
+                        $(e.target).toggleClass('btn-warning', $('textarea[name=comment]').val() !== '');
+                        $('#form_moderation_'+commentId).submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

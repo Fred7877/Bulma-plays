@@ -37,7 +37,7 @@ $(document).ready(() => {
         <div class="row">
             <div class="has-text-left">
             <div class="level m-0 has-background-dark has-text-white p-1">
-                <h5> ` + txtReplyTo + ` `  + authorName + `</h5>
+                <h5> ` + txtReplyTo + ` ` + authorName + `</h5>
             </div>
             <div class="mt-2 mb-2">
                 ` + reply + `
@@ -180,6 +180,18 @@ $(document).ready(() => {
         for (var i = 0; i < tabs.length; i++) {
             _loop();
         }
+    }
+
+    // Show succes edited comment for user
+    if ($('input[name=comment_edited]').length > 0) {
+        Swal.fire({
+            title: 'Enregistré !',
+            icon: 'success',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+        });
     }
 });
 

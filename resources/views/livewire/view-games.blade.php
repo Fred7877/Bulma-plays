@@ -18,7 +18,7 @@
             @endforelse
 
             @if ($totalQueryGame > 10)
-                <div class="mt-5 pb-5">
+                <div class="mt-5">
                     @include('frontend.partials.pagination', ['totalQueryGame' => $totalQueryGame])
                 </div>
             @endif

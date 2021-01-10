@@ -19,12 +19,14 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param CommentsDataTable $dataTable
+     * @param $type
      * @return \Illuminate\Http\Response
      */
-    public function index(CommentsDataTable $dataTable)
+    public function index(CommentsDataTable $dataTable, $type)
     {
 
-        return $dataTable->render('backend.comment.index');
+        return $dataTable->with('type', $type)->render('backend.comment.index');
     }
 
     /**
@@ -62,12 +64,16 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Comment $comment
      * @return \Illuminate\Contracts\View\View
      */
     public function edit(Comment $comment)
     {
-        return View::make('backend.moderation.edit', ['comment' => $comment, 'game' => Game::where('game_id', $comment->game_id)->first()]);
+        return View::make('backend.moderation.edit', [
+            'comment' => $comment,
+            'game' => Game::where('game_id', $comment->game_id)->first(),
+            'commentType' => $comment->type
+        ]);
     }
 
     /**

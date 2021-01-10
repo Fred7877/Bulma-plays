@@ -12,4 +12,5 @@ class Comment extends Model
     use HasFactory, CommentRelationShips;
 
     protected $guarded = [];
+
 }

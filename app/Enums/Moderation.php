@@ -5,7 +5,7 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * Class Moderation
+ * Class ModerationComment
  * @package App\Enums
  */
 final class Moderation extends Enum
