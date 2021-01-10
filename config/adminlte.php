@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\CommentType;
+
 return [
 
     /*
@@ -240,9 +242,15 @@ return [
         ['header' => 'GESTION SITE'],
         [
             'text' => 'Comments',
-            'url'  => 'backend/comments',
+            'url'  => 'backend/comments/'.CommentType::Comments,
             'icon' => 'fas fa-comments',
-            'active' => ['backend/comments*']
+            'active' => ['backend/comments/'.CommentType::Comments]
+        ],
+        [
+            'text' => 'Trucs&Astuces',
+            'url'  => 'backend/comments/'.CommentType::Tips,
+            'icon' => 'fab fa-angellist',
+            'active' => ['backend/comments'.CommentType::Tips]
         ],
         [
             'text' => 'Custom Game',
@@ -333,7 +341,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

@@ -13,27 +13,33 @@
         rel='stylesheet' type='text/css'>
 
     <style>
-
-        p,span.icon {
+        p, span.icon {
             font-size: 14px;
         }
+
         body {
             background: #222939;
             font-family: Roboto, serif;
-            padding-bottom: 35px;
+            margin: 0;
+            padding: 0;
         }
+
         .img-content {
             background: white;
         }
+
         label {
             color: #3273dc;
         }
+
         .block-filters {
             background: #323a45;
         }
+
         .pointer {
             cursor: pointer;
         }
+
         .loader-wrapper {
             transition: opacity .3s;
             display: flex;
@@ -41,21 +47,26 @@
             align-items: center;
             border-radius: 6px;
         }
+
         .loader {
             height: 80px;
             width: 80px;
         }
+
         .is-active {
             opacity: 1;
             z-index: 1;
         }
+
         .word-break {
             word-break: break-all;
         }
+
         .has-display-none {
             display: none;
             visibility: hidden;
         }
+
         .cookie-consent {
             position: fixed;
             bottom: 0;
@@ -64,6 +75,17 @@
             background-color: #0c525d;
             padding: 5px;
             font-weight: bold;
+        }
+
+        #wrap {
+            min-height: 100%;
+            width: 100%;
+        }
+
+        #footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 
@@ -75,10 +97,13 @@
 <body>
 @include('frontend.partials.nav-bar-top')
 
-<div class="container mx-auto">
-    @yield('content')
+<div id="wrap">
+    <div class="container mx-auto ">
+        @yield('content')
+    </div>
 </div>
 
+@include('footer')
 @include('cookieConsent::index')
 
 @livewireScripts

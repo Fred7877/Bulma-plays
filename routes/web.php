@@ -39,15 +39,22 @@ Route::group([
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
     Route::resource('custom-game', CustomGameController::class)->middleware('auth.frontend');
+    Route::get('comments', [FrontendComment::class, 'index'])->name('comments.user');
+    Route::get('comments/{comment}/edit', [FrontendComment::class, 'edit'])->name('comments.user.edit');
+    Route::put('comments/{comment}', [FrontendComment::class, 'update'])->name('comments.user.update');
 });
 
 Route::get('/backend', function () {
     return redirect(route('users.index'));
 });
 
-Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group( function () {
+Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group(function () {
     Route::resource('users', UserController::class);
-    Route::resource('comments', CommentController::class);
+
+    Route::get('comments/edit/{comment}', [CommentController::class, 'edit'])->name('comments.edit');
+    Route::post('comments/update/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::get('comments/{type}', [CommentController::class, 'index'])->name('comments.index');
+
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
     Route::resource('custom-games', BackendCustomGameController::class);
 });

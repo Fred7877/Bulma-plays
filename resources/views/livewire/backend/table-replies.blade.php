@@ -7,11 +7,11 @@
                     class="fas fa-arrow-circle-left"></i> </span>
         @endif
 
-        Answers - niveau {{ $level }} </h4>
+        Replies - niveau {{ $level }} </h4>
     <table class="table table-bordered table-sm">
         <thead>
         <tr>
-            <th>Answers</th>
+            <th>Replies</th>
             <th>Author</th>
             <th>Status</th>
             <th>Nb Answers</th>

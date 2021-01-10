@@ -90,4 +90,8 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     'video' => 'vidéo',
     'publish' => 'publier',
     'save' => 'enregistrer',
+    'modification_moderation' => 'une modification entrainera une modération',
+    'edit' => 'editer',
+    'return' => 'retour',
+    'my_comments' => 'Mes commentaires'
 ];

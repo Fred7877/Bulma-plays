@@ -89,4 +89,8 @@ By registering, you will also have the opportunity to leave a comment, reply to 
     'video' => 'video',
     'publish' => 'publish',
     'save' => 'save',
+    'modification_moderation' => 'a modification will result in a moderation',
+    'edit' => 'edit',
+    'return' => 'back',
+    'my_comments' => 'My comments'
 ];
