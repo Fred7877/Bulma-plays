@@ -37,16 +37,15 @@ class CommentsDataTable extends DataTable
                 return Carbon::createFromTimeString($item->created_at)->format('d/m/Y H:i');
             })
             ->editColumn('moderated', function ($item) {
-                if ($item->moderations->first() === null) {
+                if (optional($item->moderations->last())->status === null) {
                     return '<span class="badge badge-primary">&nbsp; - &nbsp;</span>';
                 } else {
 
-                    if ($item->moderations->last()->status === Moderation::ModerationNOk) {
-
-                        return '<span class="badge badge-danger">' . Moderation::getDescription($item->moderations->last()->status) . '</span>';
+                    if ((int) $item->moderations->last()->status === Moderation::ModerationNOk) {
+                        return '<span class="badge badge-danger">' . Moderation::getDescription((int)$item->moderations->last()->status) . '</span>';
                     }
 
-                    return '<span class="badge badge-success">' . Moderation::getDescription($item->moderations->last()->status) . '</span>';
+                    return '<span class="badge badge-success">' . Moderation::getDescription((int)$item->moderations->last()->status) . '</span>';
                 }
             })
             ->escapeColumns([])

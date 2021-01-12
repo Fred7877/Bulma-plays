@@ -24,7 +24,7 @@ class CustomGameRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:2',
+            'name' => 'required|min:2',
         ];
     }
 
@@ -34,8 +34,8 @@ class CustomGameRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'Un titre est obligatoire',
-            'title.min' => 'Le titre doit avoir au moins 2 caractères',
+            'name.required' => 'Un titre est obligatoire',
+            'name.min' => 'Le titre doit avoir au moins 2 caractères',
         ];
     }
 }

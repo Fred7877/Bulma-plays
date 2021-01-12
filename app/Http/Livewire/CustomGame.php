@@ -10,7 +10,7 @@ class CustomGame extends Component
 {
     use WithFileUploads;
 
-    const SYNOPSIS_MAX_LENGTH = 500;
+    const SUMMARY_MAX_LENGTH = 500;
 
     public $imagePresentation;
     public $published = false;
@@ -30,10 +30,10 @@ class CustomGame extends Component
     public $dateRelease;
     public $multiplayer;
 
-    public $title;
-    public $synopsis;
-    public $numCharSynopsis = 0;
-    public $classNumCharSynopsis = 'has-text-grey';
+    public $name;
+    public $summary;
+    public $numCharSummary = 0;
+    public $classNumCharSummary = 'has-text-grey';
     public $newLinkValues = [];
     public $newScreenshotValues = [];
     public $newProductorValues = [];
@@ -43,20 +43,22 @@ class CustomGame extends Component
     public $actionForm;
     public $actionMethod;
     public $screenshotValues = [];
-    public $videoValues = [];
+    public $submitLoading = '';
+    public $commentModeration;
 
     public $metas = [];
 
     public $screenshots = [];
 
     protected $rules = [
-        'title' => 'required|min:2',
+        'name' => 'required|min:2|unique:custom_games',
         'newScreenshotValues.*.value' => 'image',
         'imagePresentation' => 'image',
         'newVideoValues.*.value' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
     ];
 
     protected $messages = [
+        'name.unique' => 'Ce titre existe déjà',
         'imagePresentation.image' => 'Doit-être une image',
         'newScreenshotValues.image' => 'Doit-être une image',
         'newVideoValues.mimetypes' => 'Doit-être une vidéo',
@@ -77,6 +79,11 @@ class CustomGame extends Component
         'linkable',
     ];
 
+    public function submit()
+    {
+        $this->submitLoading = 'is-loading';
+    }
+
     public function updatedPublished($published)
     {
         if ($published) {
@@ -89,24 +96,24 @@ class CustomGame extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function updatedSynopsis()
+    public function updatedSummary()
     {
-        $synopsisLength = strlen($this->synopsis);
-        $this->numCharSynopsis = $synopsisLength;
+        $summaryLength = strlen($this->summary);
+        $this->numCharSummary = $summaryLength;
 
-        if ($synopsisLength >= self::SYNOPSIS_MAX_LENGTH) {
-            $this->synopsis = substr($this->synopsis, 0, self::SYNOPSIS_MAX_LENGTH);
-            $this->numCharSynopsis = self::SYNOPSIS_MAX_LENGTH;
+        if ($summaryLength >= self::SUMMARY_MAX_LENGTH) {
+            $this->summary = substr($this->summary, 0, self::SUMMARY_MAX_LENGTH);
+            $this->numCharSummary = self::SUMMARY_MAX_LENGTH;
         }
 
-        if ($this->numCharSynopsis > 150 && $this->numCharSynopsis < 300) {
-            $this->classNumCharSynopsis = 'has-text-success';
-        } else if ($this->numCharSynopsis > 300 && $this->numCharSynopsis < 425) {
-            $this->classNumCharSynopsis = 'has-text-warning';
-        } else if ($this->numCharSynopsis > 425) {
-            $this->classNumCharSynopsis = 'has-text-danger';
+        if ($this->numCharSummary > 150 && $this->numCharSummary < 300) {
+            $this->classNumCharSummary = 'has-text-success';
+        } else if ($this->numCharSummary > 300 && $this->numCharSummary < 425) {
+            $this->classNumCharSummary = 'has-text-warning';
+        } else if ($this->numCharSummary > 425) {
+            $this->classNumCharSummary = 'has-text-danger';
         } else {
-            $this->classNumCharSynopsis = 'has-text-grey';
+            $this->classNumCharSummary = 'has-text-grey';
         }
     }
 
@@ -311,8 +318,8 @@ class CustomGame extends Component
 
             $this->published = $this->customGame->publish_date !== null;
 
-            $this->title = $this->customGame->name;
-            $this->dateRelease = $this->customGame->date_release;
+            $this->name = $this->customGame->name;
+            $this->dateRelease = $this->customGame->first_release_date;
             $this->customGame->genres->each(function ($item) {
                 $this->genresSelected[$item->id] = $item->name;
             });
@@ -346,7 +353,7 @@ class CustomGame extends Component
                 $this->imagePresentation = Storage::disk('s3')->url($this->customGame->image);
             }
 
-            $this->synopsis = $this->customGame->synopsis;
+            $this->summary = $this->customGame->summary;
 
             $this->customGame->screenshots->each(function ($item, $i) {
                 $path = Storage::disk('s3')->url($item->path);
@@ -359,6 +366,8 @@ class CustomGame extends Component
                 $this->newVideoValues[$i]['value'] = $path;
                 $this->newVideoValues[$i]['value'] = $path;
             });
+
+            $this->commentModeration = optional($this->customGame->moderations->last())->comment;
         }
     }
 

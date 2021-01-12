@@ -3,7 +3,7 @@
         <input type="hidden" name="message">
     @endif
 
-    <input type="hidden" name="date_release_custom" value="{{ $dateRelease }}">
+    <input type="hidden" name="first_release_date_custom" value="{{ $dateRelease }}">
 
     <form method="post" action="{{ $actionForm }}" enctype="multipart/form-data">
         @if($actionMethod === 'put')
@@ -23,13 +23,14 @@
                                 <li>
                                     <label class="label">{{ Str::ucFirst(__('frontend.title')) }}*</label>
                                     <div class="control">
-                                        <input class="input is-small @error('title') is-danger @enderror" type="text"
-                                               name="title" wire:model.debounce.500ms="title"
+                                        <input class="input is-small @error('name') is-danger @enderror" type="text"
+                                               name="name" wire:model.debounce.900ms="name"
                                                autocomplete="off">
                                     </div>
-                                    @error('title')
+                                    @error('name')
                                     <div
-                                        class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div> @enderror
+                                        class="mt-1 p-1 is-size-7 has-text-danger has-background-danger-light">{{ $message }}</div>
+                                    @enderror
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">{{ Str::ucFirst(__('frontend.presentation_image')) }}</label>
@@ -65,7 +66,7 @@
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">{{ Str::ucFirst(__('frontend.first_release_date')) }}</label>
-                                    <input class="input is-small" id="datepicker" name="date_release"
+                                    <input class="input is-small" id="datepicker" name="first_release_date"
                                            value="{{ $dateRelease ?? '' }}"
                                            autocomplete="off">
                                 </li>
@@ -74,7 +75,8 @@
                                     <div class="control" wire:ignore>
                                         <select name="themes[]" multiple="multiple" id="themes" style="width: 100%"
                                                 class="selector">
-                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_theme')) }}</option>
+                                            <option
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_theme')) }}</option>
                                             @foreach($themes as $theme)
                                                 <option value="{{ $theme->id }}"
                                                         @if(isset($this->themesSelected[$theme->id])) selected="selected" @endif >{{ $theme->name }}</option>
@@ -87,7 +89,8 @@
                                     <div class="control" wire:ignore>
                                         <select name="genres[]" multiple="multiple" id="genres" style="width: 100%"
                                                 class="selector">
-                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
+                                            <option
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
                                             @foreach($genres as $genre)
                                                 <option value="{{ $genre->id }}"
                                                         @if(isset($this->genresSelected[$genre->id])) selected="selected" @endif >{{ $genre->name }}</option>
@@ -100,7 +103,8 @@
                                     <div class="control" wire:ignore>
                                         <select name="platforms[]" multiple="multiple" id="platforms"
                                                 style="width: 100%" class="selector">
-                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
+                                            <option
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
                                             @foreach($platforms as $platformSelection)
                                                 <option
                                                     value="{{ $platformSelection->id }}"
@@ -114,7 +118,8 @@
                                     <div class="control" wire:ignore>
                                         <select name="gameModes[]" multiple="multiple" id="gameModes"
                                                 style="width: 100%" class="selector">
-                                            <option disabled="disabled">{{ Str::ucFirst(__('frontend.choose_game_mode')) }}</option>
+                                            <option
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_game_mode')) }}</option>
                                             @foreach($gameModes as $gameMode)
                                                 <option
                                                     value="{{ $gameMode->id }}"
@@ -191,10 +196,10 @@
                                 </li>
 
                                 <li class="mt-4">
-                                    <label class="label" for="synopsis">Synopsis<span
-                                            class="is-size-7 {{ $classNumCharSynopsis }}">({{ $numCharSynopsis }}/500)</span></label>
-                                    <textarea class="textarea" name="synopsis" id="" cols="30" rows="5"
-                                              wire:model="synopsis"></textarea>
+                                    <label class="label" for="summary">Summary<span
+                                            class="is-size-7 {{ $classNumCharSummary }}">({{ $numCharSummary }}/500)</span></label>
+                                    <textarea class="textarea" name="summary" id="" cols="30" rows="5"
+                                              wire:model="summary"></textarea>
                                 </li>
                                 <li class="mt-4">
                                     <label class="label">Screenshots</label>
@@ -312,13 +317,29 @@
                                     @endforeach
                                 </li>
                                 <li class="mt-4">
-                                    <button type="submit" class="button is-link is-light">{{ Str::ucFirst(__('frontend.save')) }}</button>
+                                    <button type="submit" wire:click="submit"
+                                            class="button is-info {{ $submitLoading }}">{{ Str::ucFirst(__('frontend.save')) }}</button>
+
                                     <div class="is-pulled-right pt-5">
                                         <label for="published">{{ Str::ucFirst(__('frontend.publish')) }}</label>
-                                        <input class="checkbox" type="checkbox" @if($published) checked="checked" @endif name="published" id="published" wire:model="published">
+                                        <input class="checkbox" type="checkbox" @if($published) checked="checked"
+                                               @endif name="published" id="published" wire:model="published">
                                     </div>
                                 </li>
                             </ul>
+                            @if(\Request::route()->getName() === 'custom-game.edit')
+                                <div class="mt-2">
+                                    <p class="is-family-secondary is-size-7">
+                                        <i>*{{ Str::ucFirst(__('frontend.modification_moderation')) }}</i>
+                                    </p>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="{{ route('list.custom-games.user') }}">
+                                        <button type="button"
+                                                class="button is-info is-small is-light">{{ Str::ucFirst(__('frontend.return')) }}</button>
+                                    </a>
+                                </div>
+                            @endif
                         </aside>
                     </div>
                 </div>
@@ -330,8 +351,9 @@
                             <div class="column ">
 
                                 <div class="is-flex is-justify-content-center ">
-                                    <div wire:loading wire:target="imagePresentation"><div class="loader is-loading"></div></div>
-
+                                    <div wire:loading wire:target="imagePresentation">
+                                        <div class="loader is-loading"></div>
+                                    </div>
                                 </div>
                                 <figure class="image static" wire:loading.remove
                                         wire:target="imagePresentation">
@@ -341,7 +363,7 @@
                                         @if(!is_string($imagePresentation))
                                         {{ $imagePresentation->temporaryUrl() }}
                                         @else
-                                        {{ asset($imagePresentation) }}
+                                        {{ asset(Str::of($imagePresentation)->replace('_format_', '_720P')) }}
                                         @endif
                                         @endif
                                             ">
@@ -349,7 +371,7 @@
                             </div>
                             <div class="column ">
                                 <div class="column is-full p-0">
-                                    <span class="title is-3">{{ $title }}</span>
+                                    <span class="title is-3">{{ Str::ucFirst($name) }}</span>
                                     <hr class="dropdown-divider">
                                 </div>
                                 <div class="columns mb-0">
@@ -418,13 +440,13 @@
                             </div>
                         </div>
 
-                        @if($synopsis)
+                        @if($summary)
                             <hr class="dropdown-divider">
                             <div class="block">
                                 <div class="content">
-                                    <b>Synopsis :</b>
+                                    <b>Summary :</b>
                                     <p>
-                                        {{ $synopsis }}
+                                        {{ $summary }}
                                     </p>
                                 </div>
                             </div>
@@ -441,8 +463,9 @@
                                 @if(isset($screenshotValues[0]))
                                     @foreach($screenshotValues as $s => $screenshot)
                                         <a id='single_image-{{ $s }}'
-                                           href='{{ $screenshot['value'] }}'>
-                                            <img src="{{ $screenshot['value'] }}">
+                                           href='{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_BIG')) }}'>
+                                            <img
+                                                src="{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_BIG')) }}">
                                             <input type="hidden" name="screenshotsHidden[{{$s}}]"
                                                    value="{{ $screenshot['value'] }}">
                                         </a>
@@ -471,6 +494,14 @@
                             </div>
                         </div>
                     </div>
+
+                    @if($commentModeration)
+                        <div class="box mt-3 has-background-danger-light">
+                            <h5 class="subtitle is-5 m-0">Modération</h5>
+                            <hr class="p-0 mt-1 mb-1 has-background-black">
+                            {{ $commentModeration }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

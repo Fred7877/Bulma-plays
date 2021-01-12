@@ -4,8 +4,9 @@
     <h1>Custom game modération
         @if ($customGame->moderations->last() === null) <span class="badge badge-secondary"> - </span>
         @else
-            @if($customGame->moderations->last()->status) <span class="badge badge-success">OK</span> @else <span class="badge badge-danger">N-OK</span>
-        @endif
+            @if($customGame->moderations->last()->status) <span class="badge badge-success">OK</span> @else <span
+                class="badge badge-danger">N-OK</span>
+            @endif
         @endif
     </h1>
 @stop
@@ -21,9 +22,15 @@
                 <label for="" class="form-label">Title : &nbsp; </label>
                 {{ $customGame->name }}
             </div>
+
+            <div class="row">
+                <label for="" class="form-label">Image présentation : &nbsp; </label>
+                <img class="mr-1 img-thumbnail" style="width:250px" src="{{ Str::of( Storage::disk('s3')->url($customGame->image))->replace('_format_', '_720P') }}" alt="">
+            </div>
+
             <div class="row">
                 <label for="" class="form-label">Date release : &nbsp;</label>
-                {{ $customGame->date_release }}
+                {{ $customGame->first_release_date }}
             </div>
             <div class="row">
                 <label for="" class="form-label">Thèmes : &nbsp;</label>
@@ -47,11 +54,20 @@
             </div>
             <div class="row">
                 <label for="" class="form-label">Productors : &nbsp;</label>
-                {{ $customGame->productors()->pluck('value')->implode(', ') }}
+                @foreach($customGame->productors()->get() as $productor)
+                    @if($productor->is_link)
+                        <a href="{{ $productor->value }}" target="_blank">{{ $productor->value }}</a>
+                    @else
+                        {{ $productor->value }}
+                    @endif
+                    @if (!$loop->last)
+                        , &nbsp;
+                    @endif
+                @endforeach
             </div>
             <div class="row">
-                <label for="" class="form-label">Synopsis : &nbsp;</label>
-                {{ $customGame->synopsis }}
+                <label for="" class="form-label">Summary : &nbsp;</label>
+                {{ $customGame->summary }}
             </div>
             <div class="row">
                 <label for="" class="form-label">Screeshots : &nbsp;</label>
@@ -59,7 +75,7 @@
             <div class="row">
                 @foreach($customGame->screenshots as $screenshot)
                     <img class="mr-1 img-thumbnail" style="width:250px"
-                         src="{{ Storage::disk('s3')->url($screenshot->path) }}">
+                         src="{{ Str::of( Storage::disk('s3')->url($screenshot->path))->replace('_format_', '_720P') }}">
                 @endforeach
             </div>
             <div class="row mt-3">
@@ -85,8 +101,9 @@
                         <button type="submit" class="btn btn-danger" name="moderation_nok">N-OK</button>
                     </div>
                 </div>
-                <div class="col">
-                    <textarea name="comment" id="" cols="50" rows="5"></textarea>
+                <div class="col-7">
+                    <label class="form-label" for="comment">Commentaire modération</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="5">{{ $customGame->moderations->last()->comment }}</textarea>
                 </div>
             </div>
         </form>

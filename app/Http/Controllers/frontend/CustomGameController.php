@@ -11,11 +11,13 @@ use App\Models\CustomGameVideo;
 use App\Models\GameMode;
 use App\Models\Genre;
 use App\Models\Link;
+use App\Models\ModerationCustomGame;
 use App\Models\Platform;
 use App\Models\Productor;
 use App\Models\Theme;
+use App\Services\Facades\ResizeImage;
+use App\Services\Game;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -27,11 +29,13 @@ class CustomGameController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+
+        session()->remove('paginate');
+        return view('frontend.CustomGame.index', ['customGame' => true]);
     }
 
     /**
@@ -41,11 +45,11 @@ class CustomGameController extends Controller
      */
     public function create()
     {
-        return view('frontend.CustomGame.index', [
+        return view('frontend.CustomGame.create', [
             'platforms' => $this->getPopularPlatforms(),
             'genres' => Genre::all(),
             'gameModes' => GameMode::all(),
-            'themes' => Theme::all()
+            'themes' => Theme::all(),
         ]);
     }
 
@@ -65,24 +69,24 @@ class CustomGameController extends Controller
             Theme::whereIn('id', $request->get('themes'))->pluck('id') : $request->get('themes');
         $gameModes = isset($request->get('gameModes')[0]) && count($request->get('themes')) > 1 ?
             GameMode::whereIn('id', $request->get('gameModes'))->pluck('id') : $request->get('gameModes');
-        $title = $request->get('title');
+        $name = $request->get('name');
 
         $linksProductors = $request->get('productor_links');
 
         if ($request->hasFile('imagePresentation')) {
-            $pathImage = $request->imagePresentation->storeAs('custom_game_images/' . Str::slug($title), $request->file('imagePresentation')->getClientOriginalName(), 's3');
+            $path = ResizeImage::saveS3('imagePresentation', 'custom_game_images', true);
         }
 
         $customGame = CustomGame::firstOrCreate(
             [
                 'user_id' => Auth::user()->id,
-                'name' => $title,
+                'name' => $name,
             ],
             [
                 'publish_date' => $request->get('published') ? Carbon::now() : null,
-                'date_release' => $request->get('date_release') ? Carbon::createFromFormat('d/m/Y', $request->get('date_release')) : null,
-                'image' => $pathImage ?? null,
-                'synopsis' => $request->get('synopsis'),
+                'first_release_date' => $request->get('first_release_date') ? Carbon::createFromFormat('d/m/Y', $request->get('first_release_date')) : null,
+                'image' => $path ?? null,
+                'summary' => $request->get('summary'),
             ]
         );
 
@@ -107,8 +111,8 @@ class CustomGameController extends Controller
             }
         });
 
-        collect($request->file('screenshots'))->each(function ($screenshot) use ($customGame, $title) {
-            $pathScreenshot = $screenshot->storeAs('custom_game_screenshot/' . Str::slug($title), $screenshot->getClientOriginalName(), 's3');
+        collect($request->file('screenshots'))->each(function ($screenshot) use ($customGame, $name) {
+            $pathScreenshot = ResizeImage::saveS3($screenshot, 'custom_game_screenshot');
             CustomGameScreenshot::firstOrCreate([
                     'custom_game_id' => $customGame->id,
                     'path' => $pathScreenshot,
@@ -116,8 +120,8 @@ class CustomGameController extends Controller
             );
         });
 
-        collect($request->file('videos'))->each(function ($video) use ($customGame, $title) {
-            $pathVideo = $video->storeAs('custom_game_videos/' . Str::slug($title), $video->getClientOriginalName(), 's3');
+        collect($request->file('videos'))->each(function ($video) use ($customGame, $name) {
+            $pathVideo = $video->storeAs('custom_game_videos/' . Str::slug($name), $video->getClientOriginalName(), 's3');
             CustomGameVideo::firstOrCreate([
                     'custom_game_id' => $customGame->id,
                     'path' => $pathVideo,
@@ -146,12 +150,12 @@ class CustomGameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\CustomGame $customGame
-     * @return \Illuminate\Http\Response
+     * @param $slug
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show(CustomGame $customGame)
+    public function show($slug)
     {
-        //
+        return view('frontend.game.show', ['game' => (new Game)->get($slug, true)]);
     }
 
     /**
@@ -193,44 +197,47 @@ class CustomGameController extends Controller
             Theme::whereIn('id', $request->get('themes'))->pluck('id') : $request->get('themes');
         $gameModes = isset($request->get('gameModes')[0]) && count($request->get('themes')) > 1 ?
             GameMode::whereIn('id', $request->get('gameModes'))->pluck('id') : $request->get('gameModes');
-        $title = $request->get('title');
+        $name = $request->get('name');
         $linksProductors = $request->get('productor_links');
 
         if ($request->imagePresentation !== null) {
             File::delete(public_path($customGame->image));
-            $pathImage = $request->imagePresentation->storeAs('custom_game_images/' . Str::slug($title), $request->file('imagePresentation')->getClientOriginalName(), 's3');
+            $pathImage = $request->imagePresentation->storeAs('custom_game_images/' . Str::slug($name), $request->file('imagePresentation')->getClientOriginalName(), 's3');
             $customGame->update(['image' => $pathImage]);
         }
 
         $customGame->update(
             [
                 'user_id' => Auth::user()->id,
-                'name' => $request->get('title'),
+                'name' => $request->get('name'),
                 'publish_date' => $request->get('published') ? Carbon::now() : null,
-                'date_release' => Carbon::createFromFormat('d/m/Y', $request->get('date_release')),
-                'synopsis' => $request->get('synopsis'),
+                'first_release_date' => $request->get('first_release_date') ? Carbon::createFromFormat('d/m/Y', $request->get('first_release_date')) : null,
+                'summary' => $request->get('summary'),
             ]
         );
 
         Link::where('custom_game_id', $customGame->id)->delete();
-        collect($request->get('links'))->each(function ($link, $i) use ($customGame) {
-            Link::firstOrCreate([
-                    'custom_game_id' => $customGame->id,
-                    'url' => $link
-                ]
-            );
+        collect($request->get('links'))->each(function ($link) use ($customGame) {
+            if ($link !== null) {
+                Link::firstOrCreate([
+                        'custom_game_id' => $customGame->id,
+                        'url' => $link
+                    ]
+                );
+            }
         });
 
         Productor::where('custom_game_id', $customGame->id)->delete();
         collect($request->get('productors'))->map(function ($productor, $index) use ($customGame, $linksProductors) {
-            return Productor::firstOrCreate([
-                    'custom_game_id' => $customGame->id,
-                    'value' => $productor,
-                    'is_link' => key_exists($index, $linksProductors ?? [])
-                ]
-            );
+            if ($productor !== null) {
+                return Productor::firstOrCreate([
+                        'custom_game_id' => $customGame->id,
+                        'value' => $productor,
+                        'is_link' => key_exists($index, $linksProductors ?? [])
+                    ]
+                );
+            }
         });
-
 
         $screenshotsCustoGame = CustomGameScreenshot::where('custom_game_id', $customGame->id)->get();
         $screenshotsCustoGame->each(function ($screenshotCustoGame) use ($request) {
@@ -242,8 +249,8 @@ class CustomGameController extends Controller
             }
         });
 
-        collect($request->file('screenshots'))->each(function ($screenshot) use ($request, $title, $customGame) {
-            $pathScreenshot = $screenshot->storeAs('custom_game_screenshot/' . Str::slug($title), $screenshot->getClientOriginalName(), 's3');
+        collect($request->file('screenshots'))->each(function ($screenshot) use ($request, $name, $customGame) {
+            $pathScreenshot = $screenshot->storeAs('custom_game_screenshot/' . Str::slug($name), $screenshot->getClientOriginalName(), 's3');
             CustomGameScreenshot::firstOrCreate([
                     'custom_game_id' => $customGame->id,
                     'path' => $pathScreenshot,
@@ -261,8 +268,8 @@ class CustomGameController extends Controller
             }
         });
 
-        collect($request->file('videos'))->each(function ($video) use ($request, $title, $customGame) {
-            $pathVideo = $video->storeAs('custom_game_video/' . Str::slug($title), $video->getClientOriginalName(), 's3');
+        collect($request->file('videos'))->each(function ($video) use ($request, $name, $customGame) {
+            $pathVideo = $video->storeAs('custom_game_video/' . Str::slug($name), $video->getClientOriginalName(), 's3');
             CustomGameVideo::firstOrCreate([
                     'custom_game_id' => $customGame->id,
                     'path' => $pathVideo,
@@ -284,6 +291,11 @@ class CustomGameController extends Controller
         $customGame->gameModes()->sync($gameModes);
 
         Session::flash('message', 'Travail sauvegardé !');
+
+        ModerationCustomGame::create([
+            'custom_game_id' => $customGame->id,
+            'status' =>null,
+        ]);
 
         return redirect(route('custom-game.edit', ['custom_game' => $customGame]));
     }
@@ -314,5 +326,12 @@ class CustomGameController extends Controller
 
             return false;
         });
+    }
+
+    public function list()
+    {
+        $customGames = CustomGame::where('user_id', Auth::user()->id)->orderByDesc('created_at')->get();
+
+        return view('frontend.CustomGame.list', ['customGames' => $customGames]);
     }
 }

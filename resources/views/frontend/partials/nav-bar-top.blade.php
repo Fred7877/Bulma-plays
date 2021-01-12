@@ -12,7 +12,7 @@
     </div>
 
     <div id="navbarBasic" class="navbar-menu">
-        @if (Route::currentRouteName() === 'games.show')
+        @if (Route::currentRouteName() === 'games.show' || Route::currentRouteName() === 'custom-game.show')
             <div class="navbar-start is-hidden-mobile">
                 <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
                     <i class="fas fa-list-ul icon is-medium"></i>
@@ -57,17 +57,15 @@
                     </div>
                 </div>
             </div>
-
-
             @if(!Auth::check())
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
                             <a class="button is-primary" id="btn-signup">
-                                <strong>Sign up</strong>
+                                <strong>{{ __('frontend.sign_in') }}</strong>
                             </a>
                             <a class="button is-light" id="btn-login">
-                                Log in
+                                {{ __('frontend.log_in') }}
                             </a>
                         </div>
                     </div>
@@ -78,7 +76,7 @@
                     <div class="dropdown dropdown-menu-user is-right">
                         <div class="dropdown-trigger">
                             <button id="nav-user" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                <span><i class="fas fa-ellipsis-h"></i></i></span>
+                                <span><i class="fas fa-ellipsis-h"></i></span>
                             </button>
                         </div>
                         <div class="dropdown-menu" id="dropdown-menu" role="menu">
@@ -88,20 +86,19 @@
                                 </a>
                                 <hr class="dropdown-divider m-0">
                                 <a href="{{ route('custom-game.create') }}" class="dropdown-item" id="btn-create-game">
-                                    Créer une fiche jeux
+                                    {{ __('frontend.create_custom_game') }}
                                 </a>
                                 <hr class="dropdown-divider m-0">
                                 <a href="{{ route('comments.user') }}" class="dropdown-item" id="btn-comments-user">
-                                    Mes commentaires
+                                    {{ __('frontend.my_comments') }}
                                 </a>
-                                <a class="dropdown-item">
-                                    Mes fiches jeux
+                                <a href="{{ route('list.custom-games.user') }}" class="dropdown-item">
+                                    {{ __('frontend.my_homemade_games') }}
                                 </a>
-
                                 <div class="dropdown-item">
                                     <a class="button is-dark is-small" id="btn-logout"
                                        href="{{ route('gamers.logout') }}">
-                                        Log out
+                                        {{ __('frontend.log_out') }}
                                     </a>
                                 </div>
                             </div>

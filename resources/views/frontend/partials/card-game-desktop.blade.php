@@ -4,22 +4,25 @@
             <figure class="image">
                 @if(isset($game['cover']))
                 <img
-                    src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')  }}"/>
+                    src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')->replace('_format_', 'LOGO_MED')  }}"/>
                 @endif
             </figure>
         </div>
         <div class="media-content">
-            <div class="content">
-                <p>
-                <h4 class="title is-4 mt-0 mb-0">
-                    <a href="{{ LaravelLocalization::localizeUrl(route('games.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
-                </h4>
-                @if(isset($game['translate']['summary']) && $game['translate']['summary'] !== '')
-                {{ Str::of($game['translate']['summary'])->limit(150) }}
-                @else
-                {{ Str::of(isset($game['summary']) ? $game['summary'] : '')->limit(150)  ?? '' }}
-                @endif
-                </p>
+            <div class="content pt-2">
+                    <h4 class="title is-4 mt-0 mb-0">
+                        @if($customGame)
+                            <a href="{{ LaravelLocalization::localizeUrl(route('custom-game.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
+                        @else
+                            <a href="{{ LaravelLocalization::localizeUrl(route('games.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
+                        @endif
+                        <hr class="m-0 p-0 mb-1">
+                    </h4>
+                    @if(isset($game['translate']['summary']) && $game['translate']['summary'] !== '')
+                    {{ Str::of($game['translate']['summary'])->limit(150) }}
+                    @else
+                    {{ Str::of(isset($game['summary']) ? $game['summary'] : '')->limit(150)  ?? '' }}
+                    @endif
 
                 <div class="is-flex-direction-row">
                     <div class="is-flex-direction-row">

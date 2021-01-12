@@ -27,6 +27,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
+
+// FRONTEND
 Route::group([
     'prefix' => LaravelLocalization::setLocale()
 ], function () {
@@ -34,16 +36,23 @@ Route::group([
         return redirect(route('home'));
     });
     Route::get('games', [GameController::class, 'index'])->name('games.index');
+    Route::get('games/homemade', [CustomGameController::class, 'index'])->name('homemage.games.index');
     Route::get('reset-filter', [GameController::class, 'resetFilter'])->name('reset.filter');
     Route::get('games/{slug}', [GameController::class, 'show'])->name('games.show');
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('filter-game/{platformSlug}/{platformName}', [FilterGamesController::class, 'index'])->name('filter.game');
-    Route::resource('custom-game', CustomGameController::class)->middleware('auth.frontend');
+    Route::resource('custom-game', CustomGameController::class)->except('show')->middleware('auth.frontend');
+
+    Route::get('custom-game/user/list', [CustomGameController::class, 'list'])->name('list.custom-games.user')->middleware('auth.frontend');
     Route::get('comments', [FrontendComment::class, 'index'])->name('comments.user');
     Route::get('comments/{comment}/edit', [FrontendComment::class, 'edit'])->name('comments.user.edit');
     Route::put('comments/{comment}', [FrontendComment::class, 'update'])->name('comments.user.update');
+
+    Route::get('custom-game/{slug}', [CustomGameController::class, 'show'])->name('custom-game.show');
+
 });
 
+// BACKEND
 Route::get('/backend', function () {
     return redirect(route('users.index'));
 });

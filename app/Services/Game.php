@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Enums\CommentType;
 use App\Models\Comment;
+use App\Models\CustomGame;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use MarcReichel\IGDBLaravel\Models\Company;
@@ -58,27 +59,32 @@ class Game
         });
     }
 
-    public function get(string $slug)
+    public function get(string $slug, $customGame = false)
     {
-        return Cache::remember('game-' . $slug . '-' . App::getLocale(), $this->ttl, function () use ($slug) {
 
-            $game = IGDBGame::with([
-                'cover',
-                'videos',
-                'game_engines',
-                'game_modes',
-                'multiplayer_modes',
-                'player_perspectives',
-                'release_dates',
-                'themes',
-                'genres',
-                'keywords',
-                'platforms',
-                'screenshots',
-                'websites',
-                'age_ratings',
-                'involved_companies',
-            ])->where('slug', $slug)->first()->toArray();
+        return Cache::remember('game-' . $slug . '-' . App::getLocale(), $this->ttl, function () use ($slug, $customGame) {
+
+            if (!$customGame) {
+                $game = IGDBGame::with([
+                    'cover',
+                    'videos',
+                    'game_engines',
+                    'game_modes',
+                    'multiplayer_modes',
+                    'player_perspectives',
+                    'release_dates',
+                    'themes',
+                    'genres',
+                    'keywords',
+                    'platforms',
+                    'screenshots',
+                    'websites',
+                    'age_ratings',
+                    'involved_companies',
+                ])->where('slug', $slug)->first()->toArray();
+            } else {
+                $game = CustomGame::where('slug', $slug)->first()->toArray();
+            }
 
             if (isset($game['involved_companies'])) {
                 $game['compagnies'] = collect($game['involved_companies'])->map(function ($item) {

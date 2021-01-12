@@ -1,6 +1,6 @@
 @extends('frontend.main')
 
 @section('content')
-    <livewire:view-games />
+    <livewire:view-games/>
 @stop
 

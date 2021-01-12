@@ -1,9 +1,10 @@
-<footer class="footer mt-5" id="footer">
+<footer class="footer mt-5 pb-5 is-size-7" id="footer">
     <div class="container mx-auto ">
         <div class="columns">
             <div class="column">
                 <div class="row">
-                    <p>Ce site fonctionne grace à <a href="https://api-docs.igdb.com/#about" target="_blank">IGDB</a>
+                    <p class="has-text-weight-medium">
+                        {{ __('frontend.site_works_thanks_to') }} <a href="https://api-docs.igdb.com/#about" target="_blank">IGDB</a>
                     </p>
                 </div>
                 <div class="row">
@@ -13,7 +14,7 @@
 
             <div class="column">
                 <div class="row">
-                    <p>Vos jeux vidéo préféré sur :</p>
+                    <p class="has-text-weight-medium">{{ __('frontend.your_favorite_games') }} :</p>
                 </div>
                 <div class="row">
                     <p>
@@ -53,7 +54,18 @@
             </div>
 
             <div class="column">
-                Les jeux vidéo "homemade"
+                <p class="has-text-weight-medium">{{ __('frontend.homemade_games') }}</p>
+                <ul>
+                @foreach(\App\Models\CustomGame::whereHas('moderations', function(\Illuminate\Database\Eloquent\Builder $query){
+                               $query->where('status', true);
+                        })->limit(5)->orderByDesc('created_at')->get() as $game)
+                    <li>
+                        <a href="{{ route('custom-game.show', ['slug' => $game->slug]) }}">
+                        {{ $game->name }}
+                        </a>
+                    </li>
+                @endforeach
+                </ul>
             </div>
         </div>
     </div>
