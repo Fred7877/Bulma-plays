@@ -29,6 +29,7 @@ class Comment extends Component
     public function mount()
     {
         $this->typeDescription = Str::lower(CommentType::fromValue($this->type)->key); //Str::lower(CommentType::getDescription($this->type));
+
         $this->comments = $this->game[$this->typeDescription]->filter(function ($item) {
             return $item->parent_comment_id === null && isset($item->moderations->last()['status']) &&
                 $item->moderations->last()['status'] === Moderation::ModerationOk;

@@ -93,5 +93,13 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     'modification_moderation' => 'une modification entrainera une modération',
     'edit' => 'editer',
     'return' => 'retour',
-    'my_comments' => 'Mes commentaires'
+    'my_comments' => 'Mes commentaires',
+    'site_works_thanks_to' => 'Ce site fonctionne grace à',
+    'your_favorite_games' => 'Your favorite video games on',
+    'homemade_games' => 'Les jeux vidéo homemade',
+    'create_custom_game' => 'Créer une fiche jeux homemade',
+    'my_homemade_games' => 'Mes jeux homemade',
+    'log_out' => 'Se déconnecter',
+    'log_in' => 'Se connecter',
+    'sign_in' => 'S\'inscrire',
 ];

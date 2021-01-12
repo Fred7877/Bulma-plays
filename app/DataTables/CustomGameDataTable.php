@@ -21,16 +21,15 @@ class CustomGameDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('action', 'backend.custom-game.buttons-action')
             ->editColumn('moderated', function ($item) {
-                if ($item->moderations->first() === null) {
+
+                if (optional($item->moderations->last())->status === null) {
                     return '<span class="badge badge-primary">&nbsp; - &nbsp;</span>';
                 } else {
+                    if ((int)$item->moderations->last()->status === Moderation::ModerationNOk) {
 
-                    if ($item->moderations->last()->status === Moderation::ModerationNOk) {
-
-                        return '<span class="badge badge-danger">' . Moderation::getDescription($item->moderations->last()->status) . '</span>';
+                        return '<span class="badge badge-danger">' . Moderation::getDescription((int)$item->moderations->last()->status) . '</span>';
                     }
-
-                    return '<span class="badge badge-success">' . Moderation::getDescription($item->moderations->last()->status) . '</span>';
+                    return '<span class="badge badge-success">' . Moderation::getDescription((int)$item->moderations->last()->status) . '</span>';
                 }
             })
             ->escapeColumns([])
@@ -74,7 +73,7 @@ class CustomGameDataTable extends DataTable
             Column::make('id'),
             Column::make('name'),
             Column::make('user_id'),
-            Column::make('moderated')->title('Status moderation')->addClass('text-center'),
+            Column::make('moderated')->title('Status moderation'),
             Column::make('action', 'custom-game.id'),
         ];
     }

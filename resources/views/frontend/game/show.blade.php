@@ -17,7 +17,16 @@
                             src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'screenshot_big')  }}">
                     </figure>
                 </div>
-        @endif
+            @endif
+
+                @if(isset($game['image']))
+                    <div class="column ">
+                        <figure class="image static shadow-2xl">
+                            <img
+                                src="{{ Str::of( Storage::disk('s3')->url($game['image']))->replace('_format_', 'SCREENSHOT_BIG') }}">
+                        </figure>
+                    </div>
+            @endif
         <!-- FICHE -->
             <div class="column">
                 <div class="column is-full p-0">
@@ -189,7 +198,7 @@
         <div class="block">
             <div class="content">
                 @if(isset($game['summary']))
-                    <b>Synopsis :</b>
+                    <b>Summary :</b>
                     <p>
                         @if(isset($game['translate']['summary']) && !empty($game['translate']['summary']))
                             {{ $game['translate']['summary']}}

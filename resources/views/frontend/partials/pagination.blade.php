@@ -1,10 +1,16 @@
-<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+<nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
 
     <button class="button is-primary is-small pagination-previous @if($currentPage == 1) button  is-static @endif"
             wire:click="paginate('-')"
     >
 
         {{ Str::ucFirst(__('frontend.previous')) }}
+    </button>
+
+    <button class="button is-primary pagination-next is-small is-clickable @if($currentPage == $pageCount) button  is-static @endif"
+            wire:click="paginate('+')"
+    >
+        {{ Str::ucFirst(__('frontend.next')) }}
     </button>
 
     <ul class="pagination-list">
@@ -89,9 +95,4 @@
         @endforeach
     </ul>
 
-    <button class="button is-primary pagination-next is-small is-clickable @if($currentPage == $pageCount) button  is-static @endif"
-            wire:click="paginate('+')"
-    >
-        {{ Str::ucFirst(__('frontend.next')) }}
-    </button>
 </nav>

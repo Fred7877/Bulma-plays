@@ -36,11 +36,6 @@ class Game extends Model
         'igdb' => 'array'
     ];
 
-    public function platforms()
-    {
-        return $this->belongsToMany(Platform::class, PlatformGame::class);
-    }
-
     public function releaseDate()
     {
         return $this->hasOne(ReleaseDate::class);

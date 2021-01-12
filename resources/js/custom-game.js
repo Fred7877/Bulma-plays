@@ -32,8 +32,8 @@ $(document).ready(() => {
 
     let autoPick = false;
     let date = null;
-    if ($('input[name="date_release"]').val() !== '') {
-        let dateRelease = $('input[name="date_release"]').val().split('-');
+    if ($('input[name="first_release_date"]').val() !== '') {
+        let dateRelease = $('input[name="first_release_date"]').val().split('-');
         date = new Date(dateRelease[0], dateRelease[1], dateRelease[2]);
         autoPick = true;
     }

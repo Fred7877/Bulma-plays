@@ -3,6 +3,7 @@
 
 namespace App\Models\RelationShips;
 
+use App\Models\Comment;
 use App\Models\CustomGameScreenshot;
 use App\Models\CustomGameVideo;
 use App\Models\GameMode;
@@ -64,5 +65,10 @@ trait CustomGameRelationShipsTrait
     public function moderations()
     {
         return $this->hasMany(ModerationCustomGame::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'game_id', 'id');
     }
 }

@@ -147,6 +147,11 @@
                     <button class="button is-small is-primary @if($temporalityActual) is-light @endif" wire:click="temporality">{{ Str::ucFirst(__('frontend.coming_soon')) }}</button>
                 </div>
             </div>
+            <div class="column mr-5 is-mobile">
+                <a href="{{ route('homemage.games.index') }}">
+                    <button class="button is-warning has-text-weight-medium is-pulled-right {{ $homemadeLoading }}" wire:click="homemade">Homemade Games</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

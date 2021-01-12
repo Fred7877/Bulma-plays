@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use MarcReichel\IGDBLaravel\Models\Game;
+use App\Models\CustomGame as CustomGameModel;
 
 class ViewGames extends Component
 {
@@ -17,6 +20,7 @@ class ViewGames extends Component
     public $searchWord;
     private $with = ['release_dates', 'platforms', 'cover', 'genres'];
     public $genre = '';
+    public $customGame = false;
 
     public $offset = 0;
     public $limit = 10;
@@ -110,7 +114,7 @@ class ViewGames extends Component
 
     private function getGames()
     {
-        $keyCache = 'games_' . Str::studly($this->directionTemporality.'_'.$this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale());
+        $keyCache = 'games_' . Str::studly($this->directionTemporality.'_'.$this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale().'_'.$this->customGame);
 
         $this->totalQueryGame = $this->queryGames()->count();
         $this->pageCount = (int)ceil($this->totalQueryGame / $this->limit);
@@ -124,7 +128,11 @@ class ViewGames extends Component
         });
 
         foreach ($games as $k => $game) {
-            $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
+            if ($this->customGame) {
+                $games[$k]['cover']['url'] = Storage::disk('s3')->url($game['image']);
+            } else {
+                $games[$k]['translate']['summary'] = getTranslation($game['id'], 'summary', App::getLocale());
+            }
         }
 
         session()->put([
@@ -169,9 +177,17 @@ class ViewGames extends Component
 
     private function queryGames()
     {
-        $query = Game::with($this->with);
+        if ($this->customGame) {
+            $query = CustomGameModel::query();
+            $query->whereHas('moderations', function(Builder $query){
+                $query->where('status', true);
+            });
+        } else {
+            $query = Game::with($this->with);
+            $query->where('first_release_date', $this->directionTemporality, Carbon::now());
+            $query->orderBy('first_release_date', $this->sort);
 
-        $query->where('first_release_date', $this->directionTemporality, Carbon::now());
+        }
 
         if ($this->searchWord != '') {
             $query->search($this->searchWord);
@@ -184,8 +200,6 @@ class ViewGames extends Component
         if ($this->platform != '') {
             $query->where('platforms.slug', $this->platform);
         }
-
-        $query->orderBy('first_release_date', $this->sort);
 
         return $query;
     }

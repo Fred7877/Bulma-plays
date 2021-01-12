@@ -92,5 +92,13 @@ By registering, you will also have the opportunity to leave a comment, reply to 
     'modification_moderation' => 'a modification will result in a moderation',
     'edit' => 'edit',
     'return' => 'back',
-    'my_comments' => 'My comments'
+    'my_comments' => 'My comments',
+    'site_works_thanks_to' => 'This site works thanks to',
+    'your_favorite_games' => 'Vos jeux vidéo préféré sur',
+    'homemade_games' => '"Homemade" games',
+    'create_custom_game' => 'Create homemade game sheet',
+    'my_homemade_games' => 'My homemade games',
+    'log_out' => 'Log out',
+    'log_in' => 'Log in',
+    'sign_up' => 'Sign up',
 ];
