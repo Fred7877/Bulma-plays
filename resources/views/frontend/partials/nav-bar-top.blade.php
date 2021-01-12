@@ -12,7 +12,9 @@
     </div>
 
     <div id="navbarBasic" class="navbar-menu">
-        @if (Route::currentRouteName() === 'games.show' || Route::currentRouteName() === 'custom-game.show')
+        @if (Route::currentRouteName() === 'games.show' ||
+             Route::currentRouteName() === 'custom-game.show' ||
+             Route::currentRouteName() === 'custom-game.edit')
             <div class="navbar-start is-hidden-mobile">
                 <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
                     <i class="fas fa-list-ul icon is-medium"></i>

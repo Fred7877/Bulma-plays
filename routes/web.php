@@ -36,7 +36,7 @@ Route::group([
         return redirect(route('home'));
     });
     Route::get('games', [GameController::class, 'index'])->name('games.index');
-    Route::get('games/homemade', [CustomGameController::class, 'index'])->name('homemage.games.index');
+    Route::get('games/homemade', [CustomGameController::class, 'index'])->name('homemade.games.index');
     Route::get('reset-filter', [GameController::class, 'resetFilter'])->name('reset.filter');
     Route::get('games/{slug}', [GameController::class, 'show'])->name('games.show');
     Route::get('home', [HomeController::class, 'index'])->name('home');

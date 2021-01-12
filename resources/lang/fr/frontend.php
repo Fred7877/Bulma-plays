@@ -71,8 +71,16 @@ ou <a
 Ils sont tous ici !
     <br>
     <br>
+    En plus Encore !!! il existe une communauté de créateur passioné de jeux-vidéos fait maison, ils sont innovant, créatif, enthousiaste et mérite le coup d\'oeil :)
+    <br>
+    <br>
 En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
     de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqués :)
+    <br>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
+    Si tu est un créateur de jeux "<a href="%s">Homemade</a>", tu pourra aussi créer une fiche de ton jeux et lui permettre de lui donner un peu plus de visibilté, avoir des retours, ect...
+    <i class="fas fa-laugh-wink has-text-primary"></i>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
     <br>
     <br>
     <a href="%s">

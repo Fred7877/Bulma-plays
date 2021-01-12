@@ -70,8 +70,17 @@ or <a
     <br>
 They are all here!
     <br>
+    <br>
+    And more !!! there is a community of passionate creators of home-made video games, they are innovative, creative, enthusiastic and worth a look :)
+    <br>
+    <br>
 By registering, you will also have the opportunity to leave a comment, reply to other comments or
     to leave tips & tricks to help other players who may be blocked :)
+    <br>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
+    If you are a creator of "<a href="%s">Homemade</a>" games, you will also be able to create a card of your game and allow him to give it a little more visibility, get feedback, etc...
+    <i class="fas fa-laugh-wink has-text-primary"></i>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
     <br>
     <br>
     <a href="%s">
