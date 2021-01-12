@@ -90,7 +90,7 @@
                                         <select name="genres[]" multiple="multiple" id="genres" style="width: 100%"
                                                 class="selector">
                                             <option
-                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genre')) }}</option>
                                             @foreach($genres as $genre)
                                                 <option value="{{ $genre->id }}"
                                                         @if(isset($this->genresSelected[$genre->id])) selected="selected" @endif >{{ $genre->name }}</option>
@@ -104,7 +104,7 @@
                                         <select name="platforms[]" multiple="multiple" id="platforms"
                                                 style="width: 100%" class="selector">
                                             <option
-                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genres')) }}</option>
+                                                disabled="disabled">{{ Str::ucFirst(__('frontend.choose_genre')) }}</option>
                                             @foreach($platforms as $platformSelection)
                                                 <option
                                                     value="{{ $platformSelection->id }}"
