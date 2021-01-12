@@ -83,9 +83,6 @@
                         </div>
                         <div class="dropdown-menu" id="dropdown-menu" role="menu">
                             <div class="dropdown-content">
-                                <a href="#" class="dropdown-item" id="btn-profil">
-                                    Profil
-                                </a>
                                 <hr class="dropdown-divider m-0">
                                 <a href="{{ route('custom-game.create') }}" class="dropdown-item" id="btn-create-game">
                                     {{ __('frontend.create_custom_game') }}
