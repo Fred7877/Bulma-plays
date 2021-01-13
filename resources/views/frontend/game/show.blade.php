@@ -194,7 +194,6 @@
             <!-- FICHE -->
         </div>
         <hr class="dropdown-divider">
-
         <div class="block">
             <div class="content">
                 @if(isset($game['summary']))

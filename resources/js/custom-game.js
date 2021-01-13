@@ -51,7 +51,20 @@ $(document).ready(() => {
     owlScreenshot = $('#carousel-screenshot').owlCarousel(
         {
             margin: 10,
-            items: 3,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                960: {
+                    items: 3
+                },
+                1200: {
+                    items: 3
+                }
+            }
         }
     );
 

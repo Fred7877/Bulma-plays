@@ -2,7 +2,7 @@ const Swal = require('sweetalert2');
 
 document.addEventListener("DOMContentLoaded", () => {
     // PROFIL
-    if (document.body.contains(document.getElementById("nav-user"))) {
+    if (document.body.contains(document.getElementById("btn-profil"))) {
         document.getElementById("btn-profil").addEventListener("click", function (e) {
             $.ajaxSetup({
                 headers: {
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             $.ajax({
                 type: "get",
-                url: "get-user",
+                url: route('ajax.get.user'),
             }).done((user) => {
                 Swal.fire({
                     html: `<div class="row" id="modal-user">

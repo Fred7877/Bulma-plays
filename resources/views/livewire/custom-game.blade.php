@@ -15,9 +15,6 @@
                 <div class="column is-3">
                     <div class="box mt-3">
                         <aside class="menu">
-                            <p class="menu-label">
-                                Références
-                            </p>
                             <!-- BEGIN FORM -->
                             <ul class="menu-list">
                                 <li>
@@ -463,9 +460,9 @@
                                 @if(isset($screenshotValues[0]))
                                     @foreach($screenshotValues as $s => $screenshot)
                                         <a id='single_image-{{ $s }}'
-                                           href='{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_BIG')) }}'>
+                                           href='{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_HUGE')) }}'>
                                             <img
-                                                src="{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_BIG')) }}">
+                                                src="{{ asset(Str::of($screenshot['value'])->replace('_format_', 'SCREENSHOT_MED')) }}">
                                             <input type="hidden" name="screenshotsHidden[{{$s}}]"
                                                    value="{{ $screenshot['value'] }}">
                                         </a>
@@ -484,9 +481,8 @@
                             <div class="owl-carousel owl-theme" id="carousel-video">
                                 @if(isset($newVideoValues[0]))
                                     @foreach($newVideoValues as $v => $video)
-                                        <video width="320" height="240" controls>
-                                            <source src="{{ $video['value'] }}">
-                                        </video>
+                                        <iframe class="item-video" data-merge="1" allowfullscreen="allowfullscreen"
+                                                src="{{ $video['value'] }}"></iframe>
                                         <input type="hidden" name="videosHidden[{{ $v }}]"
                                                value="{{ $video['value'] }}">
                                     @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -52,15 +53,13 @@ class CustomGame extends Component
 
     protected $rules = [
         'name' => 'required|min:2|unique:custom_games',
-        'newScreenshotValues.*.value' => 'image',
         'imagePresentation' => 'image',
-        'newVideoValues.*.value' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
+
     ];
 
     protected $messages = [
         'name.unique' => 'Ce titre existe déjà',
         'imagePresentation.image' => 'Doit-être une image',
-        'newScreenshotValues.image' => 'Doit-être une image',
         'newVideoValues.mimetypes' => 'Doit-être une vidéo',
     ];
 
@@ -168,8 +167,13 @@ class CustomGame extends Component
         $this->newLinkValues = array_values($this->newLinkValues);
     }
 
-    public function updatedNewScreenshotValues()
+    public function updatedNewScreenshotValues($propertyName, $i)
     {
+        $this->validate([
+            'newScreenshotValues.'.$i => 'image'
+        ],
+        ['newScreenshotValues.*.value.image' => 'Doit-être une image']);
+
         $this->dispatchBrowserEvent('updatedNewScreenshotValues',
             [
                 'position' => count($this->newScreenshotValues),
@@ -197,8 +201,12 @@ class CustomGame extends Component
         );
     }
 
-    public function updatedNewVideoValues()
+    public function updatedNewVideoValues($propertyName, $i)
     {
+        $this->validate([
+            'newVideoValues.'.$i => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4',
+        ]);
+
         $this->dispatchBrowserEvent('updatedNewVideoValues',
             [
                 'position' => count($this->newVideoValues),
@@ -356,7 +364,7 @@ class CustomGame extends Component
             $this->summary = $this->customGame->summary;
 
             $this->customGame->screenshots->each(function ($item, $i) {
-                $path = Storage::disk('s3')->url($item->path);
+                $path = Storage::disk('s3')->url(Str::of($item->path)->replace('_format_', 'LOGO_MED'));
                 $this->newScreenshotValues[$i]['value'] = $path;
                 $this->screenshotValues[$i]['value'] = $path;
             });

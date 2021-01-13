@@ -74,33 +74,14 @@
                 </div>
             @endif
             @if(Auth::check())
-                <div class="navbar-end mr-3 mt-2">
-                    <div class="dropdown dropdown-menu-user is-right">
-                        <div class="dropdown-trigger">
-                            <button id="nav-user" class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                <span><i class="fas fa-ellipsis-h"></i></span>
-                            </button>
+                <div class="navbar-end mr-3">
+                    <div class="navbar-item">
+                        <div class="dropdown dropdown-menu-user is-right is-hidden-touch user-menu-desktop">
+                            @include('frontend.partials.user-menu', ['device' => 'desktop'])
                         </div>
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                <hr class="dropdown-divider m-0">
-                                <a href="{{ route('custom-game.create') }}" class="dropdown-item" id="btn-create-game">
-                                    {{ __('frontend.create_custom_game') }}
-                                </a>
-                                <hr class="dropdown-divider m-0">
-                                <a href="{{ route('comments.user') }}" class="dropdown-item" id="btn-comments-user">
-                                    {{ __('frontend.my_comments') }}
-                                </a>
-                                <a href="{{ route('list.custom-games.user') }}" class="dropdown-item">
-                                    {{ __('frontend.my_homemade_games') }}
-                                </a>
-                                <div class="dropdown-item">
-                                    <a class="button is-dark is-small" id="btn-logout"
-                                       href="{{ route('gamers.logout') }}">
-                                        {{ __('frontend.log_out') }}
-                                    </a>
-                                </div>
-                            </div>
+
+                        <div class="dropdown dropdown-menu-user is-left is-hidden-desktop user-menu-mobile" >
+                            @include('frontend.partials.user-menu', ['device' => 'mobile'])
                         </div>
                     </div>
                 </div>

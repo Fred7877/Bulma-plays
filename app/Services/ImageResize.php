@@ -32,13 +32,13 @@ class ImageResize
             $values = SizeImage::getValue($key);
 
             if ($formRequest) {
-                $extension = $request->file($name)->getExtension();
+                $extension = Str::lower($request->file($name)->getExtension());
                 $filename = $request->file($name)->getClientOriginalName();
                 $image = Image::make($request->file($name))->resize($values['w'], $values['h'])->encode($extension);
                 $pathS3 = sprintf($path, Str::slug($request->get('name')), $key, $filename);
                 Storage::disk('s3')->put($pathS3, (string)$image, 'public');
             } else {
-                $extension = $name->getExtension();
+                $extension = Str::lower($name->getExtension());
                 $filename = $name->getClientOriginalName();
                 $image = Image::make($name)->resize($values['w'], $values['h'])->encode($extension);
                 $pathS3 = sprintf($path, Str::slug($request->get('name')), $key, $filename);

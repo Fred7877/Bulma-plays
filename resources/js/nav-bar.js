@@ -6,9 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
         element.classList.toggle("is-active");
     });
 
-    if (document.body.contains(document.getElementById("nav-user")) ) {
-        document.getElementById("nav-user").addEventListener("click", function (e) {
-            var element = document.querySelector(".dropdown-menu-user");
+    if (document.body.contains(document.getElementById("nav-user-mobile")) ) {
+        document.getElementById("nav-user-mobile").addEventListener("click", function () {
+            var element = document.querySelector(".user-menu-mobile");
+            element.classList.toggle("is-active");
+        });
+    }
+
+    if (document.body.contains(document.getElementById("nav-user-desktop")) ) {
+        document.getElementById("nav-user-desktop").addEventListener("click", function () {
+            var element = document.querySelector(".user-menu-desktop");
             element.classList.toggle("is-active");
         });
     }
