@@ -59,7 +59,7 @@
                     @endif
                 </p>
                 <p>
-                    <b>Première date :</b>
+                    <b>{{ Str::ucFirst(__('frontend.first_release_date')) }}</b>
                     <span class="text-gray-600">
                             @if (isset($game['first_release_date']) && is_string($game['first_release_date']))
                             {{ Carbon\Carbon::parse($game['first_release_date'])->toDateString() }}
