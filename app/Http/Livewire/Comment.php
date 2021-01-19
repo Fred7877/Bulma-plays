@@ -32,12 +32,12 @@ class Comment extends Component
 
         $this->comments = $this->game[$this->typeDescription]->filter(function ($item) {
             return $item->parent_comment_id === null && isset($item->moderations->last()['status']) &&
-                $item->moderations->last()['status'] === Moderation::ModerationOk;
+                (int) $item->moderations->last()['status'] === Moderation::ModerationOk;
         });
 
         $this->replies = $this->game[$this->typeDescription]->filter(function ($item) {
             return $item->parent_comment_id !== null && isset($item->moderations->last()['status']) &&
-                $item->moderations->last()['status'] === Moderation::ModerationOk;
+                (int) $item->moderations->last()['status'] === Moderation::ModerationOk;
         });
     }
 
