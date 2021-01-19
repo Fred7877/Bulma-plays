@@ -117,31 +117,54 @@ return [
     |
     */
 
-    'redis' => [
-
-        'client' => env('REDIS_CLIENT', 'phpredis'),
-
-        'options' => [
-            'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+    'redis'       => [
+        'client'    => 'predis',
+        'options'   => [
+            'cluster' => 'redis',
+            'prefix'  => Str::slug(env('APP_ENV') . '_' . env('APP_NAME'), '_') . '_database_',
         ],
-
-        'default' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_DB', '0'),
+        'default'   => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 0,
         ],
-
-        'cache' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_CACHE_DB', '1'),
+        'cache'     => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 1,
         ],
-
+        'broadcast' => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 2,
+        ],
+        'horizon'   => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 3,
+        ],
+        'queue'     => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 4,
+        ],
+        'session'   => [
+            'url'      => '',
+            'host'     => '127.0.0.1',
+            'password' => null,
+            'port'     => 6379,
+            'database' => 5,
+        ],
     ],
 
 ];

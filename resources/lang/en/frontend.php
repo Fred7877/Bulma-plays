@@ -110,4 +110,13 @@ By registering, you will also have the opportunity to leave a comment, reply to 
     'log_out' => 'Log out',
     'log_in' => 'Log in',
     'sign_up' => 'Sign up',
+    'sign_in' => 'Sign in',
+    'send_email_confirmation' => 'A confirmation email has been sent, it\'s your turn to play. ;)',
+    'welcome' => 'Welcome',
+    'password_confirm' => 'Password confirm',
+    'welcome_to_bulma' => 'Bienvenue to Bulma-playz',
+    'for_validate_click_link' => 'To validate your email address, click on the following link',
+    'link_expire' => 'This link has a lifespan of 30 minutes',
+    'see_you_soon' => 'See you soon',
+    'email_validation' => 'Bulma-playz: validate your email'
 ];

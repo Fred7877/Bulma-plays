@@ -8,7 +8,7 @@
                     </p>
                 </div>
                 <div class="row">
-                    <p>Contact: <a href="mailto:bulmaplayz@gmail.com">bulmaplayz@gmail.com</a></p>
+                    <p>Contact: <a href="mailto:admin@bulma-playz.com">admin@bulma-playz.com</a></p>
                 </div>
             </div>
 

@@ -110,4 +110,12 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     'log_out' => 'Se déconnecter',
     'log_in' => 'Se connecter',
     'sign_in' => 'S\'inscrire',
+    'send_email_confirmation' => 'Un mail de confirmation a été envoyé, a toi de jouer ;)',
+    'welcome' => 'Bienvenue',
+    'password_confirm' => 'Confirmation du password',
+    'welcome_to_bulma' => 'Bienvenue sur Bulma-playz',
+    'for_validate_click_link' => 'Pour valider ton adresse email, click sur le lien suivant',
+    'link_expire' => 'Ce lien a une durée de vie de 30 minutes',
+    'see_you_soon' => 'À bientot',
+    'email_validation' => 'Bulma-playz: valide ton email'
 ];
