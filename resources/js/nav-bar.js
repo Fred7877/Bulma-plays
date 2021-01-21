@@ -38,18 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // SIGN UP
     $('#btn-signup').on('click', function () {
         Swal.fire({
-            title: 'Sign up !',
+            title: Lang.get('frontend.sign_in'),
             showCloseButton: true,
             allowEnterKey: true,
             html: `
   <input type="text" id="name" class="swal2-input" placeholder="Pseudo">
   <input type="text" id="login" class="swal2-input" placeholder="@email">
   <input type="password" id="password" class="swal2-input" placeholder="Password">
-  <input type="password" id="password_confirm" class="swal2-input" placeholder="Password confirm">
+  <input type="password" id="password_confirm" class="swal2-input" placeholder="`+Lang.get('frontend.password_confirm')+`">
 <i class="is-size-7 is-pulled-left">`+Lang.get('frontend.pseudo_must_contain')+`</i>
 <i class="is-size-7 is-pulled-left">`+Lang.get('frontend.password_must_contain')+`</i>
 `,
-            confirmButtonText: 'Sign in',
+            confirmButtonText: 'Ok',
             focusConfirm: false,
             preConfirm: () => {
                 const name = Swal.getPopup().querySelector('#name').value
@@ -102,12 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             name: name,
                             email: login,
                             password: password,
-                            password_confirmation: password_confirm
+                            password_confirmation: password_confirm,
+                            locale: Lang.locale()
                         }
                     }).done(function () {
                         Swal.fire({
-                            title: 'Bienvenue ' + name + ' !',
-                            html: `<i class="is-size-7 is-pulled-left">Tu vas pouvoir te logger avec tes identifiants :)</i>`
+                            title: Lang.get('frontend.welcome')+' ' + name + ' !',
+                            html: `<i class="is-size-7 is-pulled-left">`+Lang.get('frontend.send_email_confirmation')+`</i>`
                         })
                     }).fail(function (errors) {
                         let message = '';
@@ -123,18 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     });
 
-
     // Log IN
     $('#btn-login').on('click', function () {
         Swal.fire({
-            title: 'Log IN !',
+            title: Lang.get('frontend.log_in'),
             showCloseButton: true,
             allowEnterKey: true,
             html: `
   <input type="text" id="login" class="swal2-input" placeholder="@email">
   <input type="password" id="password" class="swal2-input" placeholder="Password">
 `,
-            confirmButtonText: 'Log in',
+            confirmButtonText: 'Ok',
             focusConfirm: false,
             preConfirm: () => {
                 const login = Swal.getPopup().querySelector('#login').value

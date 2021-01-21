@@ -258,6 +258,12 @@ return [
             'icon' => 'fas fa-tools',
             'active' => ['backend/custom-games*']
         ],
+        [
+            'text' => 'Horizon',
+            'url'  => 'backend/horizon-jobs',
+            'icon' => 'fas fa-tools',
+            'active' => ['backend/horizon']
+        ]
     ],
 
     /*

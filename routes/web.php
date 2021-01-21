@@ -15,6 +15,7 @@ use App\Http\Controllers\frontend\LogoutController;
 use App\Http\Controllers\frontend\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group([
     'prefix' => LaravelLocalization::setLocale()
 ], function () {
+    Session::put('locale', LaravelLocalization::getCurrentLocale());
+
     Route::get('/', function () {
         return redirect(route('home'));
     });
@@ -49,7 +52,6 @@ Route::group([
     Route::put('comments/{comment}', [FrontendComment::class, 'update'])->name('comments.user.update');
 
     Route::get('custom-game/{slug}', [CustomGameController::class, 'show'])->name('custom-game.show');
-
 });
 
 // BACKEND
@@ -66,6 +68,9 @@ Route::middleware(['auth', 'can:enter backend'])->prefix('backend')->group(funct
 
     Route::post('moderation', [ModerationController::class, 'moderation'])->name('backend.moderation');
     Route::resource('custom-games', BackendCustomGameController::class);
+    Route::get('horizon-jobs', function(){
+        return view('backend.horizon');
+    });
 });
 
 Route::post('gamers-register', [RegisterController::class, 'create'])->name('gamers.register');
@@ -74,5 +79,7 @@ Route::get('gamers-logout', [LogoutController::class, 'logout'])->name('gamers.l
 Route::post('comment/create', [FrontendComment::class, 'create'])->name('comments.create');
 Route::get('get-user', [AjaxController::class, 'getUser'])->name('ajax.get.user');
 Route::get('get-comments-user', [AjaxController::class, 'getCommentsUser'])->name('ajax.user.comments');
+
+Route::get('/email-validation/{user}', [LoginController::class, 'validateEmail'])->name('email.validation')->middleware('signed');
 
 Auth::routes();

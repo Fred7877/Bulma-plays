@@ -38,7 +38,7 @@
                             {!! getFlag($comment->language, '', true, 64) !!}
                         </div>
                     </td>
-                    <td>{{ $comment->moderations->last()->comment }}</td>
+                    <td>{{ optional($comment->moderations->last())->comment }}</td>
                 </tr>
                 </tbody>
             </table>

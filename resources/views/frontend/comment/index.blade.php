@@ -27,7 +27,9 @@
                                             <p class="is-family-secondary">{{ $comment->created_at }}</p>
                                         </div>
                                         <div class="column">
-                                            <h6 class="title is-6">{{ $comment->game->igdb['name'] }}</h6>
+                                            <h6 class="title is-6">
+                                                {{ $comment->game->igdb['name'] }}
+                                            </h6>
                                         </div>
                                         <div class="column p-0 mr-2">
                                             <div class="is-pulled-right">

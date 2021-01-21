@@ -184,9 +184,6 @@ class ViewGames extends Component
             });
         } else {
             $query = Game::with($this->with);
-            $query->where('first_release_date', $this->directionTemporality, Carbon::now());
-            $query->orderBy('first_release_date', $this->sort);
-
         }
 
         if ($this->searchWord != '') {
@@ -200,6 +197,9 @@ class ViewGames extends Component
         if ($this->platform != '') {
             $query->where('platforms.slug', $this->platform);
         }
+
+        $query->where('first_release_date', $this->directionTemporality, Carbon::now());
+        $query->orderBy('first_release_date', $this->sort);
 
         return $query;
     }
