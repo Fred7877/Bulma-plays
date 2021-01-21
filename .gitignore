@@ -16,4 +16,4 @@ yarn-error.log
 /storage/app/livewire-tmp
 /public/custom_game_images
 /public/custom_game_screenshot
-
+/public/vendor/js-localization/messages.js
