@@ -117,5 +117,6 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     'for_validate_click_link' => 'Pour valider ton adresse email, click sur le lien suivant',
     'link_expire' => 'Ce lien a une durée de vie de 30 minutes',
     'see_you_soon' => 'À bientot',
-    'email_validation' => 'Bulma-playz: valide ton email'
+    'email_validation' => 'Bulma-playz: valide ton email',
+    'message_moderation' => 'Message moderation',
 ];

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Jobs\SendEmailValidationEmailJob;
 use App\Services\Game;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +21,13 @@ class GameController extends Controller
 
     public function index($customGame = null)
     {
-        SendEmailValidationEmailJob::dispatch(Auth::user());
+
         return view('frontend.game.index', ['customGame' => $customGame]);
     }
 
     public function show($slug)
     {
+
         return view('frontend.game.show', ['game' => (new Game)->get($slug)]);
     }
 

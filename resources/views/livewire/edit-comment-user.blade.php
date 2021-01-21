@@ -13,7 +13,11 @@
                                         <p class="is-family-secondary">{{ $comment->created_at }}</p>
                                     </div>
                                     <div class="column">
-                                        <h6 class="title is-6">{{ $comment->game->igdb['name'] }}</h6>
+                                        <h6 class="title is-6">
+                                            <a href="{{ route('games.show', ['slug' => $comment->game->slug]) }}">
+                                            {{ $comment->game->igdb['name'] }}
+                                            </a>
+                                        </h6>
                                     </div>
                                     <div class="column p-0 mr-2">
                                         <div class="is-pulled-right">
@@ -51,9 +55,9 @@
                     </div>
                 </div>
 
-                @if($comment->moderations->last()->comment !== null)
+                @if(optional($comment->moderations->last())->comment !== null)
                     <div class="box mt-3 edit-comment">
-                        <h5 class="title is-5 m-0 p-0">Message moderation</h5>
+                        <h5 class="title is-5 m-0 p-0">{{ __('frontend.message_moderation') }}</h5>
                         <hr class="p-0 m-0 mb-3">
                         <p class="is-family-secondary">
                             {{ $comment->moderations->last()->comment }}
