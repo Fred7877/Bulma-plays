@@ -4,12 +4,10 @@ namespace App\Console\Commands;
 
 use App\Models\Game;
 use App\Models\Platform;
-use App\Models\ReleaseDate;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use MarcReichel\IGDBLaravel\Models\Game as GamesIGDB;
 use MarcReichel\IGDBLaravel\Models\Platform as PlatformIGDB;
-use MarcReichel\IGDBLaravel\Models\ReleaseDate as ReleaseDateIGDB;
 
 class UpdateDb extends Command
 {
@@ -18,7 +16,7 @@ class UpdateDb extends Command
      *
      * @var string
      */
-    protected $signature = 'update:db {--lastest : Get the last 500 games}';
+    protected $signature = 'update:db { --lastest : Get the last 500 games}';
 
     /**
      * The console command description.
@@ -44,7 +42,6 @@ class UpdateDb extends Command
      */
     public function handle()
     {
-
         if ($this->option('lastest')) {
             GamesIGDB::take(20)->where('first_release_date', '<', Carbon::now())->orderBy('first_release_date', 'desc')->get()->each(function ($data) {
 
@@ -65,9 +62,14 @@ class UpdateDb extends Command
                 Platform::firstOrCreate(
                     [
                         'slug' => $data->slug,
-                        'platform_id' => $data->id,
+                        'id_igdb' => $data->id,
                     ],
-                    ['data' => $data->toArray()]
+                    [
+                        'name' => $data->name,
+                        'platform_logo' => $data->platform_logo,
+                        'alternative_name' => $data->alternative_name,
+                        'data' => $data->toArray(),
+                    ]
                 );
             });
 
@@ -93,6 +95,7 @@ class UpdateDb extends Command
                 $this->info($skip);
             }
         }
+
         return 0;
     }
 }

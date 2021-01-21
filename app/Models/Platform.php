@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\RelationShips\PlatformRelationShipsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,17 +28,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Platform extends Model
 {
-    use HasFactory;
+    use HasFactory, PlatformRelationShipsTrait;
 
     protected $guarded = [];
 
     protected $casts = [
         'data' => 'array'
     ];
-
-
-    public function games()
-    {
-        return $this->belongsToMany(Game::class, PlatformGame::class);
-    }
 }

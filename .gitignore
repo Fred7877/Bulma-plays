@@ -9,9 +9,11 @@
 .phpunit.result.cache
 npm-debug.log
 yarn-error.log
+/.idea/*
 .idea/*
 /storage/app/public/custom_game_images
 /storage/app/public/custom_game_screenshot
 /storage/app/livewire-tmp
 /public/custom_game_images
 /public/custom_game_screenshot
+/public/vendor/js-localization/messages.js

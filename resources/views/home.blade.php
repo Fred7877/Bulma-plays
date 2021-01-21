@@ -13,6 +13,7 @@
                             route('filter.game', ['platformSlug' => 'ps4--1', 'platformName' => 'PlayStation 4']),
                             route('filter.game', ['platformSlug' => 'linux', 'platformName' => 'Linux']),
                             route('filter.game', ['platformSlug' => 'win', 'platformName' => 'PC (Microsoft Windows)']),
+                            route('homemade.games.index'),
                             route('games.index'),
                         )
                         !!}

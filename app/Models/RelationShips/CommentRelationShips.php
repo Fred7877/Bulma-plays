@@ -3,9 +3,8 @@
 
 namespace App\Models\RelationShips;
 
-use App\Models\Comment;
 use App\Models\Game;
-use App\Models\Moderation;
+use App\Models\ModerationComment;
 use Illuminate\Foundation\Auth\User;
 
 trait CommentRelationShips
@@ -15,6 +14,10 @@ trait CommentRelationShips
     }
 
     public function moderations() {
-        return $this->hasMany(Moderation::class, 'comment_id', 'id');
+        return $this->hasMany(ModerationComment::class, 'comment_id', 'id');
+    }
+
+    public function game() {
+        return $this->belongsTo(Game::class, 'game_id', 'game_id');
     }
 }

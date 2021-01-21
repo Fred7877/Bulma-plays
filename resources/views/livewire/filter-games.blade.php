@@ -6,7 +6,7 @@
                     <div class="dropdown-trigger">
                         <button class="button filter" aria-haspopup="true" aria-controls="dropdown-menu3"
                                 id="filter-nintendo">
-                            <span>{{ Str::Ucfirst(__('frontend.platform')) }}</span>
+                            <span>{{ Str::Ucfirst(__('frontend.platforms')) }}</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
                               </span>
@@ -146,6 +146,11 @@
                 <div class="row">
                     <button class="button is-small is-primary @if($temporalityActual) is-light @endif" wire:click="temporality">{{ Str::ucFirst(__('frontend.coming_soon')) }}</button>
                 </div>
+            </div>
+            <div class="column mr-5 is-mobile">
+                <a href="{{ route('homemade.games.index') }}">
+                    <button class="button is-warning has-text-weight-medium is-pulled-right {{ $homemadeLoading }}" wire:click="homemade">Homemade Games</button>
+                </a>
             </div>
         </div>
     </div>

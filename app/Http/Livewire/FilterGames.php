@@ -33,6 +33,7 @@ class FilterGames extends Component
     public $genre;
     public $genreName = '';
     public $temporalityActual = true;
+    public $homemadeLoading = '';
 
     public function mount()
     {
@@ -107,6 +108,11 @@ class FilterGames extends Component
             $this->sortName = session('filter')['sortName'] ?? __('frontend.descending');
             $this->search = session('filter')['search'] ?? '';
         }
+    }
+
+    public function homemade()
+    {
+        $this->homemadeLoading = 'is-loading';
     }
 
     /**

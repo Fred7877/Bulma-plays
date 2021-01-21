@@ -12,7 +12,9 @@
     </div>
 
     <div id="navbarBasic" class="navbar-menu">
-        @if (Route::currentRouteName() === 'games.show')
+        @if (Route::currentRouteName() === 'games.show' ||
+             Route::currentRouteName() === 'custom-game.show' ||
+             Route::currentRouteName() === 'custom-game.edit')
             <div class="navbar-start is-hidden-mobile">
                 <a class="navbar-item" href="{{ LaravelLocalization::localizeUrl(route('games.index')) }}">
                     <i class="fas fa-list-ul icon is-medium"></i>
@@ -57,26 +59,33 @@
                     </div>
                 </div>
             </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        @if(!Auth::check())
+            @if(!Auth::check())
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
                             <a class="button is-primary" id="btn-signup">
-                                <strong>Sign up</strong>
+                                <strong>{{ __('frontend.sign_in') }}</strong>
                             </a>
                             <a class="button is-light" id="btn-login">
-                                Log in
+                                {{ __('frontend.log_in') }}
                             </a>
-                        @endif
-                        @if(Auth::check())
-                            <a class="button is-dark" id="btn-logout" href="{{ route('gamers.logout') }}">
-                                Log out
-                            </a>
-                        @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
+            @if(Auth::check())
+                <div class="navbar-end mr-3">
+                    <div class="navbar-item">
+                        <div class="dropdown dropdown-menu-user is-right is-hidden-touch user-menu-desktop">
+                            @include('frontend.partials.user-menu', ['device' => 'desktop'])
+                        </div>
+
+                        <div class="dropdown dropdown-menu-user is-left is-hidden-desktop user-menu-mobile" >
+                            @include('frontend.partials.user-menu', ['device' => 'mobile'])
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <meta name="_token" content="{{ csrf_token() }}">
@@ -84,4 +93,5 @@
 
 @push('js')
     <script src="/js/nav-bar.js"></script>
+    <script src="/js/menu-user.js"></script>
 @endpush

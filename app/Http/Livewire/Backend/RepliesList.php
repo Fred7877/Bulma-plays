@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Backend;
 use App\Enums\Languages;
 use App\Enums\Moderation as EnumModeration;
 use App\Models\Comment;
-use App\Models\Moderation;
+use App\Models\ModerationComment;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Livewire\Component;
@@ -20,29 +20,30 @@ class RepliesList extends Component
     public $moderation;
     public $level = 1;
     public $waitingModeration = [];
+    public $typeComment;
 
     public function mount()
     {
-        if($this->game) {
-            $this->comments = Comment::where('game_id', $this->game->game_id)->get();
-            $this->replies = $this->comments->where('parent_comment_id', $this->comment->id);
+        $this->comments = Comment::where('game_id', $this->comment->game_id)
+            ->where('type', $this->typeComment)
+            ->get();
+        $this->replies = $this->comments->where('parent_comment_id', $this->comment->id);
 
-            $this->waitingModeration = $this->comments->filter(function($item){
-                return $item->moderations->isEmpty();
-            });
-        }
+        $this->waitingModeration = $this->comments->filter(function ($item) {
+            return $item->moderations->isEmpty();
+        });
 
     }
 
     public function backRepliesList($idParentComment)
     {
-        $this->getAnswers($idParentComment);
+        $this->getReplies($idParentComment);
         $this->level--;
     }
 
     public function moderation($replyId, $status, $slug, $parentId)
     {
-        Moderation::create([
+        ModerationComment::create([
             'comment_id' => $replyId,
             'status' => $status,
         ]);
@@ -51,22 +52,22 @@ class RepliesList extends Component
             Cache::forget('game-' . $slug . '-' . $lang);
         }
 
-        $this->getAnswers($parentId);
+        $this->getReplies($parentId);
     }
 
     public function showReplies($idComment)
     {
-        $this->getAnswers($idComment);
+        $this->getReplies($idComment);
         $this->level++;
     }
 
-    private function getAnswers($idComment)
+    private function getReplies($idComment)
     {
         $replies = Comment::where('parent_comment_id', $idComment)->get();
 
         $comments = $this->comments;
 
-        $replies->each(function ($item) use($comments) {
+        $replies->each(function ($item) use ($comments) {
             $item['parent'] = Comment::find($item->parent_comment_id);
 
             $item['childrens'] = $comments->where('parent_comment_id', $item->id);

@@ -1,6 +1,6 @@
 <?php
 return [
-    'platform' => 'plate-forme',
+    'platforms' => 'plate-forme',
     'choose' => 'choisir',
     'others-platform' => 'autres plate forme',
     'choose_genre' => 'choisir un genre',
@@ -13,8 +13,8 @@ return [
     'previous' => 'précédent',
     'voter' => 'voteur',
     'first_release_date' => 'Date première version',
-    'genre' => 'genre',
-    'theme' => 'thème',
+    'genres' => 'genres',
+    'themes' => 'thèmes',
     'produced_by' => 'produit par',
     'commentes_and_reviews' => 'Commentaires & Avis',
     'tips_and_tricks' => 'Trucs & Astuces',
@@ -71,8 +71,16 @@ ou <a
 Ils sont tous ici !
     <br>
     <br>
+    En plus Encore !!! il existe une communauté de créateur passioné de jeux-vidéos fait maison, ils sont innovant, créatif, enthousiaste et mérite le coup d\'oeil :)
+    <br>
+    <br>
 En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
     de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqués :)
+    <br>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
+    Si tu est un créateur de jeux "<a href="%s">Homemade</a>", tu pourra aussi créer une fiche de ton jeux et lui permettre de lui donner un peu plus de visibilté, avoir des retours, ect...
+    <i class="fas fa-laugh-wink has-text-primary"></i>
+    <i class="fas fa-exclamation-triangle has-text-danger"></i>
     <br>
     <br>
     <a href="%s">
@@ -81,4 +89,34 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
 </p>',
     'current' => 'actuel',
     'coming_soon' => 'a venir',
+    'title' => 'titre',
+    'presentation_image' => 'image de présentation',
+    'choose_file' => 'choisir un fichier…',
+    'choose_theme' => 'choisir thèmes',
+    'choose_platform' => 'choose platforme',
+    'choose_game_mode' => 'choisir game modes',
+    'video' => 'vidéo',
+    'publish' => 'publier',
+    'save' => 'enregistrer',
+    'modification_moderation' => 'une modification entrainera une modération',
+    'edit' => 'editer',
+    'return' => 'retour',
+    'my_comments' => 'Mes commentaires',
+    'site_works_thanks_to' => 'Ce site fonctionne grace à',
+    'your_favorite_games' => 'Your favorite video games on',
+    'homemade_games' => 'Les jeux vidéo homemade',
+    'create_custom_game' => 'Créer une fiche jeux homemade',
+    'my_homemade_games' => 'Mes jeux homemade',
+    'log_out' => 'Se déconnecter',
+    'log_in' => 'Se connecter',
+    'sign_in' => 'S\'inscrire',
+    'send_email_confirmation' => 'Un mail de confirmation a été envoyé, a toi de jouer ;)',
+    'welcome' => 'Bienvenue',
+    'password_confirm' => 'Confirmation du password',
+    'welcome_to_bulma' => 'Bienvenue sur Bulma-playz',
+    'for_validate_click_link' => 'Pour valider ton adresse email, click sur le lien suivant',
+    'link_expire' => 'Ce lien a une durée de vie de 30 minutes',
+    'see_you_soon' => 'À bientot',
+    'email_validation' => 'Bulma-playz: valide ton email',
+    'message_moderation' => 'Message moderation',
 ];

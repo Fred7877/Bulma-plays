@@ -3,12 +3,18 @@
         <div class="level-left">
             <div class="columns is-mobile">
                 <div class="column is-narrow">
-                    <img
-                        src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')  }}"/>
+                    @if(isset($game['cover']))
+                        <img
+                            src="{{ Str::of(isset($game['cover']) ? $game['cover']['url'] : '')->replace('thumb', 'logo_med')->replace('_format_', 'LOGO_MED')  }}"/>
+                    @endif
                 </div>
                 <div class="column is-half">
                     <div class="text-gray-900 font-bold text-xl mb-2">
-                        <a href="{{ LaravelLocalization::localizeUrl(route('games.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
+                        @if($customGame)
+                            <a href="{{ LaravelLocalization::localizeUrl(route('custom-game.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
+                        @else
+                            <a href="{{ LaravelLocalization::localizeUrl(route('games.show', ['slug' => $game['slug']])) }}"> {{ $game['name'] }} </a>
+                        @endif
                     </div>
                 </div>
             </div>

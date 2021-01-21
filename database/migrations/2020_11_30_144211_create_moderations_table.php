@@ -17,6 +17,7 @@ class CreateModerationsTable extends Migration
             $table->id();
             $table->integer('comment_id');
             $table->integer('status');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

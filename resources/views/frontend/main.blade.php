@@ -9,18 +9,19 @@
     @yield('js-localization.head')
 
     <link
-        href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
+        href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900'
         rel='stylesheet' type='text/css'>
 
     <style>
-        p, span {
+        p, span.icon {
             font-size: 14px;
         }
 
         body {
             background: #222939;
             font-family: Roboto, serif;
-            padding-bottom: 35px;
+            margin: 0;
+            padding: 0;
         }
 
         .img-content {
@@ -76,11 +77,18 @@
             font-weight: bold;
         }
 
-    </style>
+        #wrap {
+            min-height: 100%;
+            width: 100%;
+        }
 
-    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/assets/OwlCarousel/dist/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('storage/assets/css/fancyBox-3.5.7.min.css') }}">
+        #footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-family: Roboto, sans-serif;
+        }
+    </style>
 
     @stack('css')
 
@@ -90,10 +98,13 @@
 <body>
 @include('frontend.partials.nav-bar-top')
 
-<div class="container mx-auto">
-    @yield('content')
+<div id="wrap">
+    <div class="container mx-auto ">
+        @yield('content')
+    </div>
 </div>
 
+@include('footer')
 @include('cookieConsent::index')
 
 @livewireScripts
