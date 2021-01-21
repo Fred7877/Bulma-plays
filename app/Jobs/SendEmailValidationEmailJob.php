@@ -36,9 +36,8 @@ class SendEmailValidationEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        Log::info('SendEmailValidationEmailJob');
-        /*Mail::to($this->user)->locale($this->locale)->send(
+        Mail::to($this->user)->locale($this->locale)->send(
             new Validation($this->user)
-        );*/
+        );
     }
 }

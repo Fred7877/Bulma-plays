@@ -73,6 +73,8 @@ Ils sont tous ici !
     <br>
     En plus Encore !!! il existe une communauté de créateur passioné de jeux-vidéos fait maison, ils sont innovant, créatif, enthousiaste et mérite le coup d\'oeil :)
     <br>
+        Un discord sur les jeux web existe <a href="https://discord.com/channels/108198674475065344/108198674475065344" target="_blank">JW <i class="is-size-7 fas fa-external-link-alt"></i></a>.
+    <br>
     <br>
 En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de répondre à d\'autres commentaires ou bien
     de laisser des trucs & actuces pour aider les autres joueurs qui pourraient être bloqués :)
