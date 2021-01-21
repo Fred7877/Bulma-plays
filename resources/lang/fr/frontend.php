@@ -71,7 +71,7 @@ ou <a
 Ils sont tous ici !
     <br>
     <br>
-    En plus Encore !!! il existe une communauté de créateur passioné de jeux-vidéos fait maison, ils sont innovant, créatif, enthousiaste et mérite le coup d\'oeil :)
+    Et plus Encore !!! il existe une communauté de créateur passioné de jeux-vidéos fait maison, ils sont innovant, créatif, enthousiaste et mérite le coup d\'oeil :)
     <br>
         Un discord sur les jeux web existe <a href="https://discord.com/channels/108198674475065344/108198674475065344" target="_blank">JW <i class="is-size-7 fas fa-external-link-alt"></i></a>.
     <br>
