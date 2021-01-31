@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\Facades;
+namespace App\Facades;
 
 use App\Services\ImageResize;
 use Illuminate\Support\Facades\Facade;

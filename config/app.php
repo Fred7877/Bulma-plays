@@ -231,7 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Resizeimage'   => App\Services\Facades\ResizeImage::class
+        'Resizeimage'   => App\Facades\ResizeImage::class,
+        'Game'   => App\Facades\Game::class
 
     ],
 
