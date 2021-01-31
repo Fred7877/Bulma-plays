@@ -15,8 +15,8 @@ use App\Models\ModerationCustomGame;
 use App\Models\Platform;
 use App\Models\Productor;
 use App\Models\Theme;
-use App\Services\Facades\ResizeImage;
-use App\Services\Game;
+use App\Facades\Game;
+use App\Facades\ResizeImage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -155,7 +155,7 @@ class CustomGameController extends Controller
      */
     public function show($slug)
     {
-        return view('frontend.game.show', ['game' => (new Game)->get($slug, true)]);
+        return view('frontend.game.show', ['game' => Game::get($slug, true)]);
     }
 
     /**
