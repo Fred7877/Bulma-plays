@@ -198,8 +198,10 @@ class ViewGames extends Component
             $query->where('platforms.slug', $this->platform);
         }
 
-        $query->where('first_release_date', $this->directionTemporality, Carbon::now());
-        $query->orderBy('first_release_date', $this->sort);
+        if (!$this->customGame) {
+            $query->where('first_release_date', $this->directionTemporality, Carbon::now());
+            $query->orderBy('first_release_date', $this->sort);
+        }
 
         return $query;
     }

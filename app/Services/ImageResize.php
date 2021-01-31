@@ -46,6 +46,6 @@ class ImageResize
             }
         }
 
-        return sprintf($path, Str::slug($request->get('name')), '_format_', $filename);;
+        return sprintf($path, Str::slug($request->get('name')), '_format_', $filename);
     }
 }

@@ -33,7 +33,8 @@
         "spatie/laravel-sluggable": "^2.6",
         "tightenco/ziggy": "^1.0",
         "yajra/laravel-datatables": "^1.5",
-        "yajra/laravel-datatables-oracle": "^9.15"
+        "yajra/laravel-datatables-oracle": "^9.15",
+      "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

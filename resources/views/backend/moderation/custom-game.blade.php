@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-7">
                     <label class="form-label" for="comment">Commentaire modération</label>
-                    <textarea class="form-control" name="comment" id="comment" rows="5">{{ $customGame->moderations->last()->comment }}</textarea>
+                    <textarea class="form-control" name="comment" id="comment" rows="5">{{ optional($customGame->moderations->last())->comment }}</textarea>
                 </div>
             </div>
         </form>

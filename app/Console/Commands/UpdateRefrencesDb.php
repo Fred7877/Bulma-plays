@@ -55,6 +55,14 @@ class UpdateRefrencesDb extends Command
             );
         });
 
+        Genre::firstOrCreate(
+            [
+                'id_igdb' => 0,
+                'name' => 'web',
+                'slug' => 'web',
+            ]
+        );
+
         PlatformIGDB::all()->each(function ($data) {
             Platform::firstOrCreate(
                 [
