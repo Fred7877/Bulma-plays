@@ -33,8 +33,9 @@ class CustomGameController extends Controller
      */
     public function index()
     {
-
         session()->remove('paginate');
+        session()->remove('filter');
+
         return view('frontend.CustomGame.index', ['customGame' => true]);
     }
 

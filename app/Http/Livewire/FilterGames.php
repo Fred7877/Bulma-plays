@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use MarcReichel\IGDBLaravel\Models\Genre;
@@ -34,9 +35,13 @@ class FilterGames extends Component
     public $genreName = '';
     public $temporalityActual = true;
     public $homemadeLoading = '';
+    public $titleBtnHomeMade = 'Homemade Games';
+    public $routeHomemade = '';
 
     public function mount()
     {
+        $this->routeHomemade = route('homemade.games.index');
+
         $this->platforms = Cache::remember('platforms', $this->ttl, function () {
             return Platform::all()->sortBy('name')->toArray();
         });
@@ -108,6 +113,12 @@ class FilterGames extends Component
             $this->sortName = session('filter')['sortName'] ?? __('frontend.descending');
             $this->search = session('filter')['search'] ?? '';
         }
+
+        if(Route::currentRouteName() === 'homemade.games.index') {
+            $this->titleBtnHomeMade = 'Retour';
+            $this->routeHomemade = route('games.index');
+        }
+
     }
 
     public function homemade()
