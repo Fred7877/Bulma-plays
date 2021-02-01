@@ -115,10 +115,9 @@ class FilterGames extends Component
         }
 
         if(Route::currentRouteName() === 'homemade.games.index') {
-            $this->titleBtnHomeMade = 'Retour';
+            $this->titleBtnHomeMade = trans('frontend.back');
             $this->routeHomemade = route('games.index');
         }
-
     }
 
     public function homemade()

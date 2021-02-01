@@ -122,4 +122,6 @@ En t\'inscrivant, tu auras aussi la possibilité de laisser un commentaire, de r
     'email_validation' => 'Bulma-playz: valide ton email',
     'message_moderation' => 'Message moderation',
     'no_games' => 'Pas de jeux',
+    'back' => 'Retour'
+
 ];

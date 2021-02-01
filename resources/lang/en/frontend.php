@@ -121,4 +121,5 @@ By registering, you will also have the opportunity to leave a comment, reply to 
     'email_validation' => 'Bulma-playz: validate your email',
     'message_moderation' => 'Moderation message',
     'no_games' => 'No Games',
+    'back' => 'Back'
 ];
