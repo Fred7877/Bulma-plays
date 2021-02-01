@@ -148,8 +148,10 @@
                 </div>
             </div>
             <div class="column mr-5 is-mobile">
-                <a href="{{ route('homemade.games.index') }}">
-                    <button class="button is-warning has-text-weight-medium is-pulled-right {{ $homemadeLoading }}" wire:click="homemade">Homemade Games</button>
+                <a href="{{ $routeHomemade }}">
+                    <button class="button is-warning has-text-weight-medium is-pulled-right {{ $homemadeLoading }}" wire:click="homemade">
+                        {{ $titleBtnHomeMade }}
+                    </button>
                 </a>
             </div>
         </div>

@@ -14,7 +14,7 @@ use App\Models\CustomGame as CustomGameModel;
 
 class ViewGames extends Component
 {
-    public $games;
+    public $games = [];
     public $platform = null;
     public $sort = 'desc';
     public $searchWord;
@@ -27,15 +27,15 @@ class ViewGames extends Component
     public $pageCount;
     public $currentPage = 1;
     public $totalItem;
-    public $totalQueryGame;
+    public $totalQueryGame = null;
     public $pageNumber = 1;
     public $directionTemporality = '<';
 
     private $ttl = 7200;
 
-    protected $listeners = ['platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh', 'changeTemporality'];
+    protected $listeners = ['loadGames', 'platformChange', 'sortChange', 'search', 'genre', 'paginate' => '$refresh', 'changeTemporality'];
 
-    public function mount()
+    public function loadGames()
     {
         if (session()->has('paginate')) {
             $this->totalItem = session('paginate')['totalItem'];
@@ -62,7 +62,14 @@ class ViewGames extends Component
             }
 
             $this->getGames();
+
         }
+    }
+
+    public function mount()
+    {
+
+
     }
 
     public function platformChange($value)
@@ -114,7 +121,7 @@ class ViewGames extends Component
 
     private function getGames()
     {
-        $keyCache = 'games_' . Str::studly($this->directionTemporality.'_'.$this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale().'_'.$this->customGame);
+        $keyCache = 'games_' . Str::studly($this->directionTemporality . '_' . $this->searchWord . '_' . $this->sort . '_' . $this->platform . '_' . $this->genre . '_' . $this->offset . '_' . App::getLocale() . '_' . $this->customGame);
 
         $this->totalQueryGame = $this->queryGames()->count();
         $this->pageCount = (int)ceil($this->totalQueryGame / $this->limit);
@@ -179,7 +186,7 @@ class ViewGames extends Component
     {
         if ($this->customGame) {
             $query = CustomGameModel::query();
-            $query->whereHas('moderations', function(Builder $query){
+            $query->whereHas('moderations', function (Builder $query) {
                 $query->where('status', true);
             });
         } else {

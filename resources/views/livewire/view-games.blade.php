@@ -9,12 +9,14 @@
         </div>
     </div>
 
-    <div class="block mt-5">
-        <div wire:loading.remove>
+    <div class="block mt-5"  wire:loading.remove wire:init="loadGames">
+        <div>
             @forelse ($games as $game)
                 @include('frontend.partials.card-game', ['game' => $game])
             @empty
-                <p>No Games</p>
+                @if($totalQueryGame !== null && $totalQueryGame < 1)
+                 <p class="is-size-3 has-text-white has-text-centered">{{ __('frontend.no_games') }} ¯-_(ツ)_-¯</p>
+                @endif
             @endforelse
 
             @if ($totalQueryGame > 10)
