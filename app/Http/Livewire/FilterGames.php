@@ -61,10 +61,9 @@ class FilterGames extends Component
 
         $this->platformNintendo = collect($this->platforms)->filter(function ($item) {
 
-            if (isset($item['platform_family'])) {
-                return ($item['platform_family'] === self:: PLATFORM_FAMILLY_NINTENDO);
-            }
-            if (stripos($item['name'], 'Nintendo') !== false) {
+            if (isset($item['platform_family']) &&
+                ($item['platform_family'] === self:: PLATFORM_FAMILLY_NINTENDO ||
+                    stripos($item['name'], 'Nintendo') !== false) ) {
                 return true;
             }
 
