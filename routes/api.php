@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use MarcReichel\IGDBLaravel\Models\Game;
+use MarcReichel\IGDBLaravel\Models\Platform;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +20,24 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/games', function (Request $request) {
+    $platformSlug = $request->get('platform');
+
+    return Cache::remember('api_all_games_'.$platformSlug, 3600, function () use($platformSlug){
+         $query = Game::with(['screenshots', 'cover', 'platforms'])
+            ->where('first_release_date', '<', Carbon::now());
+            if ($platformSlug !== null) {
+                $query->where('platforms.slug', $platformSlug);
+            }
+
+        return $query->orderBy('first_release_date', 'desc')->get()->toArray();
+    });
+});
+
+Route::get('/platforms', function (Request $request) {
+    return Cache::remember('api_all_platforms', 3600, function () {
+        return Platform::all()->toArray();
+    });
+});
+
