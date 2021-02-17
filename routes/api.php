@@ -36,9 +36,8 @@ Route::get('/games', function (Request $request) {
 });
 
 Route::get('/platforms', function (Request $request) {
-    return Cache::remember('api_all_games', 3600, function () {
-        return Game::with(['screenshots', 'cover'])
-            ->where('first_release_date', '<', Carbon::now())
-            ->orderBy('first_release_date', 'desc')->get()->toArray();
+   return Cache::remember('api_all_platforms', 3600, function () {
+        return Platform::all()->toArray();
     });
 });
+
