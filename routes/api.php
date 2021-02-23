@@ -23,21 +23,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/games', function (Request $request) {
-    $platformSlug = $request->get('platform');
+    $type = $request->get('type');
+    $value = $request->get('value');
 
-    return Cache::remember('api_all_games_'.$platformSlug, 3600, function () use($platformSlug){
-         $query = Game::with(['screenshots', 'cover', 'platforms', 'genres'])
+    return Cache::remember('api_all_games_'.$type.'_'. $value, 3600, function () use ($type, $value) {
+        $query = Game::with(['screenshots', 'cover', 'platforms', 'genres'])
             ->where('first_release_date', '<', Carbon::now());
-            if ($platformSlug !== null) {
-                $query->where('platforms.slug', $platformSlug);
-            }
+        if ($type !== null && $value !== null) {
+            $query->where($type.'.slug', $value);
+        }
 
         return $query->orderBy('first_release_date', 'desc')->get()->toArray();
     });
 });
 
 Route::get('/platforms', function (Request $request) {
-   return Cache::remember('api_all_platforms', 3600, function () {
+    return Cache::remember('api_all_platforms', 3600, function () {
         return Platform::all()->toArray();
     });
 });
