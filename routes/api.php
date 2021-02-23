@@ -23,17 +23,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/games', function (Request $request) {
-    $type = $request->get('type');
-    $value = $request->get('value');
-  
-    return Cache::remember('api_all_games_' . $type, 3600, function () use ($type, $value) {
+    $typesSearch = collect($request->all())->pluck('type');
+    $valuesSearch = collect($request->all())->pluck('value');
+
+    return Cache::remember('api_all_games_'.$typesSearch->implode('_').'_'.$valuesSearch->implode('_'), 3600, function () use ($request, $typesSearch) {
         $query = Game::with(['screenshots', 'cover', 'platforms', 'genres'])
             ->where('first_release_date', '<', Carbon::now());
-        if ($type === 'platforms') {
-            $query->where('platforms.slug', $value);
+        if ($typesSearch->contains('platforms')) {
+            $query->where('platforms.slug', collect($request->all())->where('type', 'platforms')->first()['value']);
         }
-        if ($type === 'genres') {
-            $query->where('genres.slug', $value);
+
+        if ($typesSearch->contains('genres')) {
+            $query->where('genres.slug', collect($request->all())->where('type', 'genres')->first()['value']);
         }
 
         return $query->orderBy('first_release_date', 'desc')->get()->toArray();
