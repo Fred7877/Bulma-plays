@@ -29,10 +29,10 @@ Route::get('/games', function (Request $request) {
     return Cache::remember('api_all_games_' . $type, 3600, function () use ($type, $value) {
         $query = Game::with(['screenshots', 'cover', 'platforms', 'genres'])
             ->where('first_release_date', '<', Carbon::now());
-        if ($type !== 'platforms') {
+        if ($type === 'platforms') {
             $query->where('platforms.slug', $value);
         }
-        if ($type !== 'genres') {
+        if ($type === 'genres') {
             $query->where('genres.slug', $value);
         }
 
