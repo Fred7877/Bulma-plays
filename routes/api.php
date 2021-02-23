@@ -1,7 +1,11 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use MarcReichel\IGDBLaravel\Models\Game;
+use MarcReichel\IGDBLaravel\Models\Genre;
+use MarcReichel\IGDBLaravel\Models\Platform;
 
 /*
 |--------------------------------------------------------------------------
