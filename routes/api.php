@@ -24,8 +24,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/games', function (Request $request) {
     $typesSearch = collect($request->all())->pluck('type');
+    $valuesSearch = collect($request->all())->pluck('value');
 
-    return Cache::remember('api_all_games_'.$typesSearch->implode('_'), 3600, function () use ($request, $typesSearch) {
+    return Cache::remember('api_all_games_'.$typesSearch->implode('_').'_'.$valuesSearch->implode('_'), 3600, function () use ($request, $typesSearch) {
         $query = Game::with(['screenshots', 'cover', 'platforms', 'genres'])
             ->where('first_release_date', '<', Carbon::now());
         if ($typesSearch->contains('platforms')) {
