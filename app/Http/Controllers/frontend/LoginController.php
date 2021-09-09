@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     /**
+     *
      * Login the user.
      *
      * @param GamerLoginRequest $request
@@ -20,12 +21,18 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials) && Auth::user()->email_verified_at !== null) {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user->email_verified_at === null) {
+            return response()->json(['error' => __('frontend.email_not_validate')], 403);
+        }
+
+        if (Auth::attempt($credentials)) {
 
             return response()->json(['name' => Auth::user()->name], 200);
         }
 
-        return response()->json(['error' => 'Unkown user'], 404);
+        return response()->json(['error' => __('frontend.login_error')], 404);
     }
 
     public function validateEmail(User $user)
