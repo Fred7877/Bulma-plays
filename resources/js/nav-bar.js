@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }).done(function (response) {
                         Swal.fire({
                             title: 'Bienvenue '+ response.name +' !',
-                            timer: 5000,
+                            timer: 1000,
                             showConfirmButton: false,
                             background: '#fff url(/images/trees.png)',
                             backdrop: `
@@ -178,7 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             left top
                             no-repeat
                           `
-                        }).then(document.location.reload());
+                        });
+
+                        setTimeout(function(){ document.location.reload() }, 1000);
                     }).fail(function (error) {
                         Swal.showValidationMessage(error.responseJSON.error)
                     })
