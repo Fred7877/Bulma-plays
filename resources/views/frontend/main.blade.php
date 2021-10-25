@@ -90,6 +90,10 @@
         }
     </style>
 
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3267490048749348"
+            crossorigin="anonymous"></script>
+
     @stack('css')
 
     @livewireStyles
