@@ -3,11 +3,11 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3267490048749348"
             crossorigin="anonymous"></script>
-    <!-- Bloc1 -->
+    <!-- list games -->
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3267490048749348"
-         data-ad-slot="6345150642"
+         data-ad-slot="7756937688"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
     <script>
