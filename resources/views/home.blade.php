@@ -21,4 +21,16 @@
             </div>
         </article>
     </div>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3267490048749348"
+            crossorigin="anonymous"></script>
+    <!-- Bloc1 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3267490048749348"
+         data-ad-slot="6345150642"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 @endsection
