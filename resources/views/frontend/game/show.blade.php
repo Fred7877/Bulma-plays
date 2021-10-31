@@ -237,6 +237,19 @@
         @endif
     </div>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3267490048749348"
+            crossorigin="anonymous"></script>
+    <!-- Bloc1 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3267490048749348"
+         data-ad-slot="6345150642"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     @if(Auth::check())
         <div class="block has-background-dark p-4 rounded">
             <div class="container js-tabs-container ">
@@ -274,6 +287,7 @@
                 </div>
             </div>
         </div>
+
     @endif
 @endsection
 
