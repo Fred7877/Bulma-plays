@@ -237,6 +237,18 @@
         @endif
     </div>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3267490048749348"
+            crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-3267490048749348"
+         data-ad-slot="2210803827"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     @if(Auth::check())
         <div class="block has-background-dark p-4 rounded">
             <div class="container js-tabs-container ">
