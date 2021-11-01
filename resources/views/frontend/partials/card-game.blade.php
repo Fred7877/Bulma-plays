@@ -9,3 +9,4 @@
         @include('frontend.partials.card-game-desktop')
     </div>
 </div>
+
